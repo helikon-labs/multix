@@ -1,7 +1,9 @@
 <p align="center"><img src=".github/images/MULTIX_LOGO_FULL_BLUE_1200px.png" width=500 /></p>
 
 # Multix
+
 ### an interface to easily manage complex multisigs.
+
 ### https://multix.cloud
 
 ### ⚠️ Multix is no longer maintained after 2025-12-31. Please migrate to a new multisig solution by then. Nova, Mimir, Signet or Polkadot.js are good options.
