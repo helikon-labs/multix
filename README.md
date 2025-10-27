@@ -6,6 +6,8 @@
 
 ### https://multix.cloud
 
+### ⚠️ Multix is no longer maintained after 2025-12-31. Please migrate to a new multisig solution by then. Nova, Mimir, Signet or Polkadot.js are good options.
+
 This repo contains the code to run an indexer see `./squid` and a front-end, see `./packages/ui`.
 
 ## Running the project

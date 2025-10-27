@@ -1,8 +1,8 @@
-import { Alert, IconButton, styled } from '@mui/material'
-import { useCallback, useEffect, useState } from 'react'
-import { HiOutlineXMark as CloseIcon } from 'react-icons/hi2'
-import { HiOutlineArrowTopRightOnSquare as LaunchIcon } from 'react-icons/hi2'
-import { Link } from './library'
+import { Alert, styled } from '@mui/material'
+import { useEffect, useState } from 'react'
+// import { HiOutlineXMark as CloseIcon } from 'react-icons/hi2'
+// import { HiOutlineArrowTopRightOnSquare as LaunchIcon } from 'react-icons/hi2'
+// import { Link } from './library'
 
 interface Props {
   className?: string
@@ -11,7 +11,7 @@ interface Props {
 const REFERENDUM_NUMBER = 120
 const DISMISSED_REFERENDUM_KEY = `multix.dismissedReferendumBanner${REFERENDUM_NUMBER}`
 
-export const CurrentReferendumBanner = ({ className = '' }: Props) => {
+export const HomeBanner = ({ className = '' }: Props) => {
   const [isVisible, setIsVisible] = useState(false)
   const doNotDisplay = localStorage.getItem(DISMISSED_REFERENDUM_KEY) === 'true'
 
@@ -21,10 +21,10 @@ export const CurrentReferendumBanner = ({ className = '' }: Props) => {
     }
   }, [doNotDisplay])
 
-  const onClose = useCallback(() => {
-    localStorage.setItem(DISMISSED_REFERENDUM_KEY, 'true')
-    setIsVisible(false)
-  }, [])
+  // const onClose = useCallback(() => {
+  //   localStorage.setItem(DISMISSED_REFERENDUM_KEY, 'true')
+  //   setIsVisible(false)
+  // }, [])
 
   if (!isVisible) return null
 
@@ -34,7 +34,9 @@ export const CurrentReferendumBanner = ({ className = '' }: Props) => {
       className={className}
     >
       <InfoTextStyled>
-        If you like Multix, consider showing your support and voting AYE on our treasury proposal.
+        Multix will no longer be maintained after 2025-12-31. Please migrate to a new multisig
+        solution by then. Nova, Mimir, Signet or Polkadot.js are good options.
+        {/* If you like Multix, consider showing your support and voting AYE on our treasury proposal.
         <Linkstyled
           href={`https://polkadot.polkassembly.io/referenda/${REFERENDUM_NUMBER}`}
           target="_blank"
@@ -54,9 +56,9 @@ export const CurrentReferendumBanner = ({ className = '' }: Props) => {
             className="icon"
             size={20}
           />
-        </Linkstyled>
+        </Linkstyled> */}
       </InfoTextStyled>
-      <IconButton
+      {/* <IconButton
         className="closeButton"
         size="small"
         aria-label="close"
@@ -64,25 +66,25 @@ export const CurrentReferendumBanner = ({ className = '' }: Props) => {
         onClick={onClose}
       >
         <CloseIcon size={20} />
-      </IconButton>
+      </IconButton> */}
     </Alert>
   )
 }
 
-const Linkstyled = styled(Link)`
-  display: inline-flex;
-  padding: 0 0 0 0.5rem;
+// const Linkstyled = styled(Link)`
+//   display: inline-flex;
+//   padding: 0 0 0 0.5rem;
 
-  .icon {
-    padding-left: 0.5rem;
-  }
-`
+//   .icon {
+//     padding-left: 0.5rem;
+//   }
+// `
 
 const InfoTextStyled = styled('div')`
   flex: 1;
 `
 
-export default styled(CurrentReferendumBanner)`
+export default styled(HomeBanner)`
   width: 100%;
   margin-bottom: 1rem;
 

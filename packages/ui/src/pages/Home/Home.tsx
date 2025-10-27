@@ -11,8 +11,8 @@ import TransactionList from '../../components/Transactions/TransactionList'
 import { ConnectOrWatch } from '../../components/ConnectCreateOrWatch'
 import { useDisplayLoader } from '../../hooks/useDisplayLoader'
 import { useDisplayError } from '../../hooks/useDisplayError'
-// import CurrentReferendumBanner from '../../components/CurrentReferendumBanner'
-import DomainMoveBanner from '../../components/DomainMoveBanner'
+import HomeBanner from '../../components/HomeBanner'
+// import DomainMoveBanner from '../../components/DomainMoveBanner'
 
 interface HomeProps {
   className?: string
@@ -68,8 +68,8 @@ const Home = ({ className }: HomeProps) => {
       {showNewMultisigAlert && multiProxyList.length > 0 && showNewMultisigAlert && (
         <NewMulisigAlert onClose={onClosenewMultisigAlert} />
       )}
-      {/* <CurrentReferendumBanner /> */}
-      <DomainMoveBanner />
+      <HomeBanner />
+      {/* <DomainMoveBanner /> */}
       <Grid
         alignItems="center"
         size={{ xs: 12 }}
