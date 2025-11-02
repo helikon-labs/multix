@@ -49,6 +49,9 @@ import * as v1003000 from '../v1003000'
 import * as v1004000 from '../v1004000'
 import * as v1004001 from '../v1004001'
 import * as v1005000 from '../v1005000'
+import * as v1006001 from '../v1006001'
+import * as v1007001 from '../v1007001'
+import * as v1009001 from '../v1009001'
 
 export const proxy =  {
     name: 'Proxy.proxy',
@@ -1160,6 +1163,63 @@ export const proxy =  {
             real: v1005000.MultiAddress,
             forceProxyType: sts.option(() => v1005000.ProxyType),
             call: v1005000.Call,
+        })
+    ),
+    /**
+     * Dispatch the given `call` from an account that the sender is authorised for through
+     * `add_proxy`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * Parameters:
+     * - `real`: The account that the proxy will make a call on behalf of.
+     * - `force_proxy_type`: Specify the exact proxy type to be used and checked for this call.
+     * - `call`: The call to be made by the `real` account.
+     */
+    v1006001: new CallType(
+        'Proxy.proxy',
+        sts.struct({
+            real: v1006001.MultiAddress,
+            forceProxyType: sts.option(() => v1006001.ProxyType),
+            call: v1006001.Call,
+        })
+    ),
+    /**
+     * Dispatch the given `call` from an account that the sender is authorised for through
+     * `add_proxy`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * Parameters:
+     * - `real`: The account that the proxy will make a call on behalf of.
+     * - `force_proxy_type`: Specify the exact proxy type to be used and checked for this call.
+     * - `call`: The call to be made by the `real` account.
+     */
+    v1007001: new CallType(
+        'Proxy.proxy',
+        sts.struct({
+            real: v1007001.MultiAddress,
+            forceProxyType: sts.option(() => v1007001.ProxyType),
+            call: v1007001.Call,
+        })
+    ),
+    /**
+     * Dispatch the given `call` from an account that the sender is authorised for through
+     * `add_proxy`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * Parameters:
+     * - `real`: The account that the proxy will make a call on behalf of.
+     * - `force_proxy_type`: Specify the exact proxy type to be used and checked for this call.
+     * - `call`: The call to be made by the `real` account.
+     */
+    v1009001: new CallType(
+        'Proxy.proxy',
+        sts.struct({
+            real: v1009001.MultiAddress,
+            forceProxyType: sts.option(() => v1009001.ProxyType),
+            call: v1009001.Call,
         })
     ),
 }

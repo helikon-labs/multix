@@ -16,34 +16,34 @@ deploy:
       cmd: ['sqd', 'start-asset-hub-polkadot']
     # - name: asset-hub-westend-processor
     #   cmd: ['sqd', 'start-asset-hub-westend']
-    - name: kusama-processor
-      cmd: ['sqd', 'start-kusama']
+    # - name: kusama-processor
+    #   cmd: ['sqd', 'start-kusama']
     - name: polkadot-processor
       cmd: ['sqd', 'start-polkadot']
     # - name: phala-processor
     #   cmd: ['sqd', 'start-phala']
     # - name: rhala-processor
     #   cmd: ['sqd', 'start-rhala']
-    - name: acala-processor
-      cmd: ['sqd', 'start-acala']
-    - name: bifrost-polkadot-processor
-      cmd: ['sqd', 'start-bifrost-polkadot']
+    # - name: acala-processor
+    #   cmd: ['sqd', 'start-acala']
+    # - name: bifrost-polkadot-processor
+    #   cmd: ['sqd', 'start-bifrost-polkadot']
     # - name: interlay-processor
     #   cmd: ['sqd', 'start-interlay']
     # - name: astar-processor
     #   cmd: ['sqd', 'start-astar']
-    - name: hydration-processor
-      cmd: ['sqd', 'start-hydration']
+    # - name: hydration-processor
+    #   cmd: ['sqd', 'start-hydration']
     # - name: moonbeam-processor
     #   cmd: ['sqd', 'start-moonbeam']
     # - name: moonriver-processor
     #   cmd: ['sqd', 'start-moonriver']
     # - name: khala-processor
     #   cmd: ['sqd', 'start-khala']
-    - name: westend-processor
-      cmd: ['sqd', 'start-westend']
-    - name: paseo-processor
-      cmd: ['sqd', 'start-paseo']
+    # - name: westend-processor
+    #   cmd: ['sqd', 'start-westend']
+    # - name: paseo-processor
+    #   cmd: ['sqd', 'start-paseo']
     # - name: kilt-processor
     #   cmd: ['sqd', 'start-kilt']
     # - name: joystream-processor
@@ -58,8 +58,8 @@ deploy:
     #   cmd: ['sqd', 'start-coretime-kusama']
     # - name: coretime-polkadot-processor
     #   cmd: ['sqd', 'start-coretime-polkadot']
-    - name: polimec-processor
-      cmd: ['sqd', 'start-polimec']
+    # - name: polimec-processor
+    #   cmd: ['sqd', 'start-polimec']
     - name: dancelight-processor
       cmd: ['sqd', 'start-dancelight']
     - name: tanssi-processor
