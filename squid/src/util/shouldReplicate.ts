@@ -1,7 +1,7 @@
-import { replicationGroups } from '../constants'
+import { multisigReplicationGroups } from '../constants'
 
 export const shouldReplicateOn = (chainId: string) => {
-  const result = Object.entries(replicationGroups).find(([, group]) => {
+  const result = Object.entries(multisigReplicationGroups).find(([, group]) => {
     return group.find((id) => id === chainId)
   })
 
