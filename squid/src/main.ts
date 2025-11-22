@@ -27,12 +27,14 @@ import { KillPureCallInfo, getProxyKillPureArgs } from './util/getProxyKillPureA
 import { handleProxyKillPure } from './processorHandlers/handleProxyKillPure'
 import { getProxyAccountId } from './util/getProxyAccountId'
 import { ProxyType } from './model'
-import { decodeAddress } from '@polkadot/util-crypto'
-import { u8aToHex } from '@polkadot/util'
 import {
   PURE_PROXIEs_MIGRATION_BLOCK,
   PURE_PROXIEs_MIGRATION_CHAIN,
-  PURE_PROXIES_MIGRATION_ARRAY
+  PURE_PROXIES_MIGRATION_ARRAY,
+  polkadotAHIndexerMigrationBlock,
+  kusamaAHIndexerMigrationBlock,
+  AHPolkadotPureProxiesMigrationArray,
+  AHKusamaPureProxiesMigrationArray
 } from './constants'
 
 const supportedMultisigCalls = [
@@ -225,44 +227,63 @@ processor.run(
         }
       }
 
-      if (
-        blockNumber === PURE_PROXIEs_MIGRATION_BLOCK &&
-        chainId === PURE_PROXIEs_MIGRATION_CHAIN
-      ) {
-        const delay = 0
-        const type = ProxyType.Any
+      const delay = 0
+      const type = ProxyType.Any
 
-        PURE_PROXIES_MIGRATION_ARRAY.forEach(({ who, pure, entity, signatories, threshold }) => {
-          ctx.log.info(`---> pure migration for ${entity}`)
-          const whoPubKey = u8aToHex(decodeAddress(who))
-          const purePubKey = u8aToHex(decodeAddress(pure))
+      const migrations = [
+        {
+          blockNumber: PURE_PROXIEs_MIGRATION_BLOCK,
+          chainId: PURE_PROXIEs_MIGRATION_CHAIN,
+          entries: PURE_PROXIES_MIGRATION_ARRAY
+        },
+        {
+          blockNumber: polkadotAHIndexerMigrationBlock,
+          chainId: 'asset-hub-polkadot',
+          entries: AHPolkadotPureProxiesMigrationArray
+        },
+        {
+          blockNumber: kusamaAHIndexerMigrationBlock,
+          chainId: 'asset-hub-kusama',
+          entries: AHKusamaPureProxiesMigrationArray
+        }
+      ]
 
-          if (signatories) {
-            ctx.log.info(`---> multisig migration for ${entity}`)
-            const manualMultisig = {
-              pubKey: whoPubKey,
-              threshold,
-              newSignatories: signatories.map((s) => u8aToHex(decodeAddress(s))),
-              isMultisig: true,
-              isPureProxy: false
-            } as NewMultisigsInfo
+      // Process migrations
+      for (const migration of migrations) {
+        if (blockNumber === migration.blockNumber && chainId === migration.chainId) {
+          migration.entries.forEach(
+            (entry: { who: string; pure: string; signatories?: string[]; threshold?: number }) => {
+              const { who, pure, signatories, threshold } = entry
 
-            newMultisigsInfo.set(manualMultisig.pubKey, manualMultisig)
-          }
+              // Handle multisig if signatories exist
+              if (signatories && threshold !== undefined) {
+                const manualMultisig = {
+                  pubKey: who,
+                  threshold,
+                  newSignatories: signatories,
+                  isMultisig: true,
+                  isPureProxy: false
+                } as NewMultisigsInfo
 
-          const id = getProxyAccountId(whoPubKey, purePubKey, type, delay, chainId)
+                newMultisigsInfo.set(manualMultisig.pubKey, manualMultisig)
+              }
 
-          newPureProxies.set(id, {
-            id,
-            who: whoPubKey,
-            pure: purePubKey,
-            delay,
-            type,
-            createdAt: timestamp,
-            creationBlockNumber: blockNumber,
-            extrinsicIndex: 0
-          })
-        })
+              // Create pure proxy
+              const id = getProxyAccountId(who, pure, type, delay, chainId)
+
+              newPureProxies.set(id, {
+                id,
+                who,
+                pure,
+                delay,
+                type,
+                createdAt: timestamp,
+                creationBlockNumber: blockNumber,
+                extrinsicIndex: 0
+              })
+            }
+          )
+        }
       }
     }
 
