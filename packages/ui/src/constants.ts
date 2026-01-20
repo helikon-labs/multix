@@ -36,7 +36,7 @@ export const AH_SUPPORTED_ASSETS = [
   { assetId: 1337, logo: usdc }
 ]
 
-export const WALLETCONNECT_PROJECT_ID = '3cb99365b226c0f1918b24cbc2b84d49'
+export const WALLETCONNECT_PROJECT_ID = '00e79e820bfeaaf825286a5697ef5026'
 
 export interface NetworkInfo {
   chainId: string
