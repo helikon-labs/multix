@@ -36,7 +36,7 @@ const About = ({ className }: Props) => {
         </a>
         . Source code is available{' '}
         <a
-          href="https://github.com/helikon-labs/multix"
+          href="https://github.com/helikon-labs/multix-live"
           target="_blank"
           rel="noreferrer"
         >
@@ -51,7 +51,7 @@ const About = ({ className }: Props) => {
           <p>
             Multix is open-source from the get-go. The back-end and front-end code can be{' '}
             <a
-              href="https://github.com/helikon-labs/multix"
+              href="https://github.com/helikon-labs/multix-live"
               target="_blank"
               rel="noreferrer"
             >
