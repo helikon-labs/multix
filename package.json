@@ -4,14 +4,14 @@
   "workspaces": [
     "packages/*"
   ],
-  "description": "An interface to easily manage complex multisigs.",
+  "description": "Multisig tooling web application for the Polkadot ecosystem. A fork of the original project developed by Thaiut Sardan.",
   "engines": {
     "node": ">=16.10"
   },
   "packageManager": "yarn@3.6.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tbaut/Multix"
+    "url": "https://github.com/helikon-labs/multix"
   },
   "keywords": [
     "polkadot",
