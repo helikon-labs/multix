@@ -34,6 +34,14 @@ const About = ({ className }: Props) => {
         >
           Thibaut Sardan
         </a>
+        . Source code is available{' '}
+        <a
+          href="https://github.com/helikon-labs/multix"
+          target="_blank"
+          rel="noreferrer"
+        >
+          here
+        </a>
         .
       </p>
       <h1>Multix values</h1>
