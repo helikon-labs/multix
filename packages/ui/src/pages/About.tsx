@@ -15,32 +15,13 @@ const About = ({ className }: Props) => {
     <Center className={className}>
       <h1>ℹ️ Project Information</h1>
       <p>
-        This project is a{' '}
-        <strong>
-          fork of the{' '}
-          <a
-            href="https://github.com/polkadot-api/Multix"
-            target="_blank"
-            rel="noreferrer"
-          >
-            original
-          </a>
-        </strong>
-        , developed by{' '}
+        This project is the <strong>continuation of the original</strong>, developed by{' '}
         <a
           href="https://github.com/Tbaut"
           target="_blank"
           rel="noreferrer"
         >
           Thibaut Sardan
-        </a>
-        . Source code is available{' '}
-        <a
-          href="https://github.com/helikon-labs/multix-live"
-          target="_blank"
-          rel="noreferrer"
-        >
-          here
         </a>
         .
       </p>
@@ -51,7 +32,7 @@ const About = ({ className }: Props) => {
           <p>
             Multix is open-source from the get-go. The back-end and front-end code can be{' '}
             <a
-              href="https://github.com/helikon-labs/multix-live"
+              href="https://github.com/helikon-labs/multix"
               target="_blank"
               rel="noreferrer"
             >
