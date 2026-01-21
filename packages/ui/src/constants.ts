@@ -14,10 +14,10 @@ import { localSVG } from './logos/localSVG'
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG'
 // import { phalaSVG } from './logos/phalaSVG'
 import { nodesAssetHubSVG } from './logos/assetHubSVG'
-// import { hydrationSVG } from './logos/hydrationSVG'
+import { hydrationSVG } from './logos/hydrationSVG'
 // import { nodesWestendColourSVG } from './logos/westend_colourSVG'
 // import { chainsAcalaSVG } from './logos/acalaSVG'
-// import { nodesBifrostSVG } from './logos/bifrostSVG'
+import { nodesBifrostSVG } from './logos/bifrostSVG'
 import paseoSVG from './logos/paseoSVG.svg'
 // import dancelightSVG from './logos/dancelightSVG.svg'
 // import tanssiSVG from './logos/tanssiSVG.svg'
@@ -51,7 +51,7 @@ export interface NetworkInfo {
   genesisHash?: string
 }
 
-export const HTTP_GRAPHQL_URL = `https://polkadot.graphql.multix.live/graphql`
+export const HTTP_GRAPHQL_URL = `https://polkadot.graphql.multix.cloud/graphql`
 export const PAYMENT_INFO_ACCOUNT = '5CXQZrh1MSgnGGCdJu3tqvRfCv7t5iQXGGV9UKotrbfhkavs'
 
 const polkadotPplChains = [
@@ -61,6 +61,7 @@ const polkadotPplChains = [
   // 'wss://polkadot-people-rpc.polkadot.io'
   // 'wss://people-polkadot.public.curie.radiumblock.co/ws'
 ]
+
 const kusamaPplChains = [
   'wss://sys.ibp.network/people-kusama',
   'wss://people-kusama.dotters.network'
@@ -88,7 +89,7 @@ export const networkList: Record<string, NetworkInfo> = {
       // 'wss://dot-rpc.stakeworld.io',
       // 'wss://polkadot.rpc.subquery.network/public/ws'
     ],
-    httpGraphqlUrl: 'https://polkadot.graphql.multix.live/graphql',
+    httpGraphqlUrl: 'https://polkadot.graphql.multix.cloud/graphql',
     networkLogo: chainsPolkadotCircleSVG,
     descriptor: 'dot',
     pplChainDescriptor: 'dotPpl',
@@ -110,7 +111,7 @@ export const networkList: Record<string, NetworkInfo> = {
       // 'wss://ksm-rpc.stakeworld.io',
       // 'wss://kusama.rpc.subquery.network/public/ws'
     ],
-    httpGraphqlUrl: 'https://kusama.graphql.multix.live/graphql',
+    httpGraphqlUrl: 'https://kusama.graphql.multix.cloud/graphql',
     networkLogo: chainsKusamaSVG,
     descriptor: 'ksm',
     pplChainDescriptor: 'ksmPpl',
@@ -129,7 +130,7 @@ export const networkList: Record<string, NetworkInfo> = {
       //'wss://dot-rpc.stakeworld.io/assethub'
     ],
     pplChainRpcUrls: polkadotPplChains,
-    httpGraphqlUrl: 'https://asset-hub-polkadot.graphql.multix.live/graphql',
+    httpGraphqlUrl: 'https://asset-hub-polkadot.graphql.multix.cloud/graphql',
     nativeAssetLogo: chainsPolkadotCircleSVG,
     networkLogo: nodesAssetHubSVG,
     descriptor: 'dotAssetHub',
@@ -151,7 +152,7 @@ export const networkList: Record<string, NetworkInfo> = {
       // 'wss://ksm-rpc.stakeworld.io/assethub'
     ],
     pplChainRpcUrls: kusamaPplChains,
-    httpGraphqlUrl: 'https://asset-hub-kusama.graphql.multix.live/graphql',
+    httpGraphqlUrl: 'https://asset-hub-kusama.graphql.multix.cloud/graphql',
     nativeAssetLogo: chainsKusamaSVG,
     networkLogo: nodesAssetHubSVG,
     descriptor: 'ksmAssetHub',
@@ -216,37 +217,36 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: nodesAstarPNG
   // },
-  // 'bifrost-dot': {
-  //   chainId: 'bifrost-polkadot',
-  //   explorerNetworkName: 'bifrost',
-  //   rpcUrls: [
-  //     'wss://bifrost-polkadot-rpc.dwellir.com',
-  //     'wss://bifrost-polkadot.ibp.network',
-  //     'wss://bifrost-polkadot.dotters.network',
-  //     'wss://hk.p.bifrost-rpc.liebi.com/ws',
-  //     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
-  //     'wss://bifrost.public.curie.radiumblock.co/ws'
-  //   ],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   networkLogo: nodesBifrostSVG,
-  //   descriptor: 'bifrostDot',
-  //   genesisHash: '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b'
-  // },
-  // hydration: {
-  //   chainId: 'hydradx',
-  //   explorerNetworkName: 'hydration',
-  //   rpcUrls: [
-  //     'wss://rpc.helikon.io/hydradx',
-  //     'wss://hydradx-rpc.dwellir.com',
-  //     'wss://rpc.hydradx.cloud',
-  //     'wss://hydradx.paras.ibp.network',
-  //     'wss://hydration.dotters.network'
-  //   ],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   networkLogo: hydrationSVG,
-  //   descriptor: 'hydration',
-  //   genesisHash: '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d'
-  // },
+  'bifrost-dot': {
+    chainId: 'bifrost-polkadot',
+    explorerNetworkName: 'bifrost',
+    rpcUrls: [
+      'wss://rpc.ibp.network/bifrost-polkadot',
+      'wss://bifrost-polkadot.dotters.network',
+      'wss://hk.p.bifrost-rpc.liebi.com/ws',
+      'wss://eu.bifrost-polkadot-rpc.liebi.com/ws'
+      // 'wss://bifrost.public.curie.radiumblock.co/ws'
+    ],
+    httpGraphqlUrl: 'https://bifrost-polkadot.graphql.multix.cloud/graphql',
+    networkLogo: nodesBifrostSVG,
+    descriptor: 'bifrostDot',
+    genesisHash: '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b'
+  },
+  hydration: {
+    chainId: 'hydradx',
+    explorerNetworkName: 'hydration',
+    rpcUrls: [
+      'wss://rpc.helikon.io/hydration',
+      'wss://rpc.ibp.network/hydration',
+      'wss://hydration.dotters.network',
+      'wss://hydration-rpc.n.dwellir.com'
+      // 'wss://rpc.hydradx.cloud',
+    ],
+    httpGraphqlUrl: 'https://hydration.graphql.multix.cloud/graphql',
+    networkLogo: hydrationSVG,
+    descriptor: 'hydration',
+    genesisHash: '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d'
+  },
   // interlay: {
   //   chainId: 'interlay',
   //   explorerNetworkName: 'interlay',
@@ -350,7 +350,7 @@ export const networkList: Record<string, NetworkInfo> = {
       //'wss://pas-rpc.stakeworld.io',
       //'wss://paseo.rpc.amforc.com',
     ],
-    httpGraphqlUrl: 'https://paseo.graphql.multix.live/graphql',
+    httpGraphqlUrl: 'https://paseo.graphql.multix.cloud/graphql',
     pplChainRpcUrls: ['wss://people-paseo.rpc.amforc.com', 'wss://people-paseo.dotters.network'],
     networkLogo: paseoSVG,
     descriptor: 'paseo',
@@ -437,12 +437,12 @@ export const networkList: Record<string, NetworkInfo> = {
 
 export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] = [
   'polkadot',
-  'asset-hub-polkadot'
+  'asset-hub-polkadot',
   // 'coretime-polkadot',
   // 'acala',
   // 'astar',
-  // 'bifrost-dot',
-  // 'hydration',
+  'bifrost-dot',
+  'hydration'
   // 'interlay',
   // 'kilt',
   // 'moonbeam',

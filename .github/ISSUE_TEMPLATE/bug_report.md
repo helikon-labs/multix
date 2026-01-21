@@ -17,7 +17,7 @@ Add any setup info / environment / account specifics that need to be in place pr
 
 Add clear steps on how to reproduce the bug
 
-1. Go to Multix at 'https://multix.live'
+1. Go to Multix at 'https://multix.cloud'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error

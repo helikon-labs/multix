@@ -6,7 +6,7 @@
 
 Multix an interface to easily manage complex multisigs.
 
-### https://multix.live
+### https://multix.cloud
 
 This repo contains the code to run an indexer see `./squid` and a front-end, see `./packages/ui`.
 

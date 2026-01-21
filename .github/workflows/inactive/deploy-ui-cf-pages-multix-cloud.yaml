@@ -1,4 +1,4 @@
-name: UI deployment Multix.live
+name: UI deployment multix.cloud
 on:
   push:
     branches: ['main']

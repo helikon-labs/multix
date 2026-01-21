@@ -1,6 +1,6 @@
 {
   "overwrite": true,
-  "schema": "https://polkadot.graphql.multix.live/graphql",
+  "schema": "https://polkadot.graphql.multix.cloud/graphql",
   "documents": "src/**/*.graphql",
   "generates": {
     "src/gql/": {

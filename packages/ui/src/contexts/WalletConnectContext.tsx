@@ -37,7 +37,7 @@ const WalletConnectContextProvider = ({ children }: WalletConnectContextProps) =
       metadata: {
         name: DAPP_NAME,
         description: 'Multix Client as Wallet/Peer',
-        url: 'multix.live',
+        url: 'multix.cloud',
         icons: ['https://avatars.githubusercontent.com/u/37784886']
       }
     })
