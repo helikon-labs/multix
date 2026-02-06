@@ -427,7 +427,6 @@ export const networkList: Record<string, NetworkInfo> = {
   'zkVerify-mainnet': {
     chainId: 'zkverify-mainnet',
     explorerNetworkName: 'zkverify',
-    pplChainRpcUrls: ['wss://zkverify-rpc.zkverify.io'],
     rpcUrls: ['wss://zkverify-rpc.zkverify.io'],
     httpGraphqlUrl: 'https://zkverify-mainnet.graphql.multix.cloud/graphql',
     networkLogo: zkVerifyMainnetSVG,
