@@ -97,6 +97,11 @@
       "metadata": ".papi/metadata/tanssi.scale",
       "genesis": "0xdd6d086f75ec041b66e20c4186d327b23c8af244c534a2418de6574e8c041a60",
       "codeHash": "0x9324e6b036f6478ee50e4a122fd77af6ce8ba71e00108ccd330b36e2f7f1734f"
+    },
+    "zkVerifyMainnet": {
+      "wsUrl": "wss://zkverify-rpc.zkverify.io",
+      "metadata": "./.papi/metadata/zkverify-mainnet.scale",
+      "genesis": "0x060e3dd3fa2904d031206bb913c954687a2bcc350e5a83d33d9e273ad21460f1"
     }
   }
 }

@@ -7,7 +7,7 @@ import {
   kusamaNetworksAndParachains,
   networkList,
   polkadotNetworksAndParachains,
-  // soloChains,
+  soloChains,
   testChains
 } from '../../constants'
 import { theme } from '../../styles/theme'
@@ -67,7 +67,6 @@ const NetworkSelection = () => {
     return null
   }
 
-  /*
   return (
     <SelectStyled
       IconComponent={HiOutlineChevronDown}
@@ -83,24 +82,6 @@ const NetworkSelection = () => {
       {renderNetworks(kusamaNetworksAndParachains)}
       <ListSubheader>Solo chains</ListSubheader>
       {renderNetworks(soloChains)}
-      <ListSubheader>Testnets</ListSubheader>
-      {renderNetworks(testChains)}
-    </SelectStyled>
-  )
-  */
-  return (
-    <SelectStyled
-      IconComponent={HiOutlineChevronDown}
-      value={selectedNetwork}
-      autoWidth={true}
-      onChange={handleNetworkSelection}
-      MenuProps={MenuPropsStyles}
-      data-cy={`select-networks`}
-    >
-      <ListSubheader>Polkadot & Parachains</ListSubheader>
-      {renderNetworks(polkadotNetworksAndParachains)}
-      <ListSubheader>Kusama & Parachains</ListSubheader>
-      {renderNetworks(kusamaNetworksAndParachains)}
       <ListSubheader>Testnets</ListSubheader>
       {renderNetworks(testChains)}
     </SelectStyled>
