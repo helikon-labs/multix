@@ -100,8 +100,13 @@
     },
     "zkVerifyMainnet": {
       "wsUrl": "wss://zkverify-rpc.zkverify.io",
-      "metadata": "./.papi/metadata/zkverify-mainnet.scale",
+      "metadata": ".papi/metadata/zkverify-mainnet.scale",
       "genesis": "0x060e3dd3fa2904d031206bb913c954687a2bcc350e5a83d33d9e273ad21460f1"
+    },
+    "astar": {
+      "wsUrl": "wss://rpc.astar.network",
+      "metadata": ".papi/metadata/astar.scale",
+      "genesis": "0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6"
     }
   }
 }

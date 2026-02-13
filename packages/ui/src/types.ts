@@ -60,6 +60,7 @@ export interface AccountRegistration {
 
 import {
   acala,
+  astar,
   bifrostDot,
   dancelight,
   dot,
@@ -83,6 +84,7 @@ import {
 
 export const DESCRIPTORS = {
   acala,
+  astar,
   bifrostDot,
   dancelight,
   dot,
@@ -106,6 +108,7 @@ export const DESCRIPTORS = {
 
 export const DESCRIPTORS_NOT_HYDRATION_1_3 = {
   acala,
+  astar,
   bifrostDot,
   dot,
   dotAssetHub

@@ -37,7 +37,7 @@ To connect to your local indexer, you will need an env file. You can rename `.en
 When you launch the front-end, for it to point to the urls specified in your `.env`, you must specify `network=local` e.g : http://localhost:3333?network=local
 
 ```bash
-VITE_CHAIN_ID="kusama" # it will be used for identifying accounts on the idexer
+VITE_CHAIN_ID="kusama" # it will be used for identifying accounts on the indexer
 VITE_EXPLORER_NETWORK_NAME="kusama" # this name is needed to build explorer links
 VITE_WS_PROVIDER="wss://rpc.ibp.network/kusama" # the front-end will connect to this blockchain node
 VITE_GRAPHQL_HTTP_PROVIDER="http://localhost:4350/graphql" # url queried for the indexer queries

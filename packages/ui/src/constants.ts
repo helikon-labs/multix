@@ -1,4 +1,4 @@
-// import { nodesAstarPNG } from './logos/astarPNG'
+import { nodesAstarPNG } from './logos/astarPNG'
 // import { nodesInterlaySVG } from './logos/interlaySVG'
 // import { nodesMoonriverSVG } from './logos/moonriverSVG'
 // import { nodesMoonbeamSVG } from './logos/moonbeamSVG'
@@ -205,19 +205,21 @@ export const networkList: Record<string, NetworkInfo> = {
   //   descriptor: 'acala',
   //   genesisHash: '0xfc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c'
   // },
-  // astar: {
-  //   chainId: 'astar',
-  //   explorerNetworkName: 'astar',
-  //   rpcUrls: [
-  //     'wss://rpc.astar.network',
-  //     'wss://1rpc.io/astr',
-  //     'wss://astar-rpc.dwellir.com',
-  //     'wss://astar.api.onfinality.io/public-ws',
-  //     'wss://astar.public.curie.radiumblock.co/ws'
-  //   ],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: nodesAstarPNG
-  // },
+  astar: {
+    chainId: 'astar',
+    explorerNetworkName: 'astar',
+    rpcUrls: [
+      'wss://rpc.astar.network',
+      'wss://1rpc.io/astr',
+      'wss://astar-rpc.dwellir.com',
+      'wss://astar.api.onfinality.io/public-ws',
+      'wss://astar.public.curie.radiumblock.co/ws'
+    ],
+    httpGraphqlUrl: 'https://astar.graphql.multix.cloud/graphql',
+    networkLogo: nodesAstarPNG,
+    descriptor: 'astar',
+    genesisHash: '0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6'
+  },
   'bifrost-dot': {
     chainId: 'bifrost-polkadot',
     explorerNetworkName: 'bifrost',
@@ -450,7 +452,7 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
   'asset-hub-polkadot',
   // 'coretime-polkadot',
   // 'acala',
-  // 'astar',
+  'astar',
   'bifrost-dot',
   'hydration'
   // 'interlay',
