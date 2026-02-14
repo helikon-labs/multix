@@ -1,62 +1,62 @@
 query MultisigsAndPureByAccount($accountIds: [String!], $watchedAccountIds: [String!]) {
-  accounts(
-    where: {
-      AND: [
-        {
-          OR: [
-            { id_in: $watchedAccountIds }
-            { signatories_some: { signatory: { id_in: $accountIds } } }
-            { signatories_some: { signatory: { id_in: $watchedAccountIds } } }
-          ]
+    accounts(
+        where: {
+            AND: [
+                {
+                    OR: [
+                        { id_in: $watchedAccountIds }
+                        { signatories_some: { signatory: { id_in: $accountIds } } }
+                        { signatories_some: { signatory: { id_in: $watchedAccountIds } } }
+                    ]
+                }
+                { OR: [{ isMultisig_eq: true }, { isPureProxy_eq: true }] }
+            ]
         }
-        { OR: [{ isMultisig_eq: true }, { isPureProxy_eq: true }] }
-      ]
-    }
-  ) {
-    # either it's a multisig or proxy, with direct address match from a watch account
-    # or one of accounts or watch accounts is a signatory
-    id
-    pubKey
-    isMultisig
-    isPureProxy
-    threshold
-    signatories {
-      id
-      signatory {
-        id
-        pubKey
-      }
-    }
-    delegateeFor {
-      id
-      type
-      delegator {
-        id
-        pubKey
-        isPureProxy
-      }
-      delegatee {
-        id
-        pubKey
-        isPureProxy
-      }
-    }
-    delegatorFor {
-      id
-      type
-      delegatee {
+    ) {
+        # either it's a multisig or proxy, with direct address match from a watch account
+        # or one of accounts or watch accounts is a signatory
         id
         pubKey
         isMultisig
+        isPureProxy
         threshold
         signatories {
-          id
-          signatory {
             id
-            pubKey
-          }
+            signatory {
+                id
+                pubKey
+            }
         }
-      }
+        delegateeFor {
+            id
+            type
+            delegator {
+                id
+                pubKey
+                isPureProxy
+            }
+            delegatee {
+                id
+                pubKey
+                isPureProxy
+            }
+        }
+        delegatorFor {
+            id
+            type
+            delegatee {
+                id
+                pubKey
+                isMultisig
+                threshold
+                signatories {
+                    id
+                    signatory {
+                        id
+                        pubKey
+                    }
+                }
+            }
+        }
     }
-  }
 }

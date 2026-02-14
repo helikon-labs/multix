@@ -2,87 +2,87 @@ manifestVersion: subsquid.io/v0.1
 name: multix-arrow
 version: 7
 description: |-
-  Arrow Squid for Multix
+    Arrow Squid for Multix
 
 build:
 
 deploy:
-  addons:
-    postgres:
-  processor:
-    - name: asset-hub-kusama-processor
-      cmd: ['sqd', 'start-asset-hub-kusama']
-    - name: asset-hub-polkadot-processor
-      cmd: ['sqd', 'start-asset-hub-polkadot']
-    # - name: asset-hub-westend-processor
-    #   cmd: ['sqd', 'start-asset-hub-westend']
-    # - name: kusama-processor
-    #   cmd: ['sqd', 'start-kusama']
-    - name: polkadot-processor
-      cmd: ['sqd', 'start-polkadot']
-    # - name: phala-processor
-    #   cmd: ['sqd', 'start-phala']
-    # - name: acala-processor
-    #   cmd: ['sqd', 'start-acala']
-    # - name: bifrost-polkadot-processor
-    #   cmd: ['sqd', 'start-bifrost-polkadot']
-    # - name: interlay-processor
-    #   cmd: ['sqd', 'start-interlay']
-    # - name: astar-processor
-    #   cmd: ['sqd', 'start-astar']
-    # - name: hydration-processor
-    #   cmd: ['sqd', 'start-hydration']
-    # - name: moonbeam-processor
-    #   cmd: ['sqd', 'start-moonbeam']
-    # - name: moonriver-processor
-    #   cmd: ['sqd', 'start-moonriver']
-    # - name: westend-processor
-    #   cmd: ['sqd', 'start-westend']
-    # - name: paseo-processor
-    #   cmd: ['sqd', 'start-paseo']
-    # - name: joystream-processor
-    #   cmd: ['sqd', 'start-joystream']
-    # - name: watr-processor
-    #   cmd: ['sqd', 'start-watr']
-    # - name: pendulum-processor
-    #   cmd: ['sqd', 'start-pendulum']
-    # - name: amplitude-processor
-    #   cmd: ['sqd', 'start-amplitude']
-    # - name: coretime-kusama-processor
-    #   cmd: ['sqd', 'start-coretime-kusama']
-    # - name: coretime-polkadot-processor
-    #   cmd: ['sqd', 'start-coretime-polkadot']
-    - name: dancelight-processor
-      cmd: ['sqd', 'start-dancelight']
-    - name: tanssi-processor
-      cmd: ['sqd', 'start-tanssi']
-  # api:
-  #   env:
-  # SQD_DEBUG: sqd:graphql-server
-  api:
-    cmd:
-      [
-        'npx',
-        'squid-graphql-server',
-        '--sql-statement-timeout',
-        10000,
-        '--dumb-cache',
-        'in-memory',
-        '--dumb-cache-ttl',
-        1000,
-        '--dumb-cache-size',
-        100,
-        '--dumb-cache-max-age',
-        1000
-      ]
+    addons:
+        postgres:
+    processor:
+        - name: asset-hub-kusama-processor
+          cmd: ['sqd', 'start-asset-hub-kusama']
+        - name: asset-hub-polkadot-processor
+          cmd: ['sqd', 'start-asset-hub-polkadot']
+        # - name: asset-hub-westend-processor
+        #   cmd: ['sqd', 'start-asset-hub-westend']
+        # - name: kusama-processor
+        #   cmd: ['sqd', 'start-kusama']
+        - name: polkadot-processor
+          cmd: ['sqd', 'start-polkadot']
+        # - name: phala-processor
+        #   cmd: ['sqd', 'start-phala']
+        # - name: acala-processor
+        #   cmd: ['sqd', 'start-acala']
+        # - name: bifrost-polkadot-processor
+        #   cmd: ['sqd', 'start-bifrost-polkadot']
+        # - name: interlay-processor
+        #   cmd: ['sqd', 'start-interlay']
+        # - name: astar-processor
+        #   cmd: ['sqd', 'start-astar']
+        # - name: hydration-processor
+        #   cmd: ['sqd', 'start-hydration']
+        # - name: moonbeam-processor
+        #   cmd: ['sqd', 'start-moonbeam']
+        # - name: moonriver-processor
+        #   cmd: ['sqd', 'start-moonriver']
+        # - name: westend-processor
+        #   cmd: ['sqd', 'start-westend']
+        # - name: paseo-processor
+        #   cmd: ['sqd', 'start-paseo']
+        # - name: joystream-processor
+        #   cmd: ['sqd', 'start-joystream']
+        # - name: watr-processor
+        #   cmd: ['sqd', 'start-watr']
+        # - name: pendulum-processor
+        #   cmd: ['sqd', 'start-pendulum']
+        # - name: amplitude-processor
+        #   cmd: ['sqd', 'start-amplitude']
+        # - name: coretime-kusama-processor
+        #   cmd: ['sqd', 'start-coretime-kusama']
+        # - name: coretime-polkadot-processor
+        #   cmd: ['sqd', 'start-coretime-polkadot']
+        - name: dancelight-processor
+          cmd: ['sqd', 'start-dancelight']
+        - name: tanssi-processor
+          cmd: ['sqd', 'start-tanssi']
+    # api:
+    #   env:
+    # SQD_DEBUG: sqd:graphql-server
+    api:
+        cmd:
+            [
+                'npx',
+                'squid-graphql-server',
+                '--sql-statement-timeout',
+                10000,
+                '--dumb-cache',
+                'in-memory',
+                '--dumb-cache-ttl',
+                1000,
+                '--dumb-cache-size',
+                100,
+                '--dumb-cache-max-age',
+                1000,
+            ]
 scale:
-  dedicated: true
-  addons:
-    postgres:
-      profile: small
-  processor:
-    profile: small
-  api:
-    profile: small
-    # load-balance three replicas
-    # replicas: 2
+    dedicated: true
+    addons:
+        postgres:
+            profile: small
+    processor:
+        profile: small
+    api:
+        profile: small
+        # load-balance three replicas
+        # replicas: 2

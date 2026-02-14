@@ -1,20 +1,20 @@
 {
-  "outDir": "../types",
-  "specVersions": "https://v2.archive.subsquid.io/metadata/kusama",
-  "events": [
-    "Proxy.AnonymousCreated",
-    "Proxy.PureCreated",
-    "Proxy.ProxyAdded",
-    "Proxy.ProxyRemoved"
-  ],
-  "calls": [
-    "Proxy.proxy",
-    "Proxy.remove_proxies",
-    "Proxy.kill_pure",
-    "Multisig.as_multi",
-    "Multisig.approve_as_multi",
-    "Multisig.cancel_as_multi",
-    "Multisig.as_multi_threshold_1"
-  ],
-  "storage": []
+    "outDir": "../types",
+    "specVersions": "https://v2.archive.subsquid.io/metadata/kusama",
+    "events": [
+        "Proxy.AnonymousCreated",
+        "Proxy.PureCreated",
+        "Proxy.ProxyAdded",
+        "Proxy.ProxyRemoved"
+    ],
+    "calls": [
+        "Proxy.proxy",
+        "Proxy.remove_proxies",
+        "Proxy.kill_pure",
+        "Multisig.as_multi",
+        "Multisig.approve_as_multi",
+        "Multisig.cancel_as_multi",
+        "Multisig.as_multi_threshold_1"
+    ],
+    "storage": []
 }

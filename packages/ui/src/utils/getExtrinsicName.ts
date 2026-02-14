@@ -1,5 +1,5 @@
 export const getExtrinsicName = (section = '', method = '') => {
-  if (!section || !method) return ''
+    if (!section || !method) return '';
 
-  return `${section}.${method}`
-}
+    return `${section}.${method}`;
+};

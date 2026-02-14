@@ -1,50 +1,50 @@
 {
-  "name": "multix",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "description": "Multisig tooling web application for the Polkadot ecosystem. A fork of the original project developed by Thaiut Sardan.",
-  "engines": {
-    "node": ">=16.10"
-  },
-  "packageManager": "yarn@3.6.3",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/helikon-labs/multix"
-  },
-  "keywords": [
-    "polkadot",
-    "multisig"
-  ],
-  "license": "Apache-2.0",
-  "scripts": {
-    "docker:db": "docker compose up -d db",
-    "docker:down": "docker compose down",
-    "build": "yarn workspaces foreach run build",
-    "build:indexer": "cd squid && npm run codegen && npm run typegen && npm run build && npm run db:migrate",
-    "lint": "yarn workspaces foreach run lint",
-    "lint:fix": "yarn workspaces foreach run lint:fix",
-    "formatAll": "prettier --write .",
-    "start:chopsticks-test-build-and-launch-all": "concurrently --kill-others 'npm run start:chopsticks' 'npm run ui:start-with-chopsticks' 'npm run docker:down && npm run docker:db && npm run build:indexer && npm run indexer:start:chopsticks-local' 'npm run start:graphql-server'",
-    "start:chopsticks": "npx --yes @acala-network/chopsticks@1.0.6 --config chopsticks-config.yml",
-    "start:graphql-server": "cd squid && npm run start:graphql-server",
-    "indexer:start:chopsticks-ci": "cd squid && npm run start:chopsticks-ci",
-    "indexer:start:chopsticks-local": "cd squid && npm run start:chopsticks-local",
-    "ui:start": "yarn workspace multix-ui start",
-    "ui:lint": "yarn workspace multix-ui lint",
-    "ui:test": "yarn workspace multix-ui test",
-    "ui:start-with-chopsticks": "yarn workspace multix-ui start-with-chopsticks"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2"
-  },
-  "resolutions": {
-    "graphql": "^16.0.0",
-    "@polkadot/util-crypto": "12.5.1",
-    "@polkadot/util": "12.5.1"
-  }
+    "name": "multix",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "description": "Multisig tooling web application for the Polkadot ecosystem. A fork of the original project developed by Thaiut Sardan.",
+    "engines": {
+        "node": ">=16.10"
+    },
+    "packageManager": "yarn@3.6.3",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/helikon-labs/multix"
+    },
+    "keywords": [
+        "polkadot",
+        "multisig"
+    ],
+    "license": "Apache-2.0",
+    "scripts": {
+        "docker:db": "docker compose up -d db",
+        "docker:down": "docker compose down",
+        "build": "yarn workspaces foreach run build",
+        "build:indexer": "cd squid && npm run codegen && npm run typegen && npm run build && npm run db:migrate",
+        "lint": "yarn workspaces foreach run lint",
+        "lint:fix": "yarn workspaces foreach run lint:fix",
+        "formatAll": "prettier --write .",
+        "start:chopsticks-test-build-and-launch-all": "concurrently --kill-others 'npm run start:chopsticks' 'npm run ui:start-with-chopsticks' 'npm run docker:down && npm run docker:db && npm run build:indexer && npm run indexer:start:chopsticks-local' 'npm run start:graphql-server'",
+        "start:chopsticks": "npx --yes @acala-network/chopsticks@1.0.6 --config chopsticks-config.yml",
+        "start:graphql-server": "cd squid && npm run start:graphql-server",
+        "indexer:start:chopsticks-ci": "cd squid && npm run start:chopsticks-ci",
+        "indexer:start:chopsticks-local": "cd squid && npm run start:chopsticks-local",
+        "ui:start": "yarn workspace multix-ui start",
+        "ui:lint": "yarn workspace multix-ui lint",
+        "ui:test": "yarn workspace multix-ui test",
+        "ui:start-with-chopsticks": "yarn workspace multix-ui start-with-chopsticks"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
+        "prettier": "^3.6.2"
+    },
+    "resolutions": {
+        "graphql": "^16.0.0",
+        "@polkadot/util-crypto": "12.5.1",
+        "@polkadot/util": "12.5.1"
+    }
 }

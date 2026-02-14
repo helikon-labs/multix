@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020",
-    "outDir": "lib",
-    "rootDir": "src",
-    "strict": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true
-  },
-  "include": ["src", ".prettierrc.js"],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2020",
+        "outDir": "lib",
+        "rootDir": "src",
+        "strict": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true
+    },
+    "include": ["src", ".prettierrc.js"],
+    "exclude": ["node_modules"]
 }

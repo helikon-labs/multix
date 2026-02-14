@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  db:
-    container_name: subsquid_db
-    image: postgres:14
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: postgres
-    shm_size: 1gb
-    ports:
-      - '5432:5432'
+    db:
+        container_name: subsquid_db
+        image: postgres:14
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_PASSWORD: postgres
+        shm_size: 1gb
+        ports:
+            - '5432:5432'
 #    command: ["postgres", "-c", "log_statement=all"]
 #    volumes:
 #      - ./data/db:/var/lib/postgresql/data

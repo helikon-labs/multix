@@ -1,66 +1,66 @@
 name: Cypress tests
 on:
-  pull_request:
-    paths:
-      - 'packages/ui/**/*'
-      - '.github/workflows/cypress-tests.yaml'
-      - 'chopsticks-config.yml'
+    pull_request:
+        paths:
+            - 'packages/ui/**/*'
+            - '.github/workflows/cypress-tests.yaml'
+            - 'chopsticks-config.yml'
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:latest
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install indexer deps
-        working-directory: squid
-        run: npm ci
-      - name: run indexer routine
-        working-directory: squid
-        run: |
-          npm run codegen
-          npm run typegen
-          npm run build
-          npm run db:migrate
-        env:
-          DB_HOST: postgres
+    cypress-run:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:latest
+        services:
+            postgres:
+                image: postgres:14
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install indexer deps
+              working-directory: squid
+              run: npm ci
+            - name: run indexer routine
+              working-directory: squid
+              run: |
+                  npm run codegen
+                  npm run typegen
+                  npm run build
+                  npm run db:migrate
+              env:
+                  DB_HOST: postgres
 
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        env:
-          DB_HOST: postgres
-          GQL_PORT: 4350
-          DB_PORT: 5432
-        with:
-          install-command: yarn install
-          start: |
-            npm run start:chopsticks
-            yarn ui:start-with-chopsticks
-            npm run indexer:start:chopsticks-ci
-            npm run start:graphql-server
-          wait-on: 'http://localhost:3333'
-          # custom test command to run
-          command: yarn test:ci
-        # after the test run completes store videos and any screenshots
-      - name: Store screenshots
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: packages/ui/cypress/screenshots
-      # # store the videos if the tests fail
-      # - name: Store videos
-      #   uses: actions/upload-artifact@v4
-      #   if: failure()
-      #   with:
-      #     name: cypress-videos
-      #     path: packages/ui/cypress/videos
+            # Install NPM dependencies, cache them correctly
+            # and run all Cypress tests
+            - name: Cypress run
+              uses: cypress-io/github-action@v6
+              env:
+                  DB_HOST: postgres
+                  GQL_PORT: 4350
+                  DB_PORT: 5432
+              with:
+                  install-command: yarn install
+                  start: |
+                      npm run start:chopsticks
+                      yarn ui:start-with-chopsticks
+                      npm run indexer:start:chopsticks-ci
+                      npm run start:graphql-server
+                  wait-on: 'http://localhost:3333'
+                  # custom test command to run
+                  command: yarn test:ci
+              # after the test run completes store videos and any screenshots
+            - name: Store screenshots
+              uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: cypress-screenshots
+                  path: packages/ui/cypress/screenshots
+            # # store the videos if the tests fail
+            # - name: Store videos
+            #   uses: actions/upload-artifact@v4
+            #   if: failure()
+            #   with:
+            #     name: cypress-videos
+            #     path: packages/ui/cypress/videos

@@ -14,13 +14,13 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 Cypress.on('uncaught:exception', (e, runnable) => {
-  console.log('Error:', e)
-  console.log('Test', runnable)
-  if (e.name.includes('RpcError') && e.message.includes('Method not found')) return false
-})
+    console.log('Error:', e);
+    console.log('Test', runnable);
+    if (e.name.includes('RpcError') && e.message.includes('Method not found')) return false;
+});

@@ -1,15 +1,15 @@
-import { useNetwork } from '../contexts/NetworkContext'
+import { useNetwork } from '../contexts/NetworkContext';
 
-const getId = (pubKey: string, chainId: string) => `${chainId}-${pubKey}`
+const getId = (pubKey: string, chainId: string) => `${chainId}-${pubKey}`;
 
-export function useAccountId(pubKey: string[]): string[]
-export function useAccountId(pubKey: string): string
+export function useAccountId(pubKey: string[]): string[];
+export function useAccountId(pubKey: string): string;
 export function useAccountId(pubKey: string | string[]) {
-  const { selectedNetworkInfo } = useNetwork()
+    const { selectedNetworkInfo } = useNetwork();
 
-  if (Array.isArray(pubKey)) {
-    return pubKey.map((pk) => getId(pk, selectedNetworkInfo?.chainId || ''))
-  }
+    if (Array.isArray(pubKey)) {
+        return pubKey.map((pk) => getId(pk, selectedNetworkInfo?.chainId || ''));
+    }
 
-  return getId(pubKey, selectedNetworkInfo?.chainId || '')
+    return getId(pubKey, selectedNetworkInfo?.chainId || '');
 }

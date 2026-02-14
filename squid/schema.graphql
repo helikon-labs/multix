@@ -1,57 +1,57 @@
 type Account @entity {
-  id: ID!
-  pubKey: String!
-  multisigs: [AccountMultisig] @derivedFrom(field: "signatory")
-  isPureProxy: Boolean
-  # it's the origin/delegator for another proxy accounts, a pure must have some
-  delegatorFor: [ProxyAccount!] @derivedFrom(field: "delegator")
-  # it's the delegatee/doing stuff on behalf of another account
-  delegateeFor: [ProxyAccount!] @derivedFrom(field: "delegatee")
-  isMultisig: Boolean
-  signatories: [AccountMultisig!] @derivedFrom(field: "multisig")
-  threshold: Int
-  multisigsCalls: [MultisigCall!] @derivedFrom(field: "multisig")
+    id: ID!
+    pubKey: String!
+    multisigs: [AccountMultisig] @derivedFrom(field: "signatory")
+    isPureProxy: Boolean
+    # it's the origin/delegator for another proxy accounts, a pure must have some
+    delegatorFor: [ProxyAccount!] @derivedFrom(field: "delegator")
+    # it's the delegatee/doing stuff on behalf of another account
+    delegateeFor: [ProxyAccount!] @derivedFrom(field: "delegatee")
+    isMultisig: Boolean
+    signatories: [AccountMultisig!] @derivedFrom(field: "multisig")
+    threshold: Int
+    multisigsCalls: [MultisigCall!] @derivedFrom(field: "multisig")
 }
 
 type MultisigCall @entity {
-  id: ID!
-  blockHash: String!
-  timestamp: DateTime!
-  multisig: Account
-  callIndex: Int!
+    id: ID!
+    blockHash: String!
+    timestamp: DateTime!
+    multisig: Account
+    callIndex: Int!
 }
 
 # entity for linking accounts and multisigs
 type AccountMultisig @entity {
-  id: ID!
-  multisig: Account!
-  signatory: Account!
+    id: ID!
+    multisig: Account!
+    signatory: Account!
 }
 
 # entity for linking proxies
 type ProxyAccount @entity {
-  id: ID!
-  delegator: Account!
-  delegatee: Account!
-  type: ProxyType!
-  delay: Int!
-  createdAt: DateTime!
-  extrinsicIndex: Int # only useful for pure proxies
-  creationBlockNumber: Int # only useful for pure proxies
+    id: ID!
+    delegator: Account!
+    delegatee: Account!
+    type: ProxyType!
+    delay: Int!
+    createdAt: DateTime!
+    extrinsicIndex: Int # only useful for pure proxies
+    creationBlockNumber: Int # only useful for pure proxies
 }
 
 # from https://github.com/paritytech/polkadot/blob/476d3ddddf7a8f7361edac92228d0200abac0895/runtime/polkadot/src/lib.rs#L918
 # and https://github.com/paritytech/polkadot/blob/476d3ddddf7a8f7361edac92228d0200abac0895/runtime/kusama/src/lib.rs#L934
 enum ProxyType {
-  Any
-  Governance
-  NonTransfer
-  IdentityJudgement
-  CancelProxy
-  Auction
-  Staking
-  SudoBalances
-  NominationPools
-  Society
-  Unknown # this is added in case a new proxy type comes up and isn't supported yet
+    Any
+    Governance
+    NonTransfer
+    IdentityJudgement
+    CancelProxy
+    Auction
+    Staking
+    SudoBalances
+    NominationPools
+    Society
+    Unknown # this is added in case a new proxy type comes up and isn't supported yet
 }

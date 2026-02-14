@@ -1,1 +1,1 @@
-export const getPapiHowLink = () => 'https://dev.papi.how'
+export const getPapiHowLink = () => 'https://dev.papi.how';

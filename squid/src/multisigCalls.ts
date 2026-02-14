@@ -1,4 +1,4 @@
-import { Call } from '@subsquid/substrate-processor'
+import { Call } from '@subsquid/substrate-processor';
 
 // "args": {
 //     "call": {
@@ -28,8 +28,8 @@ import { Call } from '@subsquid/substrate-processor'
 // },
 
 export const handleMultisigCall = (multisigArgs: Call['args']) => {
-  return {
-    otherSignatories: multisigArgs['otherSignatories'],
-    threshold: multisigArgs['threshold']
-  }
-}
+    return {
+        otherSignatories: multisigArgs['otherSignatories'],
+        threshold: multisigArgs['threshold'],
+    };
+};

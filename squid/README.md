@@ -117,26 +117,26 @@ The end result looks like this:
  * Normalized `balances.Transfer` event data
  */
 interface TransferEvent {
-  from: Uint8Array
-  to: Uint8Array
-  amount: bigint
+    from: Uint8Array;
+    to: Uint8Array;
+    amount: bigint;
 }
 
 function getTransferEvent(ctx: EventHandlerContext): TransferEvent {
-  // instanciate type-safe facade around event data
-  let event = new BalancesTransferEvent(ctx)
-  if (event.isV1020) {
-    let [from, to, amount, fee] = event.asV1020
-    return { from, to, amount }
-  } else if (event.isV1050) {
-    let [from, to, amount] = event.asV1050
-    return { from, to, amount }
-  } else {
-    // This cast will assert,
-    // that the type of a given event matches
-    // the type of generated facade.
-    return event.asLatest
-  }
+    // instanciate type-safe facade around event data
+    let event = new BalancesTransferEvent(ctx);
+    if (event.isV1020) {
+        let [from, to, amount, fee] = event.asV1020;
+        return { from, to, amount };
+    } else if (event.isV1050) {
+        let [from, to, amount] = event.asV1050;
+        return { from, to, amount };
+    } else {
+        // This cast will assert,
+        // that the type of a given event matches
+        // the type of generated facade.
+        return event.asLatest;
+    }
 }
 ```
 
@@ -169,17 +169,17 @@ Where `typegen.json` config file has the following structure:
 
 ```json5
 {
-  outDir: 'src/types',
-  chainVersions: 'paseoVersions.json', // the result of chain exploration
-  typesBundle: 'paseo', // see types bundle section below
-  events: [
-    // list of events to generate
-    'balances.Transfer'
-  ],
-  calls: [
-    // list of calls to generate
-    'timestamp.set'
-  ]
+    outDir: 'src/types',
+    chainVersions: 'paseoVersions.json', // the result of chain exploration
+    typesBundle: 'paseo', // see types bundle section below
+    events: [
+        // list of events to generate
+        'balances.Transfer',
+    ],
+    calls: [
+        // list of calls to generate
+        'timestamp.set',
+    ],
 }
 ```
 
@@ -207,27 +207,27 @@ Type definitions (`typesBundle`) can be given to squid tools in two forms:
 
 ```json5
 {
-  types: {
-    AccountId: '[u8; 32]'
-  },
-  typesAlias: {
-    assets: {
-      Balance: 'u64'
-    }
-  },
-  versions: [
-    {
-      minmax: [0, 1000], // block range with inclusive boundaries
-      types: {
-        AccountId: '[u8; 16]'
-      },
-      typesAlias: {
+    types: {
+        AccountId: '[u8; 32]',
+    },
+    typesAlias: {
         assets: {
-          Balance: 'u32'
-        }
-      }
-    }
-  ]
+            Balance: 'u64',
+        },
+    },
+    versions: [
+        {
+            minmax: [0, 1000], // block range with inclusive boundaries
+            types: {
+                AccountId: '[u8; 16]',
+            },
+            typesAlias: {
+                assets: {
+                    Balance: 'u32',
+                },
+            },
+        },
+    ],
 }
 ```
 

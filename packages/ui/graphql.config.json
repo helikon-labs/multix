@@ -1,21 +1,21 @@
 {
-  "overwrite": true,
-  "schema": "https://polkadot.graphql.multix.cloud/graphql",
-  "documents": "src/**/*.graphql",
-  "generates": {
-    "src/gql/": {
-      "preset": "client",
-      "plugins": []
-    },
-    "types-and-hooks.tsx": {
-      "plugins": ["typescript", "typescript-operations", "typescript-react-query"],
-      "config": {
-        "reactQueryVersion": 5,
-        "fetcher": {
-          "func": "./src/hooks/useFetchData#useFetchData",
-          "isReactHook": true
+    "overwrite": true,
+    "schema": "https://polkadot.graphql.multix.cloud/graphql",
+    "documents": "src/**/*.graphql",
+    "generates": {
+        "src/gql/": {
+            "preset": "client",
+            "plugins": []
+        },
+        "types-and-hooks.tsx": {
+            "plugins": ["typescript", "typescript-operations", "typescript-react-query"],
+            "config": {
+                "reactQueryVersion": 5,
+                "fetcher": {
+                    "func": "./src/hooks/useFetchData#useFetchData",
+                    "isReactHook": true
+                }
+            }
         }
-      }
     }
-  }
 }

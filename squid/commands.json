@@ -1,229 +1,229 @@
 {
-  "$schema": "https://cdn.subsquid.io/schemas/commands.json",
-  "commands": {
-    "migration:apply": {
-      "description": "Apply the DB migrations",
-      "cmd": ["squid-typeorm-migration", "apply"]
-    },
-    "start-kusama": {
-      "description": "starts the indexer with kusama",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.kusama"
-      ]
-    },
-    "start-polkadot": {
-      "description": "starts the indexer with polkadot",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.polkadot"
-      ]
-    },
-    "start-phala": {
-      "description": "starts the indexer with phala",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.phala"
-      ]
-    },
-    "start-astar": {
-      "description": "starts the indexer with astar",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.astar"
-      ]
-    },
-    "start-asset-hub-polkadot": {
-      "description": "starts the indexer with asset-hub-polkadot",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.asset-hub-polkadot"
-      ]
-    },
-    "start-asset-hub-kusama": {
-      "description": "starts the indexer with asset-hub-kusama",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.asset-hub-kusama"
-      ]
-    },
-    "start-asset-hub-westend": {
-      "description": "starts the indexer with asset-hub-westend",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.asset-hub-westend"
-      ]
-    },
-    "start-hydration": {
-      "description": "starts the indexer with hydration",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.hydration"
-      ]
-    },
-    "start-amplitude": {
-      "description": "starts the indexer with amplitude",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.amplitude"
-      ]
-    },
-    "start-pendulum": {
-      "description": "starts the indexer with pendulum",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.pendulum"
-      ]
-    },
-    "start-westend": {
-      "description": "starts the indexer with westend",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.westend"
-      ]
-    },
-    "start-acala": {
-      "description": "starts the indexer with acala",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.acala"
-      ]
-    },
-    "start-bifrost-polkadot": {
-      "description": "starts the indexer with bifrost-polkadot",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.bifrost-polkadot"
-      ]
-    },
-    "start-interlay": {
-      "description": "starts the indexer with interlay",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.interlay"
-      ]
-    },
-    "start-moonriver": {
-      "description": "starts the indexer with moonriver",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.moonriver"
-      ]
-    },
-    "start-moonbeam": {
-      "description": "starts the indexer with moonbeam",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.moonbeam"
-      ]
-    },
-    "start-joystream": {
-      "description": "starts the indexer with joystream",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.joystream"
-      ]
-    },
-    "start-paseo": {
-      "description": "starts the indexer with paseo",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.paseo"
-      ]
-    },
-    "start-coretime-polkadot": {
-      "description": "starts the indexer with coretime-polkadot",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.coretime-polkadot"
-      ]
-    },
-    "start-coretime-kusama": {
-      "description": "starts the indexer with coretime-kusama",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.coretime-kusama"
-      ]
-    },
-    "start-dancelight": {
-      "description": "starts the indexer with dancelight",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.dancelight"
-      ]
-    },
-    "start-tanssi": {
-      "description": "starts the indexer with tanssi",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.tanssi"
-      ]
+    "$schema": "https://cdn.subsquid.io/schemas/commands.json",
+    "commands": {
+        "migration:apply": {
+            "description": "Apply the DB migrations",
+            "cmd": ["squid-typeorm-migration", "apply"]
+        },
+        "start-kusama": {
+            "description": "starts the indexer with kusama",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.kusama"
+            ]
+        },
+        "start-polkadot": {
+            "description": "starts the indexer with polkadot",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.polkadot"
+            ]
+        },
+        "start-phala": {
+            "description": "starts the indexer with phala",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.phala"
+            ]
+        },
+        "start-astar": {
+            "description": "starts the indexer with astar",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.astar"
+            ]
+        },
+        "start-asset-hub-polkadot": {
+            "description": "starts the indexer with asset-hub-polkadot",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.asset-hub-polkadot"
+            ]
+        },
+        "start-asset-hub-kusama": {
+            "description": "starts the indexer with asset-hub-kusama",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.asset-hub-kusama"
+            ]
+        },
+        "start-asset-hub-westend": {
+            "description": "starts the indexer with asset-hub-westend",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.asset-hub-westend"
+            ]
+        },
+        "start-hydration": {
+            "description": "starts the indexer with hydration",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.hydration"
+            ]
+        },
+        "start-amplitude": {
+            "description": "starts the indexer with amplitude",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.amplitude"
+            ]
+        },
+        "start-pendulum": {
+            "description": "starts the indexer with pendulum",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.pendulum"
+            ]
+        },
+        "start-westend": {
+            "description": "starts the indexer with westend",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.westend"
+            ]
+        },
+        "start-acala": {
+            "description": "starts the indexer with acala",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.acala"
+            ]
+        },
+        "start-bifrost-polkadot": {
+            "description": "starts the indexer with bifrost-polkadot",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.bifrost-polkadot"
+            ]
+        },
+        "start-interlay": {
+            "description": "starts the indexer with interlay",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.interlay"
+            ]
+        },
+        "start-moonriver": {
+            "description": "starts the indexer with moonriver",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.moonriver"
+            ]
+        },
+        "start-moonbeam": {
+            "description": "starts the indexer with moonbeam",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.moonbeam"
+            ]
+        },
+        "start-joystream": {
+            "description": "starts the indexer with joystream",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.joystream"
+            ]
+        },
+        "start-paseo": {
+            "description": "starts the indexer with paseo",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.paseo"
+            ]
+        },
+        "start-coretime-polkadot": {
+            "description": "starts the indexer with coretime-polkadot",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.coretime-polkadot"
+            ]
+        },
+        "start-coretime-kusama": {
+            "description": "starts the indexer with coretime-kusama",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.coretime-kusama"
+            ]
+        },
+        "start-dancelight": {
+            "description": "starts the indexer with dancelight",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.dancelight"
+            ]
+        },
+        "start-tanssi": {
+            "description": "starts the indexer with tanssi",
+            "cmd": [
+                "node",
+                "-r",
+                "dotenv/config",
+                "lib/main",
+                "dotenv_config_path=assets/envs/.env.tanssi"
+            ]
+        }
     }
-  }
 }

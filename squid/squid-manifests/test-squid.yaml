@@ -2,70 +2,70 @@ manifestVersion: subsquid.io/v0.1
 name: multix-test
 version: 1
 description: |-
-  Arrow test Squid for Multix
+    Arrow test Squid for Multix
 
 build:
 
 deploy:
-  addons:
-    postgres:
-  processor:
-    # - name: asset-hub-kusama-processor
-    #   cmd: ['sqd', 'start-asset-hub-kusama']
-    # - name: asset-hub-polkadot-processor
-    #   cmd: ['sqd', 'start-asset-hub-polkadot']
-    - name: westend-processor
-      cmd: ['sqd', 'start-westend']
-    # - name: kusama-processor
-    #   cmd: ['sqd', 'start-kusama']
-    # - name: polkadot-processor
-    #   cmd: ['sqd', 'start-polkadot']
-    # - name: phala-processor
-    #   cmd: ['sqd', 'start-phala']
-    # - name: acala-processor
-    #   cmd: ['sqd', 'start-acala']
-    # - name: bifrost-polkadot-processor
-    #   cmd: ['sqd', 'start-bifrost-polkadot']
-    # - name: interlay-processor
-    #   cmd: ['sqd', 'start-interlay']
-    # - name: astar-processor
-    #   cmd: ['sqd', 'start-astar']
-    # - name: hydradx-processor
-    #   cmd: ['sqd', 'start-hydradx']
-    # - name: moonbeam-processor
-    #   cmd: ['sqd', 'start-moonbeam']
-    # - name: moonriver-processor
-    #   cmd: ['sqd', 'start-moonriver']
-    # - name: westend-processor
-    #   cmd: ['sqd', 'start-westend']
-    # - name: paseo-processor
-    #   cmd: ['sqd', 'start-paseo']
-    # - name: joystream-processor
-    #   cmd: ['sqd', 'start-joystream']
-    # - name: watr-processor
-    #   cmd: ['sqd', 'start-watr']
-    # - name: pendulum-processor
-    #   cmd: ['sqd', 'start-pendulum']
-    # - name: amplitude-processor
-    #   cmd: ['sqd', 'start-amplitude']
-  api:
-    env:
-      SQD_DEBUG: sqd:graphql-server
-    cmd:
-      [
-        'npx',
-        'squid-graphql-server',
-        '--sql-statement-timeout',
-        3000,
-        '--dumb-cache',
-        'in-memory',
-        '--dumb-cache-ttl',
-        1000,
-        '--dumb-cache-size',
-        100,
-        '--dumb-cache-max-age',
-        1000
-      ]
+    addons:
+        postgres:
+    processor:
+        # - name: asset-hub-kusama-processor
+        #   cmd: ['sqd', 'start-asset-hub-kusama']
+        # - name: asset-hub-polkadot-processor
+        #   cmd: ['sqd', 'start-asset-hub-polkadot']
+        - name: westend-processor
+          cmd: ['sqd', 'start-westend']
+        # - name: kusama-processor
+        #   cmd: ['sqd', 'start-kusama']
+        # - name: polkadot-processor
+        #   cmd: ['sqd', 'start-polkadot']
+        # - name: phala-processor
+        #   cmd: ['sqd', 'start-phala']
+        # - name: acala-processor
+        #   cmd: ['sqd', 'start-acala']
+        # - name: bifrost-polkadot-processor
+        #   cmd: ['sqd', 'start-bifrost-polkadot']
+        # - name: interlay-processor
+        #   cmd: ['sqd', 'start-interlay']
+        # - name: astar-processor
+        #   cmd: ['sqd', 'start-astar']
+        # - name: hydradx-processor
+        #   cmd: ['sqd', 'start-hydradx']
+        # - name: moonbeam-processor
+        #   cmd: ['sqd', 'start-moonbeam']
+        # - name: moonriver-processor
+        #   cmd: ['sqd', 'start-moonriver']
+        # - name: westend-processor
+        #   cmd: ['sqd', 'start-westend']
+        # - name: paseo-processor
+        #   cmd: ['sqd', 'start-paseo']
+        # - name: joystream-processor
+        #   cmd: ['sqd', 'start-joystream']
+        # - name: watr-processor
+        #   cmd: ['sqd', 'start-watr']
+        # - name: pendulum-processor
+        #   cmd: ['sqd', 'start-pendulum']
+        # - name: amplitude-processor
+        #   cmd: ['sqd', 'start-amplitude']
+    api:
+        env:
+            SQD_DEBUG: sqd:graphql-server
+        cmd:
+            [
+                'npx',
+                'squid-graphql-server',
+                '--sql-statement-timeout',
+                3000,
+                '--dumb-cache',
+                'in-memory',
+                '--dumb-cache-ttl',
+                1000,
+                '--dumb-cache-size',
+                100,
+                '--dumb-cache-max-age',
+                1000,
+            ]
 # scale:
 #   # dedicated: true
 #   addons:

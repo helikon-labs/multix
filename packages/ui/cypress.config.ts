@@ -1,13 +1,13 @@
-import { defineConfig } from 'cypress'
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  e2e: {
-    specPattern: 'cypress/tests/**/*.cy.ts',
-    setupNodeEvents() {
-      // implement node event listeners here
+    e2e: {
+        specPattern: 'cypress/tests/**/*.cy.ts',
+        setupNodeEvents() {
+            // implement node event listeners here
+        },
+        retries: {
+            runMode: 3,
+        },
     },
-    retries: {
-      runMode: 3
-    }
-  }
-})
+});

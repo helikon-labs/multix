@@ -1,31 +1,37 @@
 {
-  "compilerOptions": {
-    // commenting it out to make TS compiler happy with Papi types
-    // "composite": true,
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["vite/client", "vite-plugin-svgr/client", "cypress", "node", "cypress-wait-until"],
-    "disableSizeLimit": true
-  },
-  "include": [
-    "src/**/*",
-    "**/*.config.ts",
-    "**/types-and-hooks.tsx",
-    "**/codegen.ts",
-    "graphql.config.js",
-    "cypress/**/*"
-  ]
+    "compilerOptions": {
+        // commenting it out to make TS compiler happy with Papi types
+        // "composite": true,
+        "target": "esnext",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "Bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "types": [
+            "vite/client",
+            "vite-plugin-svgr/client",
+            "cypress",
+            "node",
+            "cypress-wait-until"
+        ],
+        "disableSizeLimit": true
+    },
+    "include": [
+        "src/**/*",
+        "**/*.config.ts",
+        "**/types-and-hooks.tsx",
+        "**/codegen.ts",
+        "graphql.config.js",
+        "cypress/**/*"
+    ]
 }
