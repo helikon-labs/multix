@@ -55,12 +55,12 @@ const NetworkContextProvider = ({ children }: NetworkContextProps) => {
       }
 
       // connect the the previously selected network
-      const previouslysSelectedNetwork = localStorage.getItem(LOCALSTORAGE_SELECTED_NETWORK)
+      const previouslySelectedNetwork = localStorage.getItem(LOCALSTORAGE_SELECTED_NETWORK)
       if (
-        !!previouslysSelectedNetwork &&
-        previouslysSelectedNetwork.includes(networkParam as SupportedNetworks)
+        !!previouslySelectedNetwork &&
+        previouslySelectedNetwork.includes(networkParam as SupportedNetworks)
       ) {
-        selectNetwork(previouslysSelectedNetwork as SupportedNetworks)
+        selectNetwork(previouslySelectedNetwork as SupportedNetworks)
         return
       }
 
