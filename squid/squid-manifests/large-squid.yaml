@@ -58,8 +58,6 @@ deploy:
     #   cmd: ['sqd', 'start-coretime-kusama']
     # - name: coretime-polkadot-processor
     #   cmd: ['sqd', 'start-coretime-polkadot']
-    # - name: polimec-processor
-    #   cmd: ['sqd', 'start-polimec']
     - name: dancelight-processor
       cmd: ['sqd', 'start-dancelight']
     - name: tanssi-processor

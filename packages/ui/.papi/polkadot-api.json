@@ -68,12 +68,6 @@
       "genesis": "0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
       "codeHash": "0x8cada8f706ffc7c9bd0c31985ec4f34520914778edefaa94b624bc6adea48a1c"
     },
-    "polimec": {
-      "wsUrl": "wss://polimec.ibp.network",
-      "metadata": ".papi/metadata/polimec.scale",
-      "genesis": "0x7eb9354488318e7549c722669dcbdcdc526f1fef1420e7944667212f3601fdbd",
-      "codeHash": "0xff2ddb10d4ee8507269d08fcc674d97ef3da085d7df282dd10b17ac352dfb7d6"
-    },
     "westend": {
       "chain": "westend2",
       "metadata": ".papi/metadata/westend.scale",

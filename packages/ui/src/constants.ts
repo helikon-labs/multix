@@ -22,7 +22,6 @@ import paseoSVG from './logos/paseoSVG.svg'
 // import dancelightSVG from './logos/dancelightSVG.svg'
 // import tanssiSVG from './logos/tanssiSVG.svg'
 import { zkVerifyMainnetSVG } from './logos/zkVerifyMainnetSVG'
-// import { polimecSVG } from './logos/polimecSVG'
 import usdc from './logos/usdc.svg'
 import usdt from './logos/usdt.svg'
 import { DESCRIPTORS, PplDescriptorKeys } from './types'
@@ -395,19 +394,6 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: nodesKiltPNG
   // },
-  // polimec: {
-  //   chainId: 'polimec',
-  //   explorerNetworkName: 'polimec',
-  //   rpcUrls: [
-  //     'wss://polimec.rpc.amforc.com',
-  //     'wss://rpc.helikon.io/polimec',
-  //     'wss://polimec.ibp.network'
-  //   ],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   networkLogo: polimecSVG,
-  //   descriptor: 'polimec',
-  //   genesisHash: '0x7eb9354488318e7549c722669dcbdcdc526f1fef1420e7944667212f3601fdbd'
-  // },
   // tanssi: {
   //   chainId: 'tanssi',
   //   explorerNetworkName: 'tanssi',
@@ -460,7 +446,6 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
   // 'moonbeam',
   // 'pendulum',
   // 'phala',
-  // 'polimec'
   // 'watr'
 ]
 export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = [

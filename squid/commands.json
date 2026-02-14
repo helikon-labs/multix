@@ -229,16 +229,6 @@
         "dotenv_config_path=assets/envs/.env.coretime-kusama"
       ]
     },
-    "start-polimec": {
-      "description": "starts the indexer with polimec",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.polimec"
-      ]
-    },
     "start-dancelight": {
       "description": "starts the indexer with dancelight",
       "cmd": [

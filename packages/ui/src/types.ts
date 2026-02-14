@@ -70,7 +70,6 @@ import {
   ksmAssetHub,
   paseo,
   // phala,
-  polimec,
   // coretimeDot,
   westend,
   // wesAssetHub,
@@ -94,7 +93,6 @@ export const DESCRIPTORS = {
   ksmAssetHub,
   paseo,
   // phala,
-  polimec,
   // coretimeDot,
   westend,
   // wesAssetHub,
@@ -125,7 +123,6 @@ export const DESCRIPTORS_NOT_HYDRATION_2_3 = {
 
 export const DESCRIPTORS_NOT_HYDRATION_3_3 = {
   // phala,
-  polimec,
   // coretimeDot,
   westend
   // wesAssetHub
@@ -153,7 +150,7 @@ export const DESCRIPTORS_2_3 = {
   tanssi,
   zkVerifyMainnet
 } as const
-export const DESCRIPTORS_3_3 = { polimec, westend } as const
+export const DESCRIPTORS_3_3 = { westend } as const
 
 export type ApiDescriptors = keyof typeof DESCRIPTORS
 
