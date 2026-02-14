@@ -35,26 +35,6 @@
         "dotenv_config_path=assets/envs/.env.phala"
       ]
     },
-    "start-khala": {
-      "description": "starts the indexer with khala",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.khala"
-      ]
-    },
-    "start-rhala": {
-      "description": "starts the indexer with rhala",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.rhala"
-      ]
-    },
     "start-astar": {
       "description": "starts the indexer with astar",
       "cmd": [
@@ -184,10 +164,6 @@
         "lib/main",
         "dotenv_config_path=assets/envs/.env.moonbeam"
       ]
-    },
-    "start-kilt": {
-      "description": "starts the indexer with kilt",
-      "cmd": ["node", "-r", "dotenv/config", "lib/main", "dotenv_config_path=assets/envs/.env.kilt"]
     },
     "start-joystream": {
       "description": "starts the indexer with joystream",

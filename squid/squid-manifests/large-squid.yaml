@@ -22,8 +22,6 @@ deploy:
       cmd: ['sqd', 'start-polkadot']
     # - name: phala-processor
     #   cmd: ['sqd', 'start-phala']
-    # - name: rhala-processor
-    #   cmd: ['sqd', 'start-rhala']
     # - name: acala-processor
     #   cmd: ['sqd', 'start-acala']
     # - name: bifrost-polkadot-processor
@@ -38,14 +36,10 @@ deploy:
     #   cmd: ['sqd', 'start-moonbeam']
     # - name: moonriver-processor
     #   cmd: ['sqd', 'start-moonriver']
-    # - name: khala-processor
-    #   cmd: ['sqd', 'start-khala']
     # - name: westend-processor
     #   cmd: ['sqd', 'start-westend']
     # - name: paseo-processor
     #   cmd: ['sqd', 'start-paseo']
-    # - name: kilt-processor
-    #   cmd: ['sqd', 'start-kilt']
     # - name: joystream-processor
     #   cmd: ['sqd', 'start-joystream']
     # - name: watr-processor

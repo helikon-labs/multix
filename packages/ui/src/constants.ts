@@ -2,12 +2,10 @@ import { nodesAstarPNG } from './logos/astarPNG'
 // import { nodesInterlaySVG } from './logos/interlaySVG'
 // import { nodesMoonriverSVG } from './logos/moonriverSVG'
 // import { nodesMoonbeamSVG } from './logos/moonbeamSVG'
-// import { nodesKiltPNG } from './logos/kiltPNG'
 // import { chainsPendulumSVG } from './logos/pendulumSVG'
 // import { chainsAmplitudeSVG } from './logos/amplitudeSVG'
 // import { nodesJoystreamSVG } from './logos/joystreamSVG'
 // import { chainsWatrPNG } from './logos/watrPNG'
-// import { nodesKhalaSVG } from './logos/khalaSVG'
 // import { nodesCoretimeSVG } from './logos/coretimeSVG'
 import { chainsKusamaSVG } from './logos/kusamaSVG '
 import { localSVG } from './logos/localSVG'
@@ -256,20 +254,6 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: nodesInterlaySVG,
   // },
-  // khala: {
-  //   chainId: 'khala',
-  //   explorerNetworkName: 'khala',
-  //   rpcUrls: [
-  //     'wss://khala-rpc.dwellir.com',
-  //     'wss://rpc.helikon.io/khala',
-  //     'wss://khala.api.onfinality.io/public-ws',
-  //     'wss://khala-api.phala.network/ws',
-  //     'wss://khala.public.curie.radiumblock.co/ws'
-  //   ],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   networkLogo: nodesKhalaSVG,
-  //   descriptor: 'khala'
-  // },
   // moonbeam: {
   //   chainId: 'moonbeam',
   //   explorerNetworkName: 'moonbeam',
@@ -298,13 +282,6 @@ export const networkList: Record<string, NetworkInfo> = {
   //   networkLogo: phalaSVG,
   //   descriptor: 'phala',
   //   genesisHash: '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736'
-  // },
-  // 'rhala testnet': {
-  //   chainId: 'rhala',
-  //   explorerNetworkName: '',
-  //   rpcUrls: ['wss://rhala-node.phala.network/ws'],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: nodesKhalaSVG
   // },
   // westend: {
   //   chainId: 'westend',
@@ -387,13 +364,6 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: chainsWatrPNG
   // },
-  // kilt: {
-  //   chainId: 'kilt',
-  //   explorerNetworkName: 'spiritnet',
-  //   rpcUrls: ['wss://spiritnet.kilt.io'],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: nodesKiltPNG
-  // },
   // tanssi: {
   //   chainId: 'tanssi',
   //   explorerNetworkName: 'tanssi',
@@ -442,7 +412,6 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
   'bifrost-dot',
   'hydration'
   // 'interlay',
-  // 'kilt',
   // 'moonbeam',
   // 'pendulum',
   // 'phala',
@@ -453,7 +422,6 @@ export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = 
   'asset-hub-kusama'
   // 'coretime-kusama'
   // 'amplitude',
-  // 'khala'
   // 'moonriver'
 ]
 export const soloChains: Partial<keyof typeof networkList>[] = [
@@ -462,7 +430,6 @@ export const soloChains: Partial<keyof typeof networkList>[] = [
 ]
 export const testChains: Partial<keyof typeof networkList>[] = [
   'paseo'
-  // 'rhala testnet',
   // 'westend',
   // 'asset-hub-westend',
   // 'local',
