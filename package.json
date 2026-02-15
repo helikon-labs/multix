@@ -17,7 +17,7 @@
         "polkadot",
         "multisig"
     ],
-    "license": "Apache-2.0",
+    "license": "GPLv3",
     "scripts": {
         "docker:db": "docker compose up -d db",
         "docker:down": "docker compose down",
