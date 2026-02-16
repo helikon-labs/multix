@@ -247,12 +247,10 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
             onSetExtrinsic(undefined);
             return;
         }
-
         if (!identityFields || allFieldsUndefined) {
             onSetExtrinsic(undefined);
             return;
         }
-
         if (fieldtooLongError.length > 0) {
             onSetExtrinsic(undefined);
             return;

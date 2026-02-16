@@ -95,7 +95,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
     const debouncedSetExtrinsicToCall = useMemo(() => debounce(setExtrinsicToCall, 300), []);
 
     const withPplApi = useMemo(
-        () => selectedEasyOption === EasyTransferTitle.SetIdentity,
+        () => (selectedEasyOption === EasyTransferTitle.SetIdentity) && hasPplChain,
         [selectedEasyOption],
     );
     const { chainInfo, api } = useAnyApi({ withPplApi });
