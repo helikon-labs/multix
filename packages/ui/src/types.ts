@@ -69,7 +69,6 @@ import {
     ksm,
     ksmAssetHub,
     paseo,
-    // phala,
     // coretimeDot,
     westend,
     // wesAssetHub,
@@ -92,7 +91,6 @@ export const DESCRIPTORS = {
     ksm,
     ksmAssetHub,
     paseo,
-    // phala,
     // coretimeDot,
     westend,
     // wesAssetHub,
@@ -104,7 +102,7 @@ export const DESCRIPTORS = {
     zkVerifyMainnet,
 } as const;
 
-export const DESCRIPTORS_NOT_HYDRATION_1_3 = {
+const DESCRIPTORS_NOT_HYDRATION_1_3 = {
     acala,
     astar,
     bifrostDot,
@@ -112,7 +110,7 @@ export const DESCRIPTORS_NOT_HYDRATION_1_3 = {
     dotAssetHub,
 } as const;
 
-export const DESCRIPTORS_NOT_HYDRATION_2_3 = {
+const DESCRIPTORS_NOT_HYDRATION_2_3 = {
     ksm,
     ksmAssetHub,
     dancelight,
@@ -121,28 +119,27 @@ export const DESCRIPTORS_NOT_HYDRATION_2_3 = {
     zkVerifyMainnet,
 } as const;
 
-export const DESCRIPTORS_NOT_HYDRATION_3_3 = {
-    // phala,
+const DESCRIPTORS_NOT_HYDRATION_3_3 = {
     // coretimeDot,
     westend,
     // wesAssetHub
 } as const;
 
-export const DESCRIPTORS_ASSET_HUBS = {
+const DESCRIPTORS_ASSET_HUBS = {
     dotAssetHub,
     ksmAssetHub,
     // wesAssetHub
 };
 
-export const DESCRIPTORS_RELAYS = {
+const DESCRIPTORS_RELAYS = {
     paseo,
     dot,
     ksm,
     westend,
 };
 
-export const DESCRIPTORS_1_3 = { acala, bifrostDot, dot, dotAssetHub, hydration } as const;
-export const DESCRIPTORS_2_3 = {
+const DESCRIPTORS_1_3 = { acala, bifrostDot, dot, dotAssetHub, hydration } as const;
+const DESCRIPTORS_2_3 = {
     ksm,
     ksmAssetHub,
     paseo,
@@ -150,7 +147,7 @@ export const DESCRIPTORS_2_3 = {
     tanssi,
     zkVerifyMainnet,
 } as const;
-export const DESCRIPTORS_3_3 = { westend } as const;
+const DESCRIPTORS_3_3 = { westend } as const;
 
 export type ApiDescriptors = keyof typeof DESCRIPTORS;
 

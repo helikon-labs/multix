@@ -25,16 +25,6 @@
                 "dotenv_config_path=assets/envs/.env.polkadot"
             ]
         },
-        "start-phala": {
-            "description": "starts the indexer with phala",
-            "cmd": [
-                "node",
-                "-r",
-                "dotenv/config",
-                "lib/main",
-                "dotenv_config_path=assets/envs/.env.phala"
-            ]
-        },
         "start-astar": {
             "description": "starts the indexer with astar",
             "cmd": [

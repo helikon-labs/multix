@@ -10,7 +10,6 @@ import { nodesAstarPNG } from './logos/astarPNG';
 import { chainsKusamaSVG } from './logos/kusamaSVG ';
 import { localSVG } from './logos/localSVG';
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG';
-// import { phalaSVG } from './logos/phalaSVG'
 import { nodesAssetHubSVG } from './logos/assetHubSVG';
 import { hydrationSVG } from './logos/hydrationSVG';
 // import { nodesWestendColourSVG } from './logos/westend_colourSVG'
@@ -268,21 +267,6 @@ export const networkList: Record<string, NetworkInfo> = {
     //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
     //   logo: nodesMoonriverSVG
     // },
-    // phala: {
-    //   chainId: 'phala',
-    //   explorerNetworkName: 'phala',
-    //   rpcUrls: [
-    //     'wss://phala-rpc.dwellir.com',
-    //     'wss://rpc.helikon.io/phala',
-    //     'wss://phala.api.onfinality.io/public-ws',
-    //     'wss://api.phala.network/ws',
-    //     'wss://phala.public.curie.radiumblock.co/ws'
-    //   ],
-    //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-    //   networkLogo: phalaSVG,
-    //   descriptor: 'phala',
-    //   genesisHash: '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736'
-    // },
     // westend: {
     //   chainId: 'westend',
     //   explorerNetworkName: 'westend',
@@ -417,7 +401,6 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
     // 'interlay',
     // 'moonbeam',
     // 'pendulum',
-    // 'phala',
     // 'watr'
 ];
 export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = [
