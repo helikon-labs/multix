@@ -8,10 +8,10 @@ import { getErrorMessageReservedFunds } from '../../utils/getErrorMessageReserve
 import { useSetIdentityReservedFunds } from '../../hooks/useSetIdentityReservedFunds';
 import { FixedSizeBinary, Transaction } from 'polkadot-api';
 import { formatBigIntBalance } from '../../utils/formatBnBalance';
-import { usePplApi } from '../../contexts/PeopleChainApiContext';
 import { IdentityData } from '@polkadot-api/descriptors';
 import { useGetED } from '../../hooks/useGetED';
 import { TeleportFundsAlert } from '../TeleportFundsAlert';
+import { useIdentityApi } from '../../hooks/useIdentityApi';
 
 interface Props {
     className?: string;
@@ -42,16 +42,18 @@ const getRawOrNone = (value?: string) => {
 const getExtrinsicsArgs = ({ legal, display, email, matrix, twitter, web }: IdentityFields) => {
     return {
         info: {
-            display: getRawOrNone(display),
-            legal: getRawOrNone(legal),
-            web: getRawOrNone(web),
-            matrix: getRawOrNone(matrix),
-            email: getRawOrNone(email),
-            twitter: getRawOrNone(twitter),
-            pgp_fingerprint: undefined,
-            image: getRawOrNone(),
-            github: getRawOrNone(),
+            additional: [],
             discord: getRawOrNone(),
+            display: getRawOrNone(display),
+            email: getRawOrNone(email),
+            github: getRawOrNone(),
+            image: getRawOrNone(),
+            legal: getRawOrNone(legal),
+            matrix: getRawOrNone(matrix),
+            pgp_fingerprint: undefined,
+            riot: getRawOrNone(matrix),
+            twitter: getRawOrNone(twitter),
+            web: getRawOrNone(web),
         },
     };
 };
@@ -113,12 +115,12 @@ const MAX_ALLOWED_VAL_LENGTH = 32;
 
 const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Props) => {
     const {
-        pplApi: api,
-        pplChainInfo: chainInfo,
-        pplCompatibilityToken: compatibilityToken,
-    } = usePplApi();
-    const [identityFields, setIdentityFields] = useState<IdentityFields | undefined>();
+        api: api,
+        chainInfo: chainInfo,
+        compatibilityToken: compatibilityToken,
+    } = useIdentityApi();
     const getIdentity = useGetIdentity();
+    const [identityFields, setIdentityFields] = useState<IdentityFields | undefined>();
     const [chainIdentity, setChainIdentity] = useState<IdentityInfo>();
     const [hasChangedAtLeastAField, setHasChangedAtLeastAField] = useState(false);
     const allFieldsUndefined = useMemo(() => {
@@ -257,6 +259,7 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
         }
 
         const extrinsicsArgs = getExtrinsicsArgs(identityFields);
+        api.tx.Identity.set_identity();
         const call = api.tx.Identity.set_identity(extrinsicsArgs);
         onSetExtrinsic(call);
     }, [

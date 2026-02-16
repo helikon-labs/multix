@@ -3,11 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { IdentityFields } from '../components/EasySetup/SetIdentity';
 import { getByteCount } from '../utils/getByteCount';
 import { useIdentityApi } from './useIdentityApi';
-import { isPplContextIn } from '../contexts/PeopleChainApiContext';
-import { pplDescriptorKeys } from '../types';
 
 export const useSetIdentityReservedFunds = (identityFields?: IdentityFields) => {
-    const { ctx } = useIdentityApi();
+    const { api, chainInfo, compatibilityToken, ctx } = useIdentityApi();
     const [reserved, setReserved] = useState(0n);
 
     const fieldBytes = useMemo(() => {
@@ -21,32 +19,15 @@ export const useSetIdentityReservedFunds = (identityFields?: IdentityFields) => 
     }, [identityFields]);
 
     useEffect(() => {
-        if (isPplContextIn(ctx, pplDescriptorKeys)) {
-            const { pplApi, pplCompatibilityToken, pplChainInfo } = ctx;
-            if (!pplApi || !identityFields || !pplCompatibilityToken) return;
-
-            if (!pplChainInfo?.tokenDecimals) return;
-
-            const byteDeposit = pplApi.constants?.Identity?.ByteDeposit(pplCompatibilityToken);
-
-            const basicDeposit = pplApi.constants?.Identity.BasicDeposit(pplCompatibilityToken);
-
-            if (!basicDeposit || !byteDeposit) return;
-
-            const reservedFields = byteDeposit * BigInt(fieldBytes);
-
-            const res = reservedFields + basicDeposit;
-
-            // console.log(
-            //   'res',
-            //   formatBigIntBalance(res, chainInfo.tokenDecimals, {
-            //     tokenSymbol: chainInfo?.tokenSymbol,
-            //     numberAfterComma: 6
-            //   })
-            // )
-            setReserved(res);
-        }
-    }, [ctx, fieldBytes, identityFields]);
+        if (!api || !chainInfo || !identityFields || !compatibilityToken) return;
+        if (!chainInfo.tokenDecimals) return;
+        const byteDeposit = api.constants?.Identity?.ByteDeposit(compatibilityToken);
+        const basicDeposit = api.constants?.Identity.BasicDeposit(compatibilityToken);
+        if (!basicDeposit || !byteDeposit) return;
+        const reservedFields = byteDeposit * BigInt(fieldBytes);
+        const res = reservedFields + basicDeposit;
+        setReserved(res);
+    }, [api, chainInfo, compatibilityToken, ctx, fieldBytes, identityFields]);
 
     return { reserved };
 };

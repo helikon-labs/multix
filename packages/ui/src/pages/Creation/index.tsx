@@ -31,12 +31,7 @@ import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { Binary, Enum, Transaction } from 'polkadot-api';
 import { MultiAddress } from '@polkadot-api/descriptors';
 import { useNetwork } from '../../contexts/NetworkContext';
-import {
-    allDescriptorsKey_1_3,
-    allDescriptorsKey_2_3,
-    allDescriptorsKey_3_3,
-    noHydrationKeys,
-} from '../../types';
+import { allDescriptorsKey_1_3, allDescriptorsKey_2_3, noHydrationKeys } from '../../types';
 import { useGetED } from '../../hooks/useGetED';
 
 interface Props {
@@ -191,12 +186,6 @@ const MultisigCreation = ({ className }: Props) => {
                     index: 0,
                 })) ||
             (isContextIn(ctx, allDescriptorsKey_2_3) &&
-                ctx.api.tx.Proxy.create_pure({
-                    proxy_type: Enum('Any'),
-                    delay: 0,
-                    index: 0,
-                })) ||
-            (isContextIn(ctx, allDescriptorsKey_3_3) &&
                 ctx.api.tx.Proxy.create_pure({
                     proxy_type: Enum('Any'),
                     delay: 0,

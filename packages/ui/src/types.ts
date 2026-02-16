@@ -59,10 +59,10 @@ export interface AccountRegistration {
 }
 
 import {
-    acala,
+    // acala,
     astar,
     bifrostDot,
-    dancelight,
+    // dancelight,
     dot,
     dotAssetHub,
     hydration,
@@ -70,21 +70,21 @@ import {
     ksmAssetHub,
     paseo,
     // coretimeDot,
-    westend,
+    // westend,
     // wesAssetHub,
     dotPpl,
     ksmPpl,
     pasPpl,
-    wesPpl,
-    tanssi,
+    // wesPpl,
+    // tanssi,
     zkVerifyMainnet,
 } from '@polkadot-api/descriptors';
 
 export const DESCRIPTORS = {
-    acala,
+    // acala,
     astar,
     bifrostDot,
-    dancelight,
+    // dancelight,
     dot,
     dotAssetHub,
     hydration,
@@ -92,18 +92,18 @@ export const DESCRIPTORS = {
     ksmAssetHub,
     paseo,
     // coretimeDot,
-    westend,
+    // westend,
     // wesAssetHub,
     dotPpl,
     ksmPpl,
     pasPpl,
-    wesPpl,
-    tanssi,
+    // wesPpl,
+    // tanssi,
     zkVerifyMainnet,
 } as const;
 
 const DESCRIPTORS_NOT_HYDRATION_1_3 = {
-    acala,
+    // acala,
     astar,
     bifrostDot,
     dot,
@@ -113,16 +113,10 @@ const DESCRIPTORS_NOT_HYDRATION_1_3 = {
 const DESCRIPTORS_NOT_HYDRATION_2_3 = {
     ksm,
     ksmAssetHub,
-    dancelight,
+    // dancelight,
     paseo,
-    tanssi,
+    // tanssi,
     zkVerifyMainnet,
-} as const;
-
-const DESCRIPTORS_NOT_HYDRATION_3_3 = {
-    // coretimeDot,
-    westend,
-    // wesAssetHub
 } as const;
 
 const DESCRIPTORS_ASSET_HUBS = {
@@ -135,19 +129,24 @@ const DESCRIPTORS_RELAYS = {
     paseo,
     dot,
     ksm,
-    westend,
+    // westend,
 };
 
-const DESCRIPTORS_1_3 = { acala, bifrostDot, dot, dotAssetHub, hydration } as const;
+const DESCRIPTORS_1_3 = {
+    // acala,
+    bifrostDot,
+    dot,
+    dotAssetHub,
+    hydration,
+} as const;
 const DESCRIPTORS_2_3 = {
     ksm,
     ksmAssetHub,
     paseo,
-    dancelight,
-    tanssi,
+    // dancelight,
+    // tanssi,
     zkVerifyMainnet,
 } as const;
-const DESCRIPTORS_3_3 = { westend } as const;
 
 export type ApiDescriptors = keyof typeof DESCRIPTORS;
 
@@ -163,11 +162,7 @@ export const noHydrationKeys_2 = Object.keys(
     DESCRIPTORS_NOT_HYDRATION_2_3,
 ) as (keyof typeof DESCRIPTORS_NOT_HYDRATION_2_3)[];
 
-export const noHydrationKeys_3 = Object.keys(
-    DESCRIPTORS_NOT_HYDRATION_3_3,
-) as (keyof typeof DESCRIPTORS_NOT_HYDRATION_3_3)[];
-
-export const noHydrationKeys = [...noHydrationKeys_1, ...noHydrationKeys_2, ...noHydrationKeys_3];
+export const noHydrationKeys = [...noHydrationKeys_1, ...noHydrationKeys_2];
 
 // All descriptors but Ppl chains
 export const allDescriptorsKey_1_3 = Object.keys(
@@ -176,9 +171,6 @@ export const allDescriptorsKey_1_3 = Object.keys(
 export const allDescriptorsKey_2_3 = Object.keys(
     DESCRIPTORS_2_3,
 ) as (keyof typeof DESCRIPTORS_2_3)[];
-export const allDescriptorsKey_3_3 = Object.keys(
-    DESCRIPTORS_3_3,
-) as (keyof typeof DESCRIPTORS_3_3)[];
 
 // Asset hubs
 export const assetHubKeys = Object.keys(
@@ -188,12 +180,32 @@ export const assetHubKeys = Object.keys(
 // Relays
 export const relayKeys = Object.keys(DESCRIPTORS_RELAYS) as (keyof typeof DESCRIPTORS_RELAYS)[];
 
+// Chains with native identity pallet
+export const DESCRIPTORS_NATIVE_IDENTITY = {
+    dotPpl,
+    ksmPpl,
+    pasPpl,
+    // wesPpl,
+    astar,
+    bifrostDot,
+    zkVerifyMainnet,
+} as const;
+export type NativeIdentityDescriptorKeys = keyof typeof DESCRIPTORS_NATIVE_IDENTITY;
+export type NativeIdentityDescriptors<Id extends NativeIdentityDescriptorKeys> =
+    (typeof DESCRIPTORS_NATIVE_IDENTITY)[Id];
+export type NativeIdentityApiOf<Id extends NativeIdentityDescriptorKeys> = TypedApi<
+    NativeIdentityDescriptors<Id>
+>;
+export const identityDescriptorKeys = Object.keys(
+    DESCRIPTORS_NATIVE_IDENTITY,
+) as (keyof typeof DESCRIPTORS_NATIVE_IDENTITY)[];
+
 // Ppl chains
 export const DESCRIPTORS_PPL = {
     dotPpl,
     ksmPpl,
     pasPpl,
-    wesPpl,
+    // wesPpl,
 } as const;
 export type PplDescriptorKeys = keyof typeof DESCRIPTORS_PPL;
 export type PplDescriptors<Id extends PplDescriptorKeys> = (typeof DESCRIPTORS_PPL)[Id];

@@ -14,6 +14,7 @@ import { WatchedAccountsContextProvider } from './contexts/WatchedAccountsContex
 import { WalletConnectContextProvider } from './contexts/WalletConnectContext';
 import { ModalsContextProvider } from './contexts/ModalsContext';
 import { PplApiContextProvider } from './contexts/PeopleChainApiContext';
+import { NativeIdentityApiContextProvider } from './contexts/NativeIdentityApiContext';
 import { ReactiveDotProvider } from '@reactive-dot/react';
 import { config } from './walletConfigs';
 import { Suspense } from 'react';
@@ -34,25 +35,27 @@ const App = () => {
                             <QueryClientProvider client={queryClient}>
                                 <ApiContextProvider>
                                     <PplApiContextProvider>
-                                        <AssetsContextProvider>
-                                            <WatchedAccountsContextProvider>
-                                                <HiddenAccountsContextProvider>
-                                                    <AccountContextProvider>
-                                                        <AccountNamesContextProvider>
-                                                            <MultiProxyContextProvider>
-                                                                <WalletConnectContextProvider>
-                                                                    <PendingTxsContextProvider>
-                                                                        <ModalsContextProvider>
-                                                                            <MainLayout />
-                                                                        </ModalsContextProvider>
-                                                                    </PendingTxsContextProvider>
-                                                                </WalletConnectContextProvider>
-                                                            </MultiProxyContextProvider>
-                                                        </AccountNamesContextProvider>
-                                                    </AccountContextProvider>
-                                                </HiddenAccountsContextProvider>
-                                            </WatchedAccountsContextProvider>
-                                        </AssetsContextProvider>
+                                        <NativeIdentityApiContextProvider>
+                                            <AssetsContextProvider>
+                                                <WatchedAccountsContextProvider>
+                                                    <HiddenAccountsContextProvider>
+                                                        <AccountContextProvider>
+                                                            <AccountNamesContextProvider>
+                                                                <MultiProxyContextProvider>
+                                                                    <WalletConnectContextProvider>
+                                                                        <PendingTxsContextProvider>
+                                                                            <ModalsContextProvider>
+                                                                                <MainLayout />
+                                                                            </ModalsContextProvider>
+                                                                        </PendingTxsContextProvider>
+                                                                    </WalletConnectContextProvider>
+                                                                </MultiProxyContextProvider>
+                                                            </AccountNamesContextProvider>
+                                                        </AccountContextProvider>
+                                                    </HiddenAccountsContextProvider>
+                                                </WatchedAccountsContextProvider>
+                                            </AssetsContextProvider>
+                                        </NativeIdentityApiContextProvider>
                                     </PplApiContextProvider>
                                 </ApiContextProvider>
                             </QueryClientProvider>

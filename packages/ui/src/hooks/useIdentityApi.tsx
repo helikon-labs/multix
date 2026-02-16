@@ -1,21 +1,28 @@
 import { useState, useEffect } from 'react';
-import { IPplApiContext, usePplApi } from '../contexts/PeopleChainApiContext';
-import { ChainInfoHuman, IApiContext, useApi } from '../contexts/ApiContext';
-import { ApiDescriptors, PplDescriptorKeys } from '../types';
 import { CompatibilityToken } from 'polkadot-api';
+import { ChainInfoHuman } from '../contexts/ApiContext';
+import { PplDescriptorKeys, NativeIdentityDescriptorKeys } from '../types';
+import { IPplApiContext, usePplApi } from '../contexts/PeopleChainApiContext';
+import {
+    INativeIdentityApiContext,
+    useNativeIdentityApi,
+} from '../contexts/NativeIdentityApiContext';
 
 export const useIdentityApi = () => {
     const pplCtx = usePplApi();
-    const ctx = useApi();
+    const identityCtx = useNativeIdentityApi();
     const { pplApi, pplChainInfo, pplCompatibilityToken } = pplCtx;
-    const { api, chainInfo, compatibilityToken } = ctx;
+    const { nativeIdentityApi, nativeIdentityChainInfo, nativeIdentityCompatibilityToken } =
+        identityCtx;
     const [apiToUse, setApiToUse] = useState<
-        IPplApiContext<PplDescriptorKeys>['pplApi'] | IApiContext<ApiDescriptors>['api'] | null
+        | IPplApiContext<PplDescriptorKeys>['pplApi']
+        | INativeIdentityApiContext<NativeIdentityDescriptorKeys>['nativeIdentityApi']
+        | null
     >(null);
     const [chainInfoToUse, setChainInfoToUse] = useState<ChainInfoHuman | undefined>(undefined);
     const [compatibilityTokenToUse, setCompatibilityTokenToUse] = useState<CompatibilityToken>();
     const [ctxToUse, setCtxToUse] = useState<
-        IPplApiContext<PplDescriptorKeys> | IApiContext<ApiDescriptors>
+        IPplApiContext<PplDescriptorKeys> | INativeIdentityApiContext<NativeIdentityDescriptorKeys>
     >();
 
     useEffect(() => {
@@ -24,17 +31,17 @@ export const useIdentityApi = () => {
             setChainInfoToUse(pplChainInfo);
             setCompatibilityTokenToUse(pplCompatibilityToken);
             setCtxToUse(pplCtx);
-        } else if (api) {
-            setApiToUse(api);
-            setChainInfoToUse(chainInfo);
-            setCompatibilityTokenToUse(compatibilityToken);
-            setCtxToUse(ctx);
+        } else if (nativeIdentityApi) {
+            setApiToUse(nativeIdentityApi);
+            setChainInfoToUse(nativeIdentityChainInfo);
+            setCompatibilityTokenToUse(nativeIdentityCompatibilityToken);
+            setCtxToUse(identityCtx);
         }
     }, [
-        api,
-        chainInfo,
-        compatibilityToken,
-        ctx,
+        nativeIdentityApi,
+        nativeIdentityChainInfo,
+        nativeIdentityCompatibilityToken,
+        identityCtx,
         pplApi,
         pplChainInfo,
         pplCompatibilityToken,

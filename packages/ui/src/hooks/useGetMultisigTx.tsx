@@ -7,7 +7,6 @@ import {
     MultisigStorageInfo,
     noHydrationKeys_1,
     noHydrationKeys_2,
-    noHydrationKeys_3,
     pplDescriptorKeys,
     Weight,
 } from '../types';
@@ -124,19 +123,13 @@ export const useGetMultisigTx = ({
                                   force_proxy_type: undefined,
                                   call: extrinsicToCall.decodedCall,
                               })
-                            : isContextIn(ctx, noHydrationKeys_3) && ctx.api
-                              ? ctx.api.tx.Proxy.proxy({
-                                    real: MultiAddress.Id(fromAddress),
-                                    force_proxy_type: undefined,
-                                    call: extrinsicToCall.decodedCall,
-                                })
-                              : isPplContextIn(ctx, pplDescriptorKeys) &&
-                                ctx.pplApi &&
-                                ctx.pplApi.tx.Proxy.proxy({
-                                    real: MultiAddress.Id(fromAddress),
-                                    force_proxy_type: undefined,
-                                    call: extrinsicToCall.decodedCall,
-                                });
+                            : isPplContextIn(ctx, pplDescriptorKeys) &&
+                              ctx.pplApi &&
+                              ctx.pplApi.tx.Proxy.proxy({
+                                  real: MultiAddress.Id(fromAddress),
+                                  force_proxy_type: undefined,
+                                  call: extrinsicToCall.decodedCall,
+                              });
                 // a multisig is selected
             } else {
                 tx = extrinsicToCall;

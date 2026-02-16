@@ -72,7 +72,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
             (a) => !!a.address,
         ) as AccountBaseInfo[];
     }, [getMultisigAsAccountBaseInfo, selectedMultiProxy]);
-    const { hasPplChain } = useHasIdentityFeature();
+    const { hasPplChain, hasIdentityPallet } = useHasIdentityFeature();
     const [selectedOrigin, setSelectedOrigin] = useState<AccountBaseInfo>(possibleOrigin[0]);
     const isProxySelected = useMemo(() => selectedOrigin.meta?.isProxy, [selectedOrigin]);
     const [selectedMultisig, setSelectedMultisig] = useState(selectedMultiProxy?.multisigs[0]);
@@ -199,7 +199,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
             ),
         } as Partial<Record<EasyTransferTitle, ReactNode>>;
 
-        if (!isProxySelected && hasPplChain) {
+        if (!isProxySelected && (hasPplChain || hasIdentityPallet)) {
             res[EasyTransferTitle.SetIdentity] = (
                 <SetIdentity
                     from={selectedOrigin.address}
@@ -210,7 +210,13 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
         }
 
         return res;
-    }, [selectedOrigin.address, isProxySelected, hasPplChain, debouncedSetExtrinsicToCall]);
+    }, [
+        selectedOrigin.address,
+        isProxySelected,
+        hasPplChain,
+        hasIdentityPallet,
+        debouncedSetExtrinsicToCall,
+    ]);
 
     const signCallback = useSigningCallback({
         onSuccess: () => {

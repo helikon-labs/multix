@@ -8,7 +8,7 @@ import {
     useState,
 } from 'react';
 import { useMultiProxy } from './MultiProxyContext';
-import { ApiDescriptors, MultisigStorageInfo, PplDescriptorKeys } from '../types';
+import { ApiDescriptors, MultisigStorageInfo } from '../types';
 import { isEmptyArray } from '../utils/arrayUtils';
 import { isProxyCall } from '../utils/isProxyCall';
 import { ChainInfoHuman, IApiContext, useApi } from './ApiContext';
@@ -20,7 +20,7 @@ import { hashFromTx } from '../utils/txHash';
 import { getEncodedCallFromDecodedTx } from '../utils/getEncodedCallFromDecodedTx';
 import { getExtrinsicDecoder } from '@polkadot-api/tx-utils';
 import { useHasIdentityFeature } from '../hooks/useHasIdentityFeature';
-import { IPplApiContext, usePplApi } from './PeopleChainApiContext';
+import { usePplApi } from './PeopleChainApiContext';
 
 dayjs.extend(localizedFormat);
 
@@ -123,7 +123,7 @@ const getExtDecoderAt = async (
 
 const getMultisigInfo = async (
     call: Transaction<any, any, any, any>['decodedCall'],
-    api: IApiContext<ApiDescriptors>['api'] | IPplApiContext<PplDescriptorKeys>['pplApi'],
+    api: IApiContext<ApiDescriptors>['api'],
 ): Promise<Partial<CallDataInfoFromChain>[]> => {
     if (!api) return [];
 
@@ -175,7 +175,7 @@ const getMultisigInfo = async (
 
 const getCallDataFromChainPromise = (
     pendingTxData: PendingTx[],
-    api: IApiContext<ApiDescriptors>['api'] | IPplApiContext<PplDescriptorKeys>['pplApi'],
+    api: IApiContext<ApiDescriptors>['api'],
     client: PolkadotClient,
 ) =>
     pendingTxData.map(async (pendingTx) => {
@@ -264,7 +264,7 @@ const sortByLatest = (a: CallDataInfoFromChain, b: CallDataInfoFromChain) => {
 };
 
 interface getTxsByDateArgs {
-    api: IApiContext<ApiDescriptors>['api'] | IPplApiContext<PplDescriptorKeys>['pplApi'];
+    api: IApiContext<ApiDescriptors>['api'];
     client: PolkadotClient;
     multisigAddresses: string[];
     chainInfo: ChainInfoHuman;
