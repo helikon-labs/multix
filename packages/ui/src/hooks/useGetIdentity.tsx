@@ -9,7 +9,6 @@ import {
 } from '@polkadot-api/descriptors';
 import { identityDescriptorKeys } from '../types';
 import { isNativeIdentityContextIn } from '../contexts/NativeIdentityApiContext';
-import { useHasIdentityFeature } from './useHasIdentityFeature';
 
 export interface IdentityInfo extends Record<string, any> {
     judgements: IdentityJudgement['type'][];
@@ -17,46 +16,40 @@ export interface IdentityInfo extends Record<string, any> {
 }
 
 export const useGetIdentity = () => {
-    const { ctx } = useIdentityApi();
-    const { hasPplChain, hasIdentityPallet } = useHasIdentityFeature();
+    const { api, ctx } = useIdentityApi();
     const getIdentity = useCallback(
         async (address: string) => {
-            if (
-                !ctx ||
-                !address ||
-                !(hasPplChain || hasIdentityPallet) ||
-                !isNativeIdentityContextIn(ctx, identityDescriptorKeys) ||
-                !ctx.nativeIdentityApi
-            ) {
+            if (!api || !ctx || !address) {
                 return;
             }
-
-            const { sub, parentAddress } =
-                await ctx.nativeIdentityApi.query.Identity.SuperOf.getValue(address, {
-                    at: 'best',
-                }).then((res) => {
-                    const [parentAddress, parentIdentity] = res || [];
-
-                    if (!parentAddress || !parentIdentity) {
-                        return { parentAddress: '', display: '' };
-                    }
-
-                    const sub =
-                        parentIdentity.type !== 'None' && parentIdentity.value
-                            ? (parentIdentity.value as FixedSizeBinary<3>).asText()
-                            : '';
-
-                    return { sub, parentAddress };
-                });
-
-            const addressToUse = parentAddress || address;
-
-            const identity = await ctx.nativeIdentityApi.query.Identity.IdentityOf.getValue(
-                addressToUse,
+            let identityApi = api;
+            if (isNativeIdentityContextIn(ctx, identityDescriptorKeys) && ctx.nativeIdentityApi) {
+                identityApi = ctx.nativeIdentityApi;
+            }
+            const { sub, parentAddress } = await identityApi.query.Identity.SuperOf.getValue(
+                address,
                 {
                     at: 'best',
                 },
-            )
+            ).then((res) => {
+                const [parentAddress, parentIdentity] = res || [];
+
+                if (!parentAddress || !parentIdentity) {
+                    return { parentAddress: '', display: '' };
+                }
+
+                const sub =
+                    parentIdentity.type !== 'None' && parentIdentity.value
+                        ? (parentIdentity.value as FixedSizeBinary<3>).asText()
+                        : '';
+
+                return { sub, parentAddress };
+            });
+            const addressToUse = parentAddress || address;
+
+            const identity = await identityApi.query.Identity.IdentityOf.getValue(addressToUse, {
+                at: 'best',
+            })
                 .then((res) => {
                     const id: IdentityInfo = { judgements: [], sub };
                     type Identity =
@@ -102,10 +95,9 @@ export const useGetIdentity = () => {
                     console.error(e);
                     return undefined;
                 });
-
             return identity;
         },
-        [ctx, hasPplChain, hasIdentityPallet],
+        [api, ctx],
     );
 
     return getIdentity;
