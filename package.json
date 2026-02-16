@@ -39,12 +39,12 @@
     "devDependencies": {
         "concurrently": "^9.2.1",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-prettier": "^5.5.4",
-        "prettier": "^3.6.2"
+        "eslint-plugin-prettier": "^5.5.5",
+        "prettier": "^3.8.1"
     },
     "resolutions": {
-        "graphql": "^16.0.0",
-        "@polkadot/util-crypto": "12.5.1",
-        "@polkadot/util": "12.5.1"
+        "graphql": "^16.12.0",
+        "@polkadot/util-crypto": "14.0.1",
+        "@polkadot/util": "14.0.1"
     }
 }
