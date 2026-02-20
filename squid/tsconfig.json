@@ -11,6 +11,6 @@
         "emitDecoratorMetadata": true,
         "skipLibCheck": true
     },
-    "include": ["src", ".prettierrc.js"],
+    "include": ["src", ".prettierrc.mjs"],
     "exclude": ["node_modules"]
 }
