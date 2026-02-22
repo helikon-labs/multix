@@ -1,17 +1,22 @@
-const { defineConfig, globalIgnores } = require('eslint/config');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import globals from 'globals';
+import { fixupConfigRules } from '@eslint/compat';
+import * as tsParser from '@typescript-eslint/parser';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import prettier from 'eslint-plugin-prettier';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import * as graphqlEslint from '@graphql-eslint/eslint-plugin';
+import noOnlyTests from 'eslint-plugin-no-only-tests';
+import eslintJS from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
-const globals = require('globals');
-const { fixupConfigRules } = require('@eslint/compat');
-const tsParser = require('@typescript-eslint/parser');
-const react = require('eslint-plugin-react');
-const reactHooks = require('eslint-plugin-react-hooks');
-const prettier = require('eslint-plugin-prettier');
-const typescriptEslint = require('@typescript-eslint/eslint-plugin');
-const graphqlEslint = require('@graphql-eslint/eslint-plugin');
-const noOnlyTests = require('eslint-plugin-no-only-tests');
-const js = require('@eslint/js');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-module.exports = defineConfig([
+export default defineConfig([
     {
         files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
         languageOptions: {
@@ -30,19 +35,19 @@ module.exports = defineConfig([
             },
         },
         extends: [
-            js.configs.recommended,
-            require('eslint-config-prettier'),
+            eslintJS.configs.recommended,
+            eslintConfigPrettier,
             reactHooks.configs['recommended-latest'],
-            ...fixupConfigRules([react.configs.flat['recommended']]),
+            fixupConfigRules([react.configs.flat['recommended']]),
             typescriptEslint.configs['flat/eslint-recommended'],
         ],
         plugins: {
             prettier,
             '@typescript-eslint': typescriptEslint,
             'no-only-tests': noOnlyTests,
-            '@graphql-eslint': graphqlEslint,
+            '@graphql-eslint': graphqlEslint.default,
         },
-        processor: '@graphql-eslint/graphql',
+        processor: graphqlEslint.processors.graphql,
         settings: {
             react: {
                 version: 'detect',
@@ -71,14 +76,14 @@ module.exports = defineConfig([
     {
         files: ['**/*.graphql'],
         languageOptions: {
-            parser: graphqlEslint,
+            parser: graphqlEslint.parser,
         },
         extends: [
             graphqlEslint.configs['flat/schema-recommended'],
             graphqlEslint.configs['flat/operations-recommended'],
         ],
         plugins: {
-            '@graphql-eslint': graphqlEslint,
+            '@graphql-eslint': graphqlEslint.default,
         },
         rules: {
             '@graphql-eslint/known-type-names': 'error',
@@ -86,11 +91,12 @@ module.exports = defineConfig([
         },
     },
     globalIgnores([
+        'eslint.config.js',
+        '.papi',
         '**/dist',
         '**/src/interfaces/**/*',
         '**/types-and-hooks.tsx',
         '**/build',
         '**/src/gql',
-        '**/eslint.config.js',
     ]),
 ]);
