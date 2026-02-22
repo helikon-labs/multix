@@ -208,6 +208,11 @@ const ProposalSigning = ({
                 return;
             }
 
+            if (!selectedAccount.polkadotSigner) {
+                console.error('no signer on selected account');
+                return;
+            }
+
             if (!multisig) {
                 const error = 'No selected multisig';
                 console.error(error);

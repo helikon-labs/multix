@@ -97,6 +97,11 @@ export const TeleportFundsAlert = ({
     const onTransfer = useCallback(async () => {
         if (!ctx?.api || !selectedAccount) return;
 
+        if (!selectedAccount.polkadotSigner) {
+            console.error('no signer on selected account');
+            return;
+        }
+
         setIsSubmitting(true);
 
         // even though it could be Kusama, Polkadot, Westend, the asset hubs.. this is working

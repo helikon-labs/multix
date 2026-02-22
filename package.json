@@ -43,8 +43,9 @@
         "prettier": "^3.8.1"
     },
     "resolutions": {
-        "graphql": "^16.12.0",
+        "@polkadot/util": "14.0.1",
         "@polkadot/util-crypto": "14.0.1",
-        "@polkadot/util": "14.0.1"
+        "graphql": "^16.12.0",
+        "jotai": "2.17.1"
     }
 }

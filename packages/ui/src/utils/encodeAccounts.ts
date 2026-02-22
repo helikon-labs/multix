@@ -1,11 +1,8 @@
+import { WalletAccount } from '@reactive-dot/core/wallets.js';
 import { encodesubstrateAddress } from './encodeSubstrateAddress';
-import { InjectedPolkadotAccount } from 'polkadot-api/pjs-signer';
 
 export function encodeAccounts(accounts: string[], ss58Format: number): string[];
-export function encodeAccounts(
-    accounts: InjectedPolkadotAccount[],
-    ss58Format: number,
-): InjectedPolkadotAccount[];
+export function encodeAccounts(accounts: WalletAccount[], ss58Format: number): WalletAccount[];
 export function encodeAccounts(accounts: unknown[], ss58Format: number): unknown[] {
     if (!accounts || accounts.length === 0) return [];
 
@@ -15,7 +12,7 @@ export function encodeAccounts(accounts: unknown[], ss58Format: number): unknown
             .filter(Boolean) as string[];
     }
 
-    return (accounts as InjectedPolkadotAccount[])
+    return (accounts as WalletAccount[])
         .map((account) => {
             const addressToEncode = account.address;
 
@@ -28,7 +25,7 @@ export function encodeAccounts(accounts: unknown[], ss58Format: number): unknown
             return {
                 ...account,
                 address: encodedAddress,
-            } as InjectedPolkadotAccount;
+            } as WalletAccount;
         })
-        .filter(Boolean) as InjectedPolkadotAccount[];
+        .filter(Boolean) as WalletAccount[];
 }

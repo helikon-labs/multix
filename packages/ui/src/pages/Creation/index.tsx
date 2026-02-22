@@ -333,6 +333,11 @@ const MultisigCreation = ({ className }: Props) => {
             return;
         }
 
+        if (!selectedAccount.polkadotSigner) {
+            console.error('no signer on selected account');
+            return;
+        }
+
         multiAddress && addName(name, multiAddress);
         setIsSubmitted(true);
 
@@ -347,6 +352,11 @@ const MultisigCreation = ({ className }: Props) => {
 
         if (!selectedAccount || !batchCall) {
             console.error('no selected signer');
+            return;
+        }
+
+        if (!selectedAccount.polkadotSigner) {
+            console.error('no signer on selected account');
             return;
         }
 

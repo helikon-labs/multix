@@ -258,6 +258,11 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
             return;
         }
 
+        if (!selectedAccount.polkadotSigner) {
+            console.error('no signer on selected account');
+            return;
+        }
+
         if (!extrinsicToCall) {
             const error = 'No extrinsic to call';
             console.error(error);

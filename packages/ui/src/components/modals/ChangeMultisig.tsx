@@ -363,6 +363,11 @@ const ChangeMultisig = ({ onClose, className }: Props) => {
             return;
         }
 
+        if (!selectedAccount.polkadotSigner) {
+            console.error('no signer on selected account');
+            return;
+        }
+
         if (!firstCall || !secondCall) {
             console.error('call missing');
             console.error('firstCall', firstCall);

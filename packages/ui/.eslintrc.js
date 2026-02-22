@@ -21,6 +21,11 @@ module.exports = {
         project: './tsconfig.json',
     },
     plugins: ['react', 'prettier', '@typescript-eslint', 'no-only-tests'],
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     rules: {
         'no-only-tests/no-only-tests': 'error',
         'no-unused-vars': 'off',

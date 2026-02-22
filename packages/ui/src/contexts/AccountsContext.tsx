@@ -11,8 +11,8 @@ import React, {
 import { useAccounts as useRedotAccounts } from '@reactive-dot/react';
 import { useApi } from './ApiContext';
 import { encodeAccounts } from '../utils/encodeAccounts';
-import { InjectedPolkadotAccount } from 'polkadot-api/pjs-signer';
 import { useGetWalletConnectNamespace } from '../hooks/useWalletConnectNamespace';
+import { WalletAccount } from '@reactive-dot/core/wallets.js';
 
 const LOCALSTORAGE_SELECTED_ACCOUNT_KEY = 'multix.selectedAccount';
 const LOCALSTORAGE_ALLOWED_CONNECTION_KEY = 'multix.canConnectToExtension';
@@ -22,11 +22,11 @@ type AccountContextProps = {
 };
 
 export interface IAccountContext {
-    selectedAccount?: InjectedPolkadotAccount;
-    ownAccountList: InjectedPolkadotAccount[];
+    selectedAccount?: WalletAccount;
+    ownAccountList: WalletAccount[];
     ownAddressList: string[];
-    selectAccount: (account: InjectedPolkadotAccount) => void;
-    getAccountByAddress: (address: string) => InjectedPolkadotAccount | undefined;
+    selectAccount: (account: WalletAccount) => void;
+    getAccountByAddress: (address: string) => WalletAccount | undefined;
     allowConnectionToExtension: () => void;
     isAllowedToConnectToExtension: boolean;
     isConnectionDialogOpen: boolean;
@@ -52,9 +52,7 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
         return encodeAccounts(filteredAccounts, chainInfo.ss58Format);
     }, [chainInfo, walletConnectId, redotAccountList]);
 
-    const [selectedAccount, setSelected] = useState<InjectedPolkadotAccount | undefined>(
-        ownAccountList?.[0],
-    );
+    const [selectedAccount, setSelected] = useState<WalletAccount | undefined>(ownAccountList?.[0]);
     const [isConnectionDialogOpen, setIsConnectionDialogOpen] = useState(false);
     const [isAllowedToConnectToExtension, setIsAllowedToConnectToExtension] = useState(false);
     const ownAddressList = useMemo(
@@ -74,7 +72,7 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
         setIsAllowedToConnectToExtension(true);
     }, []);
 
-    const selectAccount = useCallback((account: InjectedPolkadotAccount) => {
+    const selectAccount = useCallback((account: WalletAccount) => {
         localStorage.setItem(LOCALSTORAGE_SELECTED_ACCOUNT_KEY, account.address);
         setSelected(account);
     }, []);
