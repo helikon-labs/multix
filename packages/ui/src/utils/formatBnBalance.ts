@@ -20,9 +20,8 @@ export const formatBigIntBalance = (
 ): string => {
     const valueString = value.toString();
 
-    let suffix = '';
-    let prefix = '';
-
+    let suffix;
+    let prefix;
     if (valueString.length > tokenDecimals) {
         suffix = valueString.slice(-tokenDecimals);
         prefix = valueString.slice(0, valueString.length - tokenDecimals);
