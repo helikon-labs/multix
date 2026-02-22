@@ -37,8 +37,11 @@ export default defineConfig([
         extends: [
             eslintJS.configs.recommended,
             eslintConfigPrettier,
-            reactHooks.configs['recommended-latest'],
-            fixupConfigRules([react.configs.flat['recommended']]),
+            {
+                plugins: { 'react-hooks': reactHooks },
+                rules: reactHooks.configs['recommended-latest'].rules,
+            },
+            ...fixupConfigRules([react.configs.flat['recommended']]),
             typescriptEslint.configs['flat/eslint-recommended'],
         ],
         plugins: {
