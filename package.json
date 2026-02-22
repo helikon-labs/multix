@@ -26,7 +26,7 @@
         "lint": "yarn workspaces foreach run lint",
         "lint:fix": "yarn workspaces foreach run lint:fix",
         "formatAll": "prettier --write .",
-        "start:chopsticks-test-build-and-launch-all": "concurrently --kill-others 'npm run start:chopsticks' 'npm run ui:start-with-chopsticks' 'npm run docker:down && npm run docker:db && npm run build:indexer && npm run indexer:start:chopsticks-local' 'npm run start:graphql-server'",
+        "start:chopsticks-test-build-and-launch-all": "rm -rf ./data && rm db.sqlite* && concurrently --kill-others 'npm run start:chopsticks' 'npm run ui:start-with-chopsticks' 'npm run docker:down && npm run docker:db && npm run build:indexer && npm run indexer:start:chopsticks-local' 'npm run start:graphql-server'",
         "start:chopsticks": "npx --yes @acala-network/chopsticks@1.0.6 --config chopsticks-config.yml",
         "start:graphql-server": "cd squid && npm run start:graphql-server",
         "indexer:start:chopsticks-ci": "cd squid && npm run start:chopsticks-ci",

@@ -1,15 +1,14 @@
-version: '3'
-
 services:
     db:
-        container_name: subsquid_db
-        image: postgres:14
+        container_name: multix_test_db
+        image: postgres:18-alpine
         environment:
             POSTGRES_DB: postgres
             POSTGRES_PASSWORD: postgres
         shm_size: 1gb
         ports:
             - '5432:5432'
-#    command: ["postgres", "-c", "log_statement=all"]
-#    volumes:
-#      - ./data/db:/var/lib/postgresql/data
+        command: |
+            postgres -c log_statement=all
+        volumes:
+            - ./data/db:/var/lib/postgresql

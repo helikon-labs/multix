@@ -48,11 +48,11 @@
         "@typescript-eslint/eslint-plugin": "^8.56.0",
         "@typescript-eslint/parser": "^8.56.0",
         "@vitejs/plugin-react": "^5.1.4",
-        "cypress": "^14.5.4",
+        "cypress": "^15.10.0",
         "cypress-wait-until": "^3.0.2",
         "eslint": "^8.57.1",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-cypress": "^5.1.1",
+        "eslint-plugin-cypress": "^6.1.0",
         "eslint-plugin-no-only-tests": "^3.3.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^5.2.0",
@@ -61,7 +61,7 @@
         "vite-plugin-svgr": "^4.5.0"
     },
     "scripts": {
-        "start": "vite --port 3333",
+        "start": "vite --port 3333 --host 127.0.0.1",
         "start-with-chopsticks": "vite --port 3333 --mode staging --host 127.0.0.1",
         "build": "tsc && vite build",
         "serve": "vite preview",

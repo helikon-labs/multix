@@ -127,4 +127,5 @@ packages/ui/cypress/screenshots/*
 packages/ui/cypress/videos/*
 packages/ui/cypress/downloads/*
 
+data
 db.sqlite*
