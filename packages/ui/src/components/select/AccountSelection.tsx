@@ -1,4 +1,4 @@
-import { Alert, Box, Grid2 as Grid } from '@mui/material';
+import { Alert, Box, Grid } from '@mui/material';
 import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useAccounts } from '../../contexts/AccountsContext';

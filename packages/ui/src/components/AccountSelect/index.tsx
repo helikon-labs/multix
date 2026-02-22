@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardHeader, IconButton, Menu, MenuItem } from '@mui/material';
-import { MenuProps } from '@mui/material/Menu/Menu';
+import { MenuProps } from '@mui/material/Menu';
 import { useAccounts } from '../../contexts/AccountsContext';
 import MultixIdenticon from '../MultixIdenticon';
 

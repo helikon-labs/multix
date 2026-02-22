@@ -4,7 +4,7 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
-    Grid2 as Grid,
+    Grid,
     SelectChangeEvent,
 } from '@mui/material';
 import { Button, ButtonWithIcon, Select } from '../library';

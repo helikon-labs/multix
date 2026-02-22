@@ -1,4 +1,4 @@
-import { Alert, Box, CircularProgress, Grid2 as Grid, Tooltip, styled } from '@mui/material';
+import { Alert, Box, CircularProgress, Grid, Tooltip, styled } from '@mui/material';
 import { Button, InputField } from '../library';
 import { useCallback, useMemo, useState, ChangeEvent } from 'react';
 import { useWalletConnect } from '../../contexts/WalletConnectContext';

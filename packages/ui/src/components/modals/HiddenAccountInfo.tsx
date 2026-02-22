@@ -4,7 +4,7 @@ import {
     DialogContent,
     DialogTitle,
     FormControlLabel,
-    Grid2 as Grid,
+    Grid,
 } from '@mui/material';
 import { Button } from '../library';
 import { styled } from '@mui/material/styles';

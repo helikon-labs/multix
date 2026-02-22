@@ -1,7 +1,7 @@
 import { HiddenAccount } from '../contexts/HiddenAccountsContext';
 import { AccountNames } from '../contexts/AccountNamesContext';
 import { useGetEncodedAddress } from '../hooks/useGetEncodedAddress';
-import { Grid2 as Grid, styled } from '@mui/material';
+import { Grid, styled } from '@mui/material';
 import AccountDisplay from './AccountDisplay/AccountDisplay';
 import Expander from './Expander';
 

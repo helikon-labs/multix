@@ -1,4 +1,4 @@
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { TextField } from '../library';

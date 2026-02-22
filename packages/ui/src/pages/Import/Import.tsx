@@ -1,4 +1,4 @@
-import { Alert, Grid2 as Grid, Paper } from '@mui/material';
+import { Alert, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { MigratedData, useImportExportLocalData } from '../../hooks/useImportExportLocalData';
 import { useNavigate, useSearchParams } from 'react-router';

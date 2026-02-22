@@ -1,12 +1,4 @@
-import {
-    Alert,
-    Box,
-    CircularProgress,
-    Grid2 as Grid,
-    Step,
-    StepLabel,
-    Stepper,
-} from '@mui/material';
+import { Alert, Box, CircularProgress, Grid, Step, StepLabel, Stepper } from '@mui/material';
 import { Button, ButtonWithIcon } from '../../components/library';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';

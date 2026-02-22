@@ -8,7 +8,7 @@ import IdenticonBadge from '../IdenticonBadge';
 import { useAccountNames } from '../../contexts/AccountNamesContext';
 import { AccountBadge } from '../../types';
 import { Autocomplete } from '../library';
-import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete/Autocomplete';
+import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
 import TextFieldLargeStyled from '../library/TextFieldLargeStyled';
 import { useGetIdentity } from '../../hooks/useGetIdentity';
 import { getIdentityName } from '../../utils/getIdentityName';

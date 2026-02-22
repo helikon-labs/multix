@@ -1,4 +1,4 @@
-import { Grid2, styled, Alert, CircularProgress } from '@mui/material';
+import { Grid, styled, Alert, CircularProgress } from '@mui/material';
 import { ButtonWithIcon } from './library';
 import { Builder, TPapiTransaction } from '@paraspell/sdk';
 import { isContextIn, useApi } from '../contexts/ApiContext';
@@ -143,7 +143,7 @@ export const TeleportFundsAlert = ({
     ]);
 
     return (
-        <Grid2 size={{ xs: 12 }}>
+        <Grid size={{ xs: 12 }}>
             <AlertStyled
                 className={className}
                 severity="error"
@@ -169,7 +169,7 @@ export const TeleportFundsAlert = ({
                     </ButtonWithIcon>
                 </ButtonWrapper>
             </AlertStyled>
-        </Grid2>
+        </Grid>
     );
 };
 

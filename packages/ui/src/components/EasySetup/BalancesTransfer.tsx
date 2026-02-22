@@ -4,7 +4,7 @@ import { isContextIn, useApi } from '../../contexts/ApiContext';
 import { Transaction } from 'polkadot-api';
 import TransferAsset, { Option } from '../TransferAsset';
 import { Button } from '../library';
-import { Grid2 } from '@mui/material';
+import { Grid } from '@mui/material';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { useNetwork } from '../../contexts/NetworkContext';
 import { useAssets } from '../../contexts/AssetsContext';
@@ -218,6 +218,6 @@ const AddButtonStyled = styled(Button)`
         margin-right: 0.5rem;
     }
 `;
-const ButtonGridStyled = styled(Grid2)`
+const ButtonGridStyled = styled(Grid)`
     margin-top: 1rem;
 `;

@@ -1,5 +1,5 @@
 import { useNavigate, useRouteError } from 'react-router';
-import { Alert, AlertTitle, Grid2 as Grid } from '@mui/material';
+import { Alert, AlertTitle, Grid } from '@mui/material';
 import { theme } from '../../styles/theme';
 import { styled, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { Button } from '../library';

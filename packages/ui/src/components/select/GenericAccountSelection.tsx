@@ -8,7 +8,7 @@ import IdenticonBadge from '../IdenticonBadge';
 import { AccountBadge } from '../../types';
 import { Autocomplete, TextField } from '../library';
 import OptionMenuItem from './OptionMenuItem';
-import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete/Autocomplete';
+import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
 
 export interface AccountBaseInfo {
     address: string;

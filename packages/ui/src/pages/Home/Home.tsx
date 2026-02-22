@@ -1,5 +1,5 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { Box, Grid2 as Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { useSearchParams } from 'react-router';
 import SuccessCreation from '../../components/SuccessCreation';

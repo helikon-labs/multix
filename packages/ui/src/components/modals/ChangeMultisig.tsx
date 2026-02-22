@@ -5,7 +5,7 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
-    Grid2 as Grid,
+    Grid,
 } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';

@@ -12,7 +12,7 @@ import {
     AutocompleteRenderInputParams,
     AutocompleteRenderOptionState,
     AutocompleteValue,
-} from '@mui/material/Autocomplete/Autocomplete';
+} from '@mui/material/Autocomplete';
 import { HiOutlineChevronDown } from 'react-icons/hi2';
 import { theme } from '../../styles/theme';
 

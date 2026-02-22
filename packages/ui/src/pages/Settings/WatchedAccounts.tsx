@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Grid2 as Grid, IconButton, Paper } from '@mui/material';
+import { Box, Grid, IconButton, Paper } from '@mui/material';
 import { useWatchedAccounts } from '../../contexts/WatchedAccountsContext';
 import AccountDisplay from '../../components/AccountDisplay/AccountDisplay';
 import { HiOutlineXMark } from 'react-icons/hi2';

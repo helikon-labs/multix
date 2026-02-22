@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Grid2, IconButton, InputAdornment, SelectChangeEvent } from '@mui/material';
+import { Grid, IconButton, InputAdornment, SelectChangeEvent } from '@mui/material';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import GenericAccountSelection, { AccountBaseInfo } from './select/GenericAccountSelection';
 import { useAccountBaseFromAccountList } from '../hooks/useAccountBaseFromAccountList';
@@ -181,14 +181,14 @@ const TransferAsset = ({
     }, [assetList, onAssetSelection, selectedAsset]);
 
     return (
-        <Grid2
+        <Grid
             className={className}
             container
             spacing={2}
             justifyContent={'center'}
             data-cy={`transfer-asset-${index}`}
         >
-            <Grid2 size={{ xs: 12, md: 7 }}>
+            <Grid size={{ xs: 12, md: 7 }}>
                 <GenericAccountSelection
                     className="to"
                     onChange={onAddressDestChange}
@@ -198,13 +198,13 @@ const TransferAsset = ({
                     accountList={accountBase}
                     testId="send-tokens-field-to"
                 />
-            </Grid2>
-            <Grid2
+            </Grid>
+            <Grid
                 container
                 size={{ xs: 12, md: 5 }}
                 spacing={0}
             >
-                <Grid2 size={{ xs: 11 }}>
+                <Grid size={{ xs: 11 }}>
                     <TextFieldStyled
                         fullWidth
                         className={isAssetHub ? 'assetHub' : ''}
@@ -231,8 +231,8 @@ const TransferAsset = ({
                             },
                         }}
                     />
-                </Grid2>
-                <Grid2 size={{ xs: 1 }}>
+                </Grid>
+                <Grid size={{ xs: 1 }}>
                     {withDeleteButton && (
                         <DeleteButtonStyled
                             onClick={onRemove}
@@ -241,9 +241,9 @@ const TransferAsset = ({
                             <HiOutlineTrash />
                         </DeleteButtonStyled>
                     )}
-                </Grid2>
-            </Grid2>
-        </Grid2>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 };
 
