@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useWatchedAccounts } from '../contexts/WatchedAccountsContext';
 import { HiddenAccount, useHiddenAccounts } from '../contexts/HiddenAccountsContext';
 import { AccountNames, useAccountNames } from '../contexts/AccountNamesContext';
@@ -51,15 +51,14 @@ const decodeData = (encodedData: string): MigratedData => {
 };
 
 export const useImportExportLocalData = () => {
-    const [encodedData, setEncodedData] = useState<string | null>(null);
     const { watchedPubKeys, setWatchedPubKeys } = useWatchedAccounts();
     const { hiddenAccounts, setHiddenAccounts } = useHiddenAccounts();
     const { pubKeyNames, setPubKeyNames } = useAccountNames();
 
-    useEffect(() => {
-        setEncodedData(encodeData({ watchedPubKeys, hiddenAccounts, pubKeyNames }));
-    }, [watchedPubKeys, hiddenAccounts, pubKeyNames]);
-
+    const encodedData = useMemo(
+        () => encodeData({ watchedPubKeys, hiddenAccounts, pubKeyNames }),
+        [watchedPubKeys, hiddenAccounts, pubKeyNames],
+    );
     const mergeWithLocalData = useCallback(
         (newData: MigratedData) => {
             if (newData.watchedPubKeys && newData.watchedPubKeys.length > 0) {

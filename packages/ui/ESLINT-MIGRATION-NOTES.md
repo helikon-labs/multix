@@ -130,6 +130,8 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/pages/Overview/OverviewHeaderView.tsx`              | `nodes` and `edges` → `useMemo`; passed as `defaultNodes`/`defaultEdges` to ReactFlow; `key` prop derived from `selectedMultiProxy` forces remount on proxy change; interactivity preserved via ReactFlow's uncontrolled mode |
 | `react-hooks/set-state-in-effect`         | `src/components/select/AccountSelection.tsx`             | `name` → `useMemo` combining `userNameEntry` state (tracks active user input by address) with `accountNames` fallback; `useEffect` removed                                                                                    |
 | `react-hooks/set-state-in-effect`         | `src/pages/Settings/Settings.tsx`                        | `expanded` → lazy `useState` initializer deriving initial panel from URL hash; `useEffect` (which called `onToggle` → `setExpanded`) and `useLocation` removed                                                                |
+| `react-hooks/set-state-in-effect`         | `src/contexts/AccountNamesContext.tsx`                   | `accountNames` → `useMemo` over `pubKeyNames` + `chainInfo`; `useState` + `useEffect` removed                                                                                                                                 |
+| `react-hooks/set-state-in-effect`         | `src/hooks/useImportExportLocalData.tsx`                 | `encodedData` → `useMemo` over `watchedPubKeys`, `hiddenAccounts`, `pubKeyNames`; `useState` + `useEffect` removed                                                                                                            |
 
 ---
 
@@ -141,15 +143,14 @@ The rule flags `setState` calls (direct or indirect) inside `useEffect` bodies. 
 
 State is computed synchronously from other state or props. The effect and its state variable can be eliminated entirely.
 
-| File                                             | Lines             | Notes                                                           |
-| ------------------------------------------------ | ----------------- | --------------------------------------------------------------- |
-| `src/components/MultisigCompactDisplay.tsx`      | 37                | `signatories`, `threshold`, `badge` derived from GraphQL `data` |
-| `src/components/modals/Send.tsx`                 | 157               | `errorMessage` derived from balance/funds calculation           |
-| `src/components/modals/WalletConnectSigning.tsx` | 93, 108, 142, 152 |                                                                 |
-| `src/contexts/AccountNamesContext.tsx`           | 61, 103           |                                                                 |
-| `src/contexts/MultiProxyContext.tsx`             | 160, 322          |                                                                 |
-| `src/hooks/useImportExportLocalData.tsx`         | 60                |                                                                 |
-| `src/pages/Creation/ThresholdSelection.tsx`      | 40                |                                                                 |
+| File                                             | Lines             | Notes                                                                                                                 |
+| ------------------------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `src/components/MultisigCompactDisplay.tsx`      | 37                | `signatories`, `threshold`, `badge` derived from GraphQL `data`                                                       |
+| `src/components/modals/Send.tsx`                 | 157               | `errorMessage` derived from balance/funds calculation                                                                 |
+| `src/components/modals/WalletConnectSigning.tsx` | 93, 108, 142, 152 |                                                                                                                       |
+| `src/contexts/AccountNamesContext.tsx`           | 103               | `loadNames()` — one-time init from localStorage; convert to lazy `useState` (same pattern as `HiddenAccountsContext`) |
+| `src/contexts/MultiProxyContext.tsx`             | 160, 322          |                                                                                                                       |
+| `src/pages/Creation/ThresholdSelection.tsx`      | 40                |                                                                                                                       |
 
 ### B. Async or genuine side effects → `useMemo` not applicable; consider `eslint-disable`
 

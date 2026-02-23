@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useAccounts } from './AccountsContext';
 import { useApi } from './ApiContext';
 import { encodeNames } from '../utils/namesUtil';
@@ -25,10 +25,13 @@ export interface IAccountNamesContext {
 const AccountNamesContext = createContext<IAccountNamesContext | undefined>(undefined);
 
 const AccountNamesContextProvider = ({ children }: AccountNamesContextProps) => {
-    const [accountNames, setAccountNames] = useState<AccountNames>({});
     const [pubKeyNames, setPubKeyNames] = useState<AccountNames>({});
     const { getAccountByAddress } = useAccounts();
     const { chainInfo } = useApi();
+    const accountNames = useMemo(() => {
+        if (!chainInfo) return {};
+        return encodeNames(pubKeyNames, chainInfo.ss58Format);
+    }, [chainInfo, pubKeyNames]);
 
     const getNamesWithExtension = useCallback(
         (address: string) => {
@@ -52,14 +55,6 @@ const AccountNamesContextProvider = ({ children }: AccountNamesContextProps) => 
         const namePubkeyParsed = JSON.parse(namesHexString) as AccountNames;
         setPubKeyNames(namePubkeyParsed);
     }, []);
-
-    useEffect(() => {
-        if (!chainInfo) {
-            return;
-        }
-        const namesString = encodeNames(pubKeyNames, chainInfo.ss58Format);
-        setAccountNames(namesString);
-    }, [chainInfo, pubKeyNames]);
 
     const saveNames = useCallback(() => {
         if (!Object.entries(pubKeyNames).length) return;
