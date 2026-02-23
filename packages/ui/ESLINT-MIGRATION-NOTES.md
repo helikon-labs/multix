@@ -112,63 +112,62 @@ export default defineConfig([
 
 ---
 
-## Pending: Lint Errors from `eslint-plugin-react-hooks` v5 → v7 Upgrade
+## Fixed
 
-v7 introduced new rules (part of the React Compiler ruleset) that flag patterns previously allowed.
-
-### 1. `react-hooks/static-components` — ~~**High priority (actual bugs)**~~ **DONE**
-
-| File                                              | Line | Issue                                                                    | Fix                                                                                         |
-| ------------------------------------------------- | ---- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| `src/components/IdenticonBadge.tsx`               | 27   | `const AccountIcon = () => (...)` defined inside component body          | Removed `AccountIcon`; inlined `MultixIdenticon` directly with a shared `iconSize` variable |
-| `src/components/Transactions/TransactionList.tsx` | 34   | `const Transactions = useCallback(...)` — component inside `useCallback` | Extracted `Transactions` to module level; hooks called directly inside it                   |
-
----
-
-### 2. `react-hooks/set-state-in-effect` — **Medium priority (performance / outdated pattern)**
-
-Calling `setState` synchronously in a `useEffect` body causes cascading renders. These work correctly but are inefficient. The recommended approach is to use `useMemo` for derived state instead.
-
-| File                                                     | Lines             |
-| -------------------------------------------------------- | ----------------- |
-| `src/components/EasySetup/FromCallData.tsx`              | 69                |
-| `src/components/MultisigCompactDisplay.tsx`              | 37                |
-| `src/components/modals/Send.tsx`                         | 157               |
-| `src/components/modals/WalletConnectSessionProposal.tsx` | 55                |
-| `src/components/modals/WalletConnectSigning.tsx`         | 93, 108, 142, 152 |
-| `src/components/select/AccountSelection.tsx`             | 65                |
-| `src/contexts/AccountNamesContext.tsx`                   | 61, 103           |
-| `src/contexts/AccountsContext.tsx`                       | 84                |
-| `src/contexts/ApiContext.tsx`                            | 74                |
-| `src/contexts/HiddenAccountsContext.tsx`                 | 122               |
-| `src/contexts/MultiProxyContext.tsx`                     | 160, 322          |
-| `src/contexts/NativeIdentityApiContext.tsx`              | 89                |
-| `src/contexts/PendingTxContext.tsx`                      | 447               |
-| `src/contexts/PeopleChainApiContext.tsx`                 | 67                |
-| `src/contexts/WatchedAccountsContext.tsx`                | 70                |
-| `src/hooks/useCallInfoFromCallData.tsx`                  | 21                |
-| `src/hooks/useIdentityApi.tsx`                           | 30                |
-| `src/hooks/useImportExportLocalData.tsx`                 | 60                |
-| `src/pages/Creation/ThresholdSelection.tsx`              | 40                |
-| `src/pages/Home/Home.tsx`                                | 38                |
-| `src/pages/Overview/OverviewHeaderView.tsx`              | 154               |
-| `src/pages/Settings/Settings.tsx`                        | 44                |
+| Rule                                      | File                                              | Fix                                                                                         |
+| ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `react-hooks/static-components`           | `src/components/IdenticonBadge.tsx`               | Removed `AccountIcon`; inlined `MultixIdenticon` directly with a shared `iconSize` variable |
+| `react-hooks/static-components`           | `src/components/Transactions/TransactionList.tsx` | Extracted `Transactions` to module level; hooks called directly inside it                   |
+| `react-hooks/preserve-manual-memoization` | `src/contexts/NativeIdentityApiContext.tsx`       | Changed dep from `selectedNetworkInfo?.rpcUrls` to `selectedNetworkInfo`                    |
+| `react-hooks/preserve-manual-memoization` | `src/contexts/PeopleChainApiContext.tsx`          | Changed dep from `selectedNetworkInfo?.pplChainRpcUrls` to `selectedNetworkInfo`            |
+| `react-hooks/immutability`                | `src/contexts/NetworkContext.tsx`                 | Eliminated recursive `selectNetwork` self-call; resolved `validNetwork` inline              |
 
 ---
 
-### 3. `react-hooks/preserve-manual-memoization` — ~~**Low priority (React Compiler hint)**~~ **DONE**
+## Remaining: `react-hooks/set-state-in-effect`
 
-React Compiler skipped optimization due to inconsistent optional chaining in `useMemo` dep arrays vs. usage in the body.
+The rule flags `setState` calls (direct or indirect) inside `useEffect` bodies. Not all cases are the same — they fall into three categories.
 
-| File                                        | Line | Issue                                                                                            | Fix                                                                            |
-| ------------------------------------------- | ---- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `src/contexts/NativeIdentityApiContext.tsx` | 70   | `[selectedNetworkInfo?.rpcUrls]` dep but body uses `selectedNetworkInfo.rpcUrls`                 | Changed dep to `[selectedNetworkInfo]` — consistent with body and more correct |
-| `src/contexts/PeopleChainApiContext.tsx`    | 51   | `[selectedNetworkInfo?.pplChainRpcUrls]` dep but body uses `selectedNetworkInfo.pplChainRpcUrls` | Changed dep to `[selectedNetworkInfo]` — consistent with body and more correct |
+### A. Synchronous derived state → replace `useEffect` + `setState` with `useMemo`
 
----
+State is computed synchronously from other state or props. The effect and its state variable can be eliminated entirely.
 
-### 4. `react-hooks/immutability` — ~~**Medium priority**~~ **DONE**
+| File                                                     | Lines             | Notes                                                           |
+| -------------------------------------------------------- | ----------------- | --------------------------------------------------------------- |
+| `src/components/MultisigCompactDisplay.tsx`              | 37                | `signatories`, `threshold`, `badge` derived from GraphQL `data` |
+| `src/components/modals/Send.tsx`                         | 157               | `errorMessage` derived from balance/funds calculation           |
+| `src/components/modals/WalletConnectSessionProposal.tsx` | 55                |                                                                 |
+| `src/components/modals/WalletConnectSigning.tsx`         | 93, 108, 142, 152 |                                                                 |
+| `src/components/select/AccountSelection.tsx`             | 65                |                                                                 |
+| `src/contexts/AccountNamesContext.tsx`                   | 61, 103           |                                                                 |
+| `src/contexts/AccountsContext.tsx`                       | 84                |                                                                 |
+| `src/contexts/ApiContext.tsx`                            | 74                |                                                                 |
+| `src/contexts/HiddenAccountsContext.tsx`                 | 122               |                                                                 |
+| `src/contexts/MultiProxyContext.tsx`                     | 160, 322          |                                                                 |
+| `src/hooks/useIdentityApi.tsx`                           | 30                |                                                                 |
+| `src/hooks/useImportExportLocalData.tsx`                 | 60                |                                                                 |
+| `src/pages/Creation/ThresholdSelection.tsx`              | 40                |                                                                 |
+| `src/pages/Home/Home.tsx`                                | 38                |                                                                 |
+| `src/pages/Overview/OverviewHeaderView.tsx`              | 154               |                                                                 |
+| `src/pages/Settings/Settings.tsx`                        | 44                |                                                                 |
 
-| File                              | Line | Issue                                                                      | Fix                                                                                |
-| --------------------------------- | ---- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `src/contexts/NetworkContext.tsx` | 31   | `selectNetwork` calls itself recursively inside its own `useCallback` body | Eliminated recursion by resolving to `validNetwork` inline; self-reference removed |
+### B. Async or genuine side effects → `useMemo` not applicable; consider `eslint-disable`
+
+State is set from async operations or external API initialisation. The `useEffect` + `setState` pattern is correct here — the rule is a false positive. Use `// eslint-disable-next-line react-hooks/set-state-in-effect` with a comment explaining why.
+
+| File                                        | Lines | Notes                                                                                           |
+| ------------------------------------------- | ----- | ----------------------------------------------------------------------------------------------- |
+| `src/components/EasySetup/FromCallData.tsx` | 69    | `setCallDataToUse` called via async `.then()` on `removeProxyProxyCall`                         |
+| `src/hooks/useCallInfoFromCallData.tsx`     | 21    | Sync reset guard (`setCallInfo(undefined)`) before async API call — both are in the same effect |
+| `src/contexts/NativeIdentityApiContext.tsx` | 89    | Multiple setters initialising API client from external lib — genuine side effect, not derivable |
+| `src/contexts/PeopleChainApiContext.tsx`    | 67    | Same pattern as `NativeIdentityApiContext` — API client initialisation                          |
+| `src/contexts/PendingTxContext.tsx`         | 447   | `refresh()` triggers async data fetching — not derived state                                    |
+| `src/contexts/WatchedAccountsContext.tsx`   | 70    | `loadWatchedPubKeys()` — one-time initialisation on mount                                       |
+
+### C. Indirect setState via function call → restructure or `eslint-disable`
+
+The rule traces through function calls and flags effects that call functions which internally call `setState`. Previously undetected because the `react-hooks/immutability` error in the same file masked it.
+
+| File                              | Line | Notes                                                                                                                                                                                                                                                           |
+| --------------------------------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/contexts/NetworkContext.tsx` | 53   | `selectNetwork(networkParam)` called in effect — rule detects that `selectNetwork` calls setters internally. This is a one-time initialisation effect; consider running the initial network resolution outside the effect or suppressing with `eslint-disable`. |
