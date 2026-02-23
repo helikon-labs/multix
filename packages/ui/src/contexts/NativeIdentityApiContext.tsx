@@ -71,7 +71,7 @@ const NativeIdentityApiContextProvider = <Id extends NativeIdentityDescriptorKey
         if (!selectedNetworkInfo?.rpcUrls) return;
 
         return getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
-    }, [selectedNetworkInfo?.rpcUrls]);
+    }, [selectedNetworkInfo]);
 
     useEffect(() => {
         if (!nativeIdentityApi) return;

@@ -52,7 +52,7 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
         if (!selectedNetworkInfo?.pplChainRpcUrls) return;
 
         return getWsProvider(selectedNetworkInfo.pplChainRpcUrls, wsStatusChangeCallback);
-    }, [selectedNetworkInfo?.pplChainRpcUrls]);
+    }, [selectedNetworkInfo]);
 
     useEffect(() => {
         if (!pplApi) return;

@@ -156,16 +156,14 @@ Calling `setState` synchronously in a `useEffect` body causes cascading renders.
 
 ---
 
-### 3. `react-hooks/preserve-manual-memoization` — **Low priority (React Compiler hint)**
+### 3. `react-hooks/preserve-manual-memoization` — ~~**Low priority (React Compiler hint)**~~ **DONE**
 
 React Compiler skipped optimization due to inconsistent optional chaining in `useMemo` dep arrays vs. usage in the body.
 
-| File                                        | Line | Issue                                                                                            |
-| ------------------------------------------- | ---- | ------------------------------------------------------------------------------------------------ |
-| `src/contexts/NativeIdentityApiContext.tsx` | 70   | `[selectedNetworkInfo?.rpcUrls]` dep but body uses `selectedNetworkInfo.rpcUrls`                 |
-| `src/contexts/PeopleChainApiContext.tsx`    | 51   | `[selectedNetworkInfo?.pplChainRpcUrls]` dep but body uses `selectedNetworkInfo.pplChainRpcUrls` |
-
-**Fix:** Make dep array and body consistent — either both use `?.` or neither.
+| File                                        | Line | Issue                                                                                            | Fix                                                                            |
+| ------------------------------------------- | ---- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `src/contexts/NativeIdentityApiContext.tsx` | 70   | `[selectedNetworkInfo?.rpcUrls]` dep but body uses `selectedNetworkInfo.rpcUrls`                 | Changed dep to `[selectedNetworkInfo]` — consistent with body and more correct |
+| `src/contexts/PeopleChainApiContext.tsx`    | 51   | `[selectedNetworkInfo?.pplChainRpcUrls]` dep but body uses `selectedNetworkInfo.pplChainRpcUrls` | Changed dep to `[selectedNetworkInfo]` — consistent with body and more correct |
 
 ---
 
