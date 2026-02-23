@@ -1,5 +1,5 @@
 import { Alert, Box, Grid } from '@mui/material';
-import { ChangeEvent, SyntheticEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useCallback, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useAccounts } from '../../contexts/AccountsContext';
 import { isValidAddress } from '../../utils/isValidAddress';
@@ -44,7 +44,6 @@ const AccountSelection = ({
     const { chainInfo } = useApi();
     const [errorMessage, setErrorMessage] = useState('');
     const { accountNames, addName } = useAccountNames();
-    const [name, setName] = useState('');
     const accountBase = useAccountBaseFromAccountList();
     const [selected, setSelected] = useState(accountBase.find(({ address }) => address === value));
     const dedupedSignatories = useMemo(() => {
@@ -59,12 +58,14 @@ const AccountSelection = ({
         return getAccountByAddress(selected.address)?.name;
     }, [getAccountByAddress, selected]);
 
-    useEffect(() => {
-        const previouslyNameAccount = selected && accountNames[selected.address];
-        if (previouslyNameAccount) {
-            setName(previouslyNameAccount);
-        }
-    }, [accountNames, selected]);
+    const [userNameEntry, setUserNameEntry] = useState<{ address: string; name: string } | null>(
+        null,
+    );
+    const name = useMemo(() => {
+        if (!selected) return '';
+        if (userNameEntry?.address === selected.address) return userNameEntry.name;
+        return accountNames[selected.address] || '';
+    }, [accountNames, selected, userNameEntry]);
 
     const onChange = useCallback((newAccount?: AccountBaseInfo) => {
         newAccount && setSelected(newAccount);
@@ -112,7 +113,7 @@ const AccountSelection = ({
             name && addName(name, selected.address);
             addAccount(selected.address);
             setSelected(undefined);
-            setName('');
+            setUserNameEntry(null);
         }
     }, [selected, chainInfo, currentSelectionPubKeys, addAccount, name, addName]);
 
@@ -127,10 +128,13 @@ const AccountSelection = ({
 
     const onNameChange = useCallback(
         (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-            const value = event.target.value;
-            setName(value);
+            selected &&
+                setUserNameEntry({
+                    address: selected.address,
+                    name: event.target.value,
+                });
         },
-        [],
+        [selected],
     );
 
     const onInputChange = useCallback(
@@ -141,7 +145,7 @@ const AccountSelection = ({
             >,
         ) => {
             setErrorMessage('');
-            setName('');
+            setUserNameEntry(null);
             const value = getOptionLabel(val as string);
             setSelected(value ? { address: value } : undefined);
         },
