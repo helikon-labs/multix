@@ -38,7 +38,7 @@
     "devDependencies": {
         "@chainsafe/cypress-polkadot-wallet": "^2.3.0",
         "@eslint/compat": "^2.0.2",
-        "@eslint/eslintrc": "^3.3.3",
+        "@eslint/eslintrc": "^3.3.4",
         "@eslint/js": "^10.0.1",
         "@graphql-codegen/cli": "6.1.1",
         "@graphql-codegen/client-preset": "5.2.3",
