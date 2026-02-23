@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useMemo } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { useSearchParams } from 'react-router';
@@ -21,12 +21,14 @@ const Home = ({ className }: HomeProps) => {
         creationInProgress: 'false',
     });
     const { multiProxyList } = useMultiProxy();
-    const [showNewMultisigAlert, setShowNewMultisigAlert] = useState(false);
+    const showNewMultisigAlert = useMemo(
+        () => searchParams.get('creationInProgress') === 'true',
+        [searchParams],
+    );
     const DisplayError = useDisplayError();
     const DisplayLoader = useDisplayLoader();
 
-    const onClosenewMultisigAlert = useCallback(() => {
-        setShowNewMultisigAlert(false);
+    const onCloseNewMultisigAlert = useCallback(() => {
         setSearchParams((prev) => {
             prev.set('creationInProgress', 'false');
             return prev;
@@ -35,12 +37,11 @@ const Home = ({ className }: HomeProps) => {
 
     useEffect(() => {
         if (searchParams.get('creationInProgress') === 'true') {
-            setShowNewMultisigAlert(true);
             setTimeout(() => {
-                onClosenewMultisigAlert();
+                onCloseNewMultisigAlert();
             }, 20000);
         }
-    }, [onClosenewMultisigAlert, searchParams]);
+    }, [onCloseNewMultisigAlert, searchParams]);
 
     if (DisplayLoader) {
         return DisplayLoader;
@@ -63,8 +64,8 @@ const Home = ({ className }: HomeProps) => {
             className={className}
             container
         >
-            {showNewMultisigAlert && multiProxyList.length > 0 && showNewMultisigAlert && (
-                <NewMulisigAlert onClose={onClosenewMultisigAlert} />
+            {showNewMultisigAlert && multiProxyList.length > 0 && (
+                <NewMulisigAlert onClose={onCloseNewMultisigAlert} />
             )}
             <Grid
                 alignItems="center"

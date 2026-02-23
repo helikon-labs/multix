@@ -1,22 +1,16 @@
 import { Box } from '@mui/material';
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { AccountBadge } from '../../types';
 import CustomNode, { NodeData } from './CustomNode';
 import ReactFlow, {
-    addEdge,
     FitViewOptions,
-    applyNodeChanges,
-    applyEdgeChanges,
     Node,
     Edge,
     DefaultEdgeOptions,
     Background,
     Controls,
-    OnConnect,
-    OnEdgesChange,
-    OnNodesChange,
     MarkerType,
     NodeTypes,
 } from 'reactflow';
@@ -62,27 +56,21 @@ const VERTICAL_GAP_BETWEEN_NODES = 300;
 
 const OverviewHeaderView = ({ className }: Props) => {
     const { selectedMultiProxy } = useMultiProxy();
-    const [nodes, setNodes] = useState<Node[]>([]);
-    const [edges, setEdges] = useState<Edge[]>([]);
     const uniqueSignatoriesSet = useMemo(() => {
-        const res = new Set<string>();
+        const uniqueSignatories = new Set<string>();
         selectedMultiProxy?.multisigs.forEach((multisig) => {
             multisig.signatories?.forEach((address) => {
-                res.add(address);
+                uniqueSignatories.add(address);
             });
         });
 
-        return res;
+        return uniqueSignatories;
     }, [selectedMultiProxy?.multisigs]);
 
-    useEffect(() => {
-        if (uniqueSignatoriesSet.size === 0 || !selectedMultiProxy?.multisigs) return;
-
+    const nodes = useMemo<Node[]>(() => {
+        if (uniqueSignatoriesSet.size === 0 || !selectedMultiProxy?.multisigs) return [];
         const resNodes: Node[] = [];
-        const resEdges: Edge[] = [];
-
         let ySigPosition = 0;
-        // create nodes
         for (const sig of uniqueSignatoriesSet.values()) {
             resNodes.push(
                 nodeFactory({
@@ -93,24 +81,17 @@ const OverviewHeaderView = ({ className }: Props) => {
             );
             ySigPosition += HORIZONTAL_GAP_BETWEEN_NODES;
         }
-
         let yMultiPosition = 0;
-
         for (const multisig of selectedMultiProxy.multisigs) {
             resNodes.push(
                 nodeFactory({
                     id: multisig.address,
-                    data: {
-                        address: multisig.address,
-                        handle: 'both',
-                        badge: AccountBadge.MULTI,
-                    },
+                    data: { address: multisig.address, handle: 'both', badge: AccountBadge.MULTI },
                     position: { x: VERTICAL_GAP_BETWEEN_NODES, y: yMultiPosition },
                 }),
             );
             yMultiPosition += HORIZONTAL_GAP_BETWEEN_NODES;
         }
-
         if (selectedMultiProxy.proxy) {
             resNodes.push(
                 nodeFactory({
@@ -124,8 +105,12 @@ const OverviewHeaderView = ({ className }: Props) => {
                 }),
             );
         }
+        return resNodes;
+    }, [selectedMultiProxy, uniqueSignatoriesSet]);
 
-        //create edges
+    const edges = useMemo<Edge[]>(() => {
+        if (!selectedMultiProxy?.multisigs) return [];
+        const resEdges: Edge[] = [];
         selectedMultiProxy.multisigs.forEach(({ address: multiAddress, signatories, type }) => {
             signatories?.forEach((sigAddress) => {
                 resEdges.push({
@@ -137,7 +122,6 @@ const OverviewHeaderView = ({ className }: Props) => {
                     ...defaultEdgeOptions,
                 });
             });
-
             if (selectedMultiProxy.proxy) {
                 resEdges.push({
                     id: `${multiAddress}-${selectedMultiProxy.proxy}`,
@@ -150,34 +134,20 @@ const OverviewHeaderView = ({ className }: Props) => {
                 });
             }
         });
+        return resEdges;
+    }, [selectedMultiProxy]);
 
-        setNodes(resNodes);
-        setEdges(resEdges);
-    }, [selectedMultiProxy, uniqueSignatoriesSet]);
-
-    const onNodesChange: OnNodesChange = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [setNodes],
-    );
-
-    const onEdgesChange: OnEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        [setEdges],
-    );
-
-    const onConnect: OnConnect = useCallback(
-        (connection) => setEdges((eds) => addEdge(connection, eds)),
-        [setEdges],
-    );
+    const reactFlowKey = [
+        selectedMultiProxy?.proxy,
+        ...(selectedMultiProxy?.multisigs?.map((m) => m.address) ?? []),
+    ].join('-');
 
     return (
         <Box className={className}>
             <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
+                key={reactFlowKey}
+                defaultNodes={nodes}
+                defaultEdges={edges}
                 fitView
                 fitViewOptions={fitViewOptions}
                 nodeTypes={nodeTypes}

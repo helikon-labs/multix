@@ -1,6 +1,6 @@
 import { Alert, Box, Dialog, DialogContent, DialogTitle, Grid } from '@mui/material';
 import { Button } from '../library';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { ModalCloseButton } from '../library/ModalCloseButton';
@@ -21,7 +21,6 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
     const { selectedMultiProxy } = useMultiProxy();
     const { walletKit, refresh } = useWalletConnect();
     const { currentNamespace, getAccountsWithNamespace } = useGetWalletConnectNamespace();
-    const [errorMessage, setErrorMessage] = useState('');
     const accountsToShare = useMemo(() => {
         const accountsToShare = [
             selectedMultiProxy?.proxy,
@@ -48,19 +47,14 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
         [sessionProposal?.params],
     );
 
-    useEffect(() => {
-        if (!walletKit || !sessionProposal) return;
-
-        if (!chains.includes(currentNamespace)) {
-            setErrorMessage(
-                `Multix is not connected to the same network as the WalletConnect request. Please switch to the correct network.
+    const errorMessage =
+        !walletKit || !sessionProposal
+            ? ''
+            : !chains.includes(currentNamespace)
+              ? `Multix is not connected to the same network as the WalletConnect request. Please switch to the correct network.
         - Requested: ${chains}
-        - Current: ${currentNamespace}`,
-            );
-        } else {
-            setErrorMessage('');
-        }
-    }, [chains, currentNamespace, sessionProposal, walletKit]);
+        - Current: ${currentNamespace}`
+              : '';
 
     const onApprove = useCallback(() => {
         if (!walletKit || !sessionProposal) return;
