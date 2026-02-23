@@ -10,7 +10,7 @@ import {
     TxEvent,
     TypedApi,
 } from 'polkadot-api';
-import { getWsProvider } from 'polkadot-api/ws-provider/web';
+import { getWsProvider } from 'polkadot-api/ws-provider';
 import { sr25519CreateDerive } from '@polkadot-labs/hdkd';
 import { entropyToMiniSecret, mnemonicToEntropy } from '@polkadot-labs/hdkd-helpers';
 import { getPolkadotSigner } from 'polkadot-api/signer';

@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from 'react';
 import { useNetwork } from './NetworkContext';
 import { ethereumChains } from '../utils/ethereumChains';
 import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api';
-import { getWsProvider } from 'polkadot-api/ws-provider/web';
+import { getWsProvider } from 'polkadot-api/ws-provider';
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';
 import { ApiDescriptors, ApiOf, Descriptors, DESCRIPTORS } from '../types';
 import { wsStatusChangeCallback } from '../utils/wsStatusChangeCallback';

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useState, useEffect, createContext, useContext } from 'react';
 import { useNetwork } from './NetworkContext';
 import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api';
-import { getWsProvider } from 'polkadot-api/ws-provider/web';
+import { getWsProvider } from 'polkadot-api/ws-provider';
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';
 import {
     NativeIdentityApiOf,
