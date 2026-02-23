@@ -6,15 +6,79 @@ import { getDifference, getIntersection } from '../../utils/arrayUtils';
 import { useAccounts } from '../../contexts/AccountsContext';
 import { MdOutlineFlare as FlareIcon } from 'react-icons/md';
 import Transaction from './Transaction';
-import { useCallback } from 'react';
+
+interface TxParams {
+    groupedTxs: AggGroupedByDate;
+    refreshFn: () => Promise<void>;
+    isPplChainTxs: boolean;
+}
+
+const Transactions = ({ groupedTxs, refreshFn, isPplChainTxs }: TxParams) => {
+    const { getMultisigByAddress } = useMultiProxy();
+    const { ownAddressList } = useAccounts();
+
+    return (
+        Object.entries(groupedTxs).length !== 0 &&
+        Object.entries(groupedTxs).map(([date, aggregatedData]) => {
+            return (
+                <TransactionWrapper key={`${date}-${isPplChainTxs}`}>
+                    <DateContainerStyled data-cy="label-date">{date}</DateContainerStyled>
+                    {aggregatedData.map((agg, index) => {
+                        const { callData, info, from } = agg;
+                        const { threshold, signatories } =
+                            getMultisigByAddress(from) ||
+                            ({
+                                threshold: undefined,
+                                signatories: undefined,
+                            } as MultisigAggregated);
+
+                        // if the "from"  is not a multisig from the
+                        // currently selected multiProxy or we have no info
+                        if (!info || !threshold) {
+                            return null;
+                        }
+
+                        const multisigSignatories = signatories || [];
+                        // if the threshold is met, but the transaction is still not executed
+                        // it means we need one signtory to submit with asMulti
+                        // so any signatory should be able to approve (again)
+                        const neededSigners =
+                            info?.approvals.length >= threshold
+                                ? multisigSignatories
+                                : getDifference(multisigSignatories, info?.approvals);
+                        const possibleSigners = getIntersection(neededSigners, ownAddressList);
+                        const isProposer =
+                            !!info?.depositor && ownAddressList.includes(info.depositor);
+
+                        // if we have the proposer in the extension it can always reject the transaction
+                        if (isProposer) {
+                            possibleSigners.push(info.depositor);
+                        }
+
+                        return (
+                            <Transaction
+                                key={`${index}-${callData}`}
+                                aggregatedData={agg}
+                                isProposer={isProposer}
+                                onSuccess={refreshFn}
+                                possibleSigners={possibleSigners}
+                                multisigSignatories={multisigSignatories}
+                                threshold={threshold}
+                                isPplChainTx={isPplChainTxs}
+                            />
+                        );
+                    })}
+                </TransactionWrapper>
+            );
+        })
+    );
+};
 
 interface Props {
     className?: string;
 }
 
 const TransactionList = ({ className }: Props) => {
-    const { getMultisigByAddress } = useMultiProxy();
-
     const {
         pendingTxs: tx,
         pendingPplTxs: pplTx,
@@ -22,77 +86,6 @@ const TransactionList = ({ className }: Props) => {
         refresh,
         refreshPpl,
     } = usePendingTx();
-
-    const { ownAddressList } = useAccounts();
-
-    interface TxParams {
-        groupedTxs: AggGroupedByDate;
-        refreshFn: () => Promise<void>;
-        isPplChainTxs: boolean;
-    }
-    const Transactions = useCallback(
-        ({ groupedTxs, refreshFn, isPplChainTxs }: TxParams) => {
-            return (
-                Object.entries(groupedTxs).length !== 0 &&
-                Object.entries(groupedTxs).map(([date, aggregatedData]) => {
-                    return (
-                        <TransactionWrapper key={`${date}-${isPplChainTxs}`}>
-                            <DateContainerStyled data-cy="label-date">{date}</DateContainerStyled>
-                            {aggregatedData.map((agg, index) => {
-                                const { callData, info, from } = agg;
-                                const { threshold, signatories } =
-                                    getMultisigByAddress(from) ||
-                                    ({
-                                        threshold: undefined,
-                                        signatories: undefined,
-                                    } as MultisigAggregated);
-
-                                // if the "from"  is not a multisig from the
-                                // currently selected multiProxy or we have no info
-                                if (!info || !threshold) {
-                                    return null;
-                                }
-
-                                const multisigSignatories = signatories || [];
-                                // if the threshold is met, but the transaction is still not executed
-                                // it means we need one signtory to submit with asMulti
-                                // so any signatory should be able to approve (again)
-                                const neededSigners =
-                                    info?.approvals.length >= threshold
-                                        ? multisigSignatories
-                                        : getDifference(multisigSignatories, info?.approvals);
-                                const possibleSigners = getIntersection(
-                                    neededSigners,
-                                    ownAddressList,
-                                );
-                                const isProposer =
-                                    !!info?.depositor && ownAddressList.includes(info.depositor);
-
-                                // if we have the proposer in the extension it can always reject the transaction
-                                if (isProposer) {
-                                    possibleSigners.push(info.depositor);
-                                }
-
-                                return (
-                                    <Transaction
-                                        key={`${index}-${callData}`}
-                                        aggregatedData={agg}
-                                        isProposer={isProposer}
-                                        onSuccess={refreshFn}
-                                        possibleSigners={possibleSigners}
-                                        multisigSignatories={multisigSignatories}
-                                        threshold={threshold}
-                                        isPplChainTx={isPplChainTxs}
-                                    />
-                                );
-                            })}
-                        </TransactionWrapper>
-                    );
-                })
-            );
-        },
-        [getMultisigByAddress, ownAddressList],
-    );
 
     return (
         <Box className={className}>

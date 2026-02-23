@@ -24,24 +24,18 @@ export const IdenticonBadge = ({
 }: Props) => {
     const { isWatchedAccount } = useMultiProxy();
 
-    const AccountIcon = () => (
-        <MultixIdenticon
-            value={address}
-            className="identicon"
-            size={
-                size === 'small'
-                    ? ICON_SIZE_SMALL
-                    : size === 'medium'
-                      ? ICON_SIZE_MEDIUM
-                      : ICON_SIZE_LARGE
-            }
-        />
-    );
-
     const appliedClass = useMemo(() => (badge === AccountBadge.PURE ? 'blue' : 'red'), [badge]);
+    const iconSize =
+        size === 'small' ? ICON_SIZE_SMALL : size === 'medium' ? ICON_SIZE_MEDIUM : ICON_SIZE_LARGE;
 
     if (!badge) {
-        return <AccountIcon />;
+        return (
+            <MultixIdenticon
+                value={address}
+                className="identicon"
+                size={iconSize}
+            />
+        );
     }
 
     return (
@@ -59,7 +53,11 @@ export const IdenticonBadge = ({
             anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
             data-cy={`badge-${badge}`}
         >
-            <AccountIcon />
+            <MultixIdenticon
+                value={address}
+                className="identicon"
+                size={iconSize}
+            />
         </BadgeStyled>
     );
 };

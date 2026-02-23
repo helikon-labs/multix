@@ -116,16 +116,12 @@ export default defineConfig([
 
 v7 introduced new rules (part of the React Compiler ruleset) that flag patterns previously allowed.
 
-### 1. `react-hooks/static-components` — **High priority (actual bugs)**
+### 1. `react-hooks/static-components` — ~~**High priority (actual bugs)**~~ **DONE**
 
-Defining a component inside another component causes React to unmount/remount it on every render, losing internal state.
-
-| File                                              | Line | Issue                                                                    |
-| ------------------------------------------------- | ---- | ------------------------------------------------------------------------ |
-| `src/components/IdenticonBadge.tsx`               | 27   | `const AccountIcon = () => (...)` defined inside component body          |
-| `src/components/Transactions/TransactionList.tsx` | 34   | `const Transactions = useCallback(...)` — component inside `useCallback` |
-
-**Fix:** Extract these to module-level component declarations.
+| File                                              | Line | Issue                                                                    | Fix                                                                                         |
+| ------------------------------------------------- | ---- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| `src/components/IdenticonBadge.tsx`               | 27   | `const AccountIcon = () => (...)` defined inside component body          | Removed `AccountIcon`; inlined `MultixIdenticon` directly with a shared `iconSize` variable |
+| `src/components/Transactions/TransactionList.tsx` | 34   | `const Transactions = useCallback(...)` — component inside `useCallback` | Extracted `Transactions` to module level; hooks called directly inside it                   |
 
 ---
 
