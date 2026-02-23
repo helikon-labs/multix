@@ -128,6 +128,8 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/hooks/useIdentityApi.tsx`                           | All four derived state variables → plain values inlined directly into return; hook reduced to pure computation; all `useState` + `useEffect` removed                                                                          |
 | `react-hooks/set-state-in-effect`         | `src/pages/Home/Home.tsx`                                | `showNewMultisigAlert` → plain `const` from `searchParams`; `useState` removed; `useEffect` simplified to only call `setSearchParams` (prop, not local state) via `setTimeout`                                                |
 | `react-hooks/set-state-in-effect`         | `src/pages/Overview/OverviewHeaderView.tsx`              | `nodes` and `edges` → `useMemo`; passed as `defaultNodes`/`defaultEdges` to ReactFlow; `key` prop derived from `selectedMultiProxy` forces remount on proxy change; interactivity preserved via ReactFlow's uncontrolled mode |
+| `react-hooks/set-state-in-effect`         | `src/components/select/AccountSelection.tsx`             | `name` → `useMemo` combining `userNameEntry` state (tracks active user input by address) with `accountNames` fallback; `useEffect` removed                                                                                    |
+| `react-hooks/set-state-in-effect`         | `src/pages/Settings/Settings.tsx`                        | `expanded` → lazy `useState` initializer deriving initial panel from URL hash; `useEffect` (which called `onToggle` → `setExpanded`) and `useLocation` removed                                                                |
 
 ---
 
@@ -144,12 +146,10 @@ State is computed synchronously from other state or props. The effect and its st
 | `src/components/MultisigCompactDisplay.tsx`      | 37                | `signatories`, `threshold`, `badge` derived from GraphQL `data` |
 | `src/components/modals/Send.tsx`                 | 157               | `errorMessage` derived from balance/funds calculation           |
 | `src/components/modals/WalletConnectSigning.tsx` | 93, 108, 142, 152 |                                                                 |
-| `src/components/select/AccountSelection.tsx`     | 65                |                                                                 |
 | `src/contexts/AccountNamesContext.tsx`           | 61, 103           |                                                                 |
 | `src/contexts/MultiProxyContext.tsx`             | 160, 322          |                                                                 |
 | `src/hooks/useImportExportLocalData.tsx`         | 60                |                                                                 |
 | `src/pages/Creation/ThresholdSelection.tsx`      | 40                |                                                                 |
-| `src/pages/Settings/Settings.tsx`                | 44                |                                                                 |
 
 ### B. Async or genuine side effects → `useMemo` not applicable; consider `eslint-disable`
 
