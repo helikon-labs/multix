@@ -167,10 +167,8 @@ React Compiler skipped optimization due to inconsistent optional chaining in `us
 
 ---
 
-### 4. `react-hooks/immutability` — **Medium priority**
+### 4. `react-hooks/immutability` — ~~**Medium priority**~~ **DONE**
 
-| File                              | Line | Issue                                                                                       |
-| --------------------------------- | ---- | ------------------------------------------------------------------------------------------- |
-| `src/contexts/NetworkContext.tsx` | 31   | `selectNetwork` is called before its declaration (forward reference within a `useCallback`) |
-
-**Fix:** Restructure so `selectNetwork` is declared before the `useEffect` that calls it.
+| File                              | Line | Issue                                                                      | Fix                                                                                |
+| --------------------------------- | ---- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `src/contexts/NetworkContext.tsx` | 31   | `selectNetwork` calls itself recursively inside its own `useCallback` body | Eliminated recursion by resolving to `validNetwork` inline; self-reference removed |

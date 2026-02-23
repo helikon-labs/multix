@@ -28,18 +28,18 @@ const NetworkContextProvider = ({ children }: NetworkContextProps) => {
         (network: string, shouldResetAccountAddress = false) => {
             if (!isSupportedNetwork(network)) {
                 console.error('This network is not supported', network);
-                selectNetwork(DEFAULT_NETWORK);
-                return;
             }
 
-            setSelectedNetworkInfo(networkList[network]);
-            setSelectedNetwork(network);
+            const validNetwork = isSupportedNetwork(network) ? network : DEFAULT_NETWORK;
+
+            setSelectedNetworkInfo(networkList[validNetwork]);
+            setSelectedNetwork(validNetwork);
             setSearchParams((prev) => {
                 shouldResetAccountAddress && prev.delete('address');
-                prev.set('network', network);
+                prev.set('network', validNetwork);
                 return prev;
             });
-            localStorage.setItem(LOCALSTORAGE_SELECTED_NETWORK, network);
+            localStorage.setItem(LOCALSTORAGE_SELECTED_NETWORK, validNetwork);
         },
         [setSearchParams],
     );
