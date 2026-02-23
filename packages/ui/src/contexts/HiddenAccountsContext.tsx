@@ -7,7 +7,6 @@ import {
     useMemo,
     useState,
 } from 'react';
-import { useApi } from './ApiContext';
 import { getPubKeyFromAddress } from '../utils/getPubKeyFromAddress';
 import { useNetwork } from './NetworkContext';
 import { HexString } from 'polkadot-api';
@@ -28,7 +27,6 @@ export interface IHiddenAccountsContext {
     removeHiddenAccount: (address: string) => void;
     hiddenAccounts: HiddenAccount[];
     networkHiddenAccounts: string[];
-    isInitialized: boolean;
     setHiddenAccounts: (hiddenAccounts: HiddenAccount[]) => void;
 }
 
@@ -40,13 +38,14 @@ export interface HiddenAccount {
 const HiddenAccountsContext = createContext<IHiddenAccountsContext | undefined>(undefined);
 
 const HiddenAccountsContextProvider = ({ children }: HiddenAccountsProps) => {
-    const [hiddenAccounts, setHiddenAccounts] = useState<HiddenAccount[]>([]);
-    const [isInitialized, setIsInitialized] = useState(false);
-    const { chainInfo } = useApi();
     const { selectedNetwork } = useNetwork();
     const getEncodedAddress = useGetEncodedAddress();
     const [searchParams, setSearchParams] = useSearchParams({ address: '' });
     const { watchedAddresses, removeWatchedAccount } = useWatchedAccounts();
+    const [hiddenAccounts, setHiddenAccounts] = useState<HiddenAccount[]>(() => {
+        const stored = localStorage.getItem(LOCALSTORAGE_HIDDEN_ACCOUNTS_KEY);
+        return stored ? JSON.parse(stored) : [];
+    });
 
     const networkHiddenAccounts = useMemo(() => {
         if (!selectedNetwork) return [];
@@ -104,30 +103,10 @@ const HiddenAccountsContextProvider = ({ children }: HiddenAccountsProps) => {
         [hiddenAccounts, selectedNetwork],
     );
 
-    const loadHiddenAccounts = useCallback(() => {
-        if (!chainInfo) {
-            return;
-        }
-
-        const localStorageHiddenAccount = localStorage.getItem(LOCALSTORAGE_HIDDEN_ACCOUNTS_KEY);
-        const hiddenArray: HiddenAccount[] = localStorageHiddenAccount
-            ? JSON.parse(localStorageHiddenAccount)
-            : [];
-
-        setHiddenAccounts(hiddenArray);
-        setIsInitialized(true);
-    }, [chainInfo]);
-
-    useEffect(() => {
-        !isInitialized && loadHiddenAccounts();
-    }, [isInitialized, loadHiddenAccounts]);
-
     // persist the accounts hidden every time there's a change
     useEffect(() => {
-        if (!isInitialized) return;
-
         localStorage.setItem(LOCALSTORAGE_HIDDEN_ACCOUNTS_KEY, JSON.stringify(hiddenAccounts));
-    }, [isInitialized, hiddenAccounts]);
+    }, [hiddenAccounts]);
 
     return (
         <HiddenAccountsContext.Provider
@@ -136,7 +115,6 @@ const HiddenAccountsContextProvider = ({ children }: HiddenAccountsProps) => {
                 removeHiddenAccount,
                 hiddenAccounts,
                 setHiddenAccounts,
-                isInitialized,
                 networkHiddenAccounts,
             }}
         >

@@ -114,13 +114,16 @@ export default defineConfig([
 
 ## Fixed
 
-| Rule                                      | File                                              | Fix                                                                                         |
-| ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `react-hooks/static-components`           | `src/components/IdenticonBadge.tsx`               | Removed `AccountIcon`; inlined `MultixIdenticon` directly with a shared `iconSize` variable |
-| `react-hooks/static-components`           | `src/components/Transactions/TransactionList.tsx` | Extracted `Transactions` to module level; hooks called directly inside it                   |
-| `react-hooks/preserve-manual-memoization` | `src/contexts/NativeIdentityApiContext.tsx`       | Changed dep from `selectedNetworkInfo?.rpcUrls` to `selectedNetworkInfo`                    |
-| `react-hooks/preserve-manual-memoization` | `src/contexts/PeopleChainApiContext.tsx`          | Changed dep from `selectedNetworkInfo?.pplChainRpcUrls` to `selectedNetworkInfo`            |
-| `react-hooks/immutability`                | `src/contexts/NetworkContext.tsx`                 | Eliminated recursive `selectNetwork` self-call; resolved `validNetwork` inline              |
+| Rule                                      | File                                              | Fix                                                                                                                                                                                                                   |
+| ----------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `react-hooks/static-components`           | `src/components/IdenticonBadge.tsx`               | Removed `AccountIcon`; inlined `MultixIdenticon` directly with a shared `iconSize` variable                                                                                                                           |
+| `react-hooks/static-components`           | `src/components/Transactions/TransactionList.tsx` | Extracted `Transactions` to module level; hooks called directly inside it                                                                                                                                             |
+| `react-hooks/preserve-manual-memoization` | `src/contexts/NativeIdentityApiContext.tsx`       | Changed dep from `selectedNetworkInfo?.rpcUrls` to `selectedNetworkInfo`                                                                                                                                              |
+| `react-hooks/preserve-manual-memoization` | `src/contexts/PeopleChainApiContext.tsx`          | Changed dep from `selectedNetworkInfo?.pplChainRpcUrls` to `selectedNetworkInfo`                                                                                                                                      |
+| `react-hooks/immutability`                | `src/contexts/NetworkContext.tsx`                 | Eliminated recursive `selectNetwork` self-call; resolved `validNetwork` inline                                                                                                                                        |
+| `react-hooks/set-state-in-effect`         | `src/contexts/ApiContext.tsx`                     | `client` and `api` → `useMemo`; `apiDescriptor` → plain derived variable; `resetApi` simplified to reset only `chainInfo` and `compatibilityToken`; initialization `useEffect` removed                                |
+| `react-hooks/set-state-in-effect`         | `src/contexts/AccountsContext.tsx`                | `isAllowedToConnectToExtension` → lazy `useState` from localStorage; `selectedAccount` → `useMemo` over `selectedAddress` (lazy `useState` from localStorage); initialization `useEffect` removed                     |
+| `react-hooks/set-state-in-effect`         | `src/contexts/HiddenAccountsContext.tsx`          | `hiddenAccounts` → lazy `useState` from localStorage; `isInitialized` removed entirely (always ready); unnecessary `chainInfo` guard and `loadHiddenAccounts` callback eliminated; initialization `useEffect` deleted |
 
 ---
 
@@ -140,9 +143,6 @@ State is computed synchronously from other state or props. The effect and its st
 | `src/components/modals/WalletConnectSigning.tsx`         | 93, 108, 142, 152 |                                                                 |
 | `src/components/select/AccountSelection.tsx`             | 65                |                                                                 |
 | `src/contexts/AccountNamesContext.tsx`                   | 61, 103           |                                                                 |
-| `src/contexts/AccountsContext.tsx`                       | 84                |                                                                 |
-| `src/contexts/ApiContext.tsx`                            | 74                |                                                                 |
-| `src/contexts/HiddenAccountsContext.tsx`                 | 122               |                                                                 |
 | `src/contexts/MultiProxyContext.tsx`                     | 160, 322          |                                                                 |
 | `src/hooks/useIdentityApi.tsx`                           | 30                |                                                                 |
 | `src/hooks/useImportExportLocalData.tsx`                 | 60                |                                                                 |

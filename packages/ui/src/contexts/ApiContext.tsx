@@ -2,10 +2,10 @@ import { useCallback, ReactNode, useMemo } from 'react';
 import { useState, useEffect, createContext, useContext } from 'react';
 import { useNetwork } from './NetworkContext';
 import { ethereumChains } from '../utils/ethereumChains';
-import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api';
+import { CompatibilityToken, createClient, PolkadotClient } from 'polkadot-api';
 import { getWsProvider } from 'polkadot-api/ws-provider';
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';
-import { ApiDescriptors, ApiOf, Descriptors, DESCRIPTORS } from '../types';
+import { ApiDescriptors, ApiOf, DESCRIPTORS } from '../types';
 import { wsStatusChangeCallback } from '../utils/wsStatusChangeCallback';
 
 type ApiContextProps = {
@@ -47,17 +47,14 @@ const ApiContext = createContext<IApiContext<ApiDescriptors> | undefined>(undefi
 const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextProps) => {
     const { selectedNetworkInfo } = useNetwork();
     const [chainInfo, setChainInfo] = useState<ChainInfoHuman>();
-    const [client, setClient] = useState<PolkadotClient | undefined>();
-    const [api, setApi] = useState<TypedApi<Descriptors<Id>> | undefined>();
     const [compatibilityToken, setCompatibilityToken] = useState<CompatibilityToken | undefined>();
-    const [apiDescriptor, setApiDescriptor] =
-        useState<IApiContext<ApiDescriptors>['apiDescriptor']>();
+
+    const apiDescriptor =
+        selectedNetworkInfo?.descriptor as IApiContext<ApiDescriptors>['apiDescriptor'];
 
     const resetApi = useCallback(() => {
         setChainInfo(undefined);
         setCompatibilityToken(undefined);
-        setApi(undefined);
-        setApiDescriptor(undefined);
     }, []);
 
     const wsProvider = useMemo(() => {
@@ -66,18 +63,18 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
         return getWsProvider(selectedNetworkInfo?.rpcUrls, wsStatusChangeCallback);
     }, [selectedNetworkInfo?.rpcUrls]);
 
-    useEffect(() => {
+    const client = useMemo(() => {
         if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor || !wsProvider)
             return;
-
-        const cl = createClient(withPolkadotSdkCompat(wsProvider));
-        setClient(cl);
-        const id = selectedNetworkInfo.descriptor as Id;
-        const typedApi = cl.getTypedApi(DESCRIPTORS[id]);
-        setApi(typedApi);
-
-        setApiDescriptor(selectedNetworkInfo.descriptor);
+        return createClient(withPolkadotSdkCompat(wsProvider));
     }, [selectedNetworkInfo, wsProvider]);
+
+    const api = useMemo(() => {
+        if (!client || !selectedNetworkInfo?.descriptor) return undefined;
+
+        const id = selectedNetworkInfo.descriptor as Id;
+        return client.getTypedApi(DESCRIPTORS[id]);
+    }, [client, selectedNetworkInfo]);
 
     useEffect(() => {
         if (!client || !api) return;

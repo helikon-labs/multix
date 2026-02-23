@@ -6,7 +6,6 @@ import React, {
     useMemo,
     Dispatch,
     SetStateAction,
-    useEffect,
 } from 'react';
 import { useAccounts as useRedotAccounts } from '@reactive-dot/react';
 import { useApi } from './ApiContext';
@@ -39,6 +38,10 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
     const { walletConnectId } = useGetWalletConnectNamespace();
     const redotAccountList = useRedotAccounts();
     const { chainInfo } = useApi();
+    const [isConnectionDialogOpen, setIsConnectionDialogOpen] = useState(false);
+    const [isAllowedToConnectToExtension, setIsAllowedToConnectToExtension] = useState(
+        () => localStorage.getItem(LOCALSTORAGE_ALLOWED_CONNECTION_KEY) === 'true',
+    );
     const ownAccountList = useMemo(() => {
         if (!chainInfo || !redotAccountList) return [];
         // redot would share 10 accounts if we connect say Nova with 1 account, and 10 networks
@@ -51,10 +54,13 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
         });
         return encodeAccounts(filteredAccounts, chainInfo.ss58Format);
     }, [chainInfo, walletConnectId, redotAccountList]);
-
-    const [selectedAccount, setSelected] = useState<WalletAccount | undefined>(ownAccountList?.[0]);
-    const [isConnectionDialogOpen, setIsConnectionDialogOpen] = useState(false);
-    const [isAllowedToConnectToExtension, setIsAllowedToConnectToExtension] = useState(false);
+    const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
+        () => localStorage.getItem(LOCALSTORAGE_SELECTED_ACCOUNT_KEY) ?? undefined,
+    );
+    const selectedAccount = useMemo(
+        () => ownAccountList.find((a) => a.address === selectedAddress) ?? ownAccountList[0],
+        [ownAccountList, selectedAddress],
+    );
     const ownAddressList = useMemo(
         () => (ownAccountList || []).map((a) => a.address),
         [ownAccountList],
@@ -74,18 +80,8 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
 
     const selectAccount = useCallback((account: WalletAccount) => {
         localStorage.setItem(LOCALSTORAGE_SELECTED_ACCOUNT_KEY, account.address);
-        setSelected(account);
+        setSelectedAddress(account.address);
     }, []);
-
-    useEffect(() => {
-        if (!isAllowedToConnectToExtension) {
-            const previouslyAllowed = localStorage.getItem(LOCALSTORAGE_ALLOWED_CONNECTION_KEY);
-            if (previouslyAllowed === 'true') {
-                setIsAllowedToConnectToExtension(true);
-            }
-            // setIsLocalStorageSetupDone(true)
-        }
-    }, [isAllowedToConnectToExtension]);
 
     return (
         <AccountContext.Provider
