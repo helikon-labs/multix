@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    target-branch: 'development'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'docker'
+    target-branch: 'development'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+  - package-ecosystem: 'github-actions'
+    target-branch: 'development'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
