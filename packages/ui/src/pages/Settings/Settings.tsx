@@ -10,7 +10,7 @@ import {
     HiOutlineArrowRightOnRectangle,
 } from 'react-icons/hi2';
 import { theme } from '../../styles/theme';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useLocation } from 'react-router';
 import WalletConnectSVG from '../../logos/walletConnectSVG.svg?react';
 import HiddenAccounts from './HiddenAccounts';
@@ -23,7 +23,7 @@ const ACCORDION_EXPORT_LOCAL_DATA = 'panel-export-local-data';
 export const WATCH_ACCOUNT_ANCHOR = 'watched-accounts';
 export const HIDDEN_ACCOUNTS_ANCHOR = 'hidden-accounts';
 
-type AccordionNames =
+type AccordionName =
     | typeof ACCORDION_WATCHED_ACCOUNTS
     | typeof ACCORDION_WALLET_CONNECT
     | typeof ACCORDION_HIDDEN_ACCOUNTS
@@ -31,23 +31,14 @@ type AccordionNames =
 
 const Settings = () => {
     const { hash } = useLocation();
-    const [expanded, setExpanded] = useState<AccordionNames | undefined>(undefined);
-
-    const onToggle = useCallback((panel: AccordionNames, forceOpen = false) => {
-        setExpanded((prev) => {
-            return prev === panel && !forceOpen ? undefined : panel;
-        });
+    const [expanded, setExpanded] = useState<AccordionName | undefined>(() => {
+        if (hash === `#${WATCH_ACCOUNT_ANCHOR}`) return ACCORDION_WATCHED_ACCOUNTS;
+        if (hash === `#${HIDDEN_ACCOUNTS_ANCHOR}`) return ACCORDION_HIDDEN_ACCOUNTS;
+        return undefined;
+    });
+    const onToggle = useCallback((panel: AccordionName, forceOpen = false) => {
+        setExpanded((prev) => (prev === panel && !forceOpen ? undefined : panel));
     }, []);
-
-    useEffect(() => {
-        if (hash === `#${WATCH_ACCOUNT_ANCHOR}`) {
-            onToggle(ACCORDION_WATCHED_ACCOUNTS, true);
-        }
-
-        if (hash === `#${HIDDEN_ACCOUNTS_ANCHOR}`) {
-            onToggle(ACCORDION_HIDDEN_ACCOUNTS, true);
-        }
-    }, [hash, onToggle]);
 
     return (
         <>
