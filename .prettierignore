@@ -5,6 +5,5 @@
 /squid/lib/**/*
 /packages/ui/src/gql/**/*
 /packages/ui/src/interfaces/**/*
-/packages/ui/types-and-hooks.tsx
 /packages/ui/build/**/*
 .papi
