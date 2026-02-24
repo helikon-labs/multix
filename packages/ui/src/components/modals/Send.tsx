@@ -8,7 +8,7 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import { Button, ButtonWithIcon, Select } from '../library';
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useAccounts } from '../../contexts/AccountsContext';
 import { useMultiProxy } from '../../contexts/MultiProxyContext';
@@ -58,7 +58,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
     } = useMultiProxy();
     const { selectedAccount } = useAccounts();
     const [easyOptionErrorMessage, setEasyOptionErrorMessage] = useState<ReactNode | string>('');
-    const [errorMessage, setErrorMessage] = useState<ReactNode | string>('');
+    const [signErrorMessage, setSignErrorMessage] = useState<ReactNode | string>('');
     const possibleOrigin = useMemo(() => {
         const proxyBaseInfo = {
             address: selectedMultiProxy?.proxy,
@@ -135,7 +135,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
         return multisigProposalNeededFunds + existentialDeposit;
     }, [existentialDeposit, multisigProposalNeededFunds]);
 
-    useEffect(() => {
+    const errorMessage = useMemo<ReactNode | string>(() => {
         if (!!minBalance && !hasSignerEnoughFunds) {
             const requiredBalanceString = formatBigIntBalance(
                 minBalance,
@@ -144,19 +144,18 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
                     tokenSymbol: chainInfo?.tokenSymbol,
                 },
             );
-
             const reservedString = formatBigIntBalance(reserved, chainInfo?.tokenDecimals, {
                 tokenSymbol: chainInfo?.tokenSymbol,
             });
-            const errorWithReservedFunds = getErrorMessageReservedFunds({
+            return getErrorMessageReservedFunds({
                 identifier: '"Signing with" account',
                 requiredBalanceString,
                 reservedString,
                 withPpleChain: withPplApi,
             });
-            setErrorMessage(errorWithReservedFunds);
         }
-    }, [chainInfo, reserved, hasSignerEnoughFunds, minBalance, withPplApi]);
+        return signErrorMessage;
+    }, [chainInfo, hasSignerEnoughFunds, minBalance, reserved, signErrorMessage, withPplApi]);
 
     const onSubmitting = useCallback(() => {
         setIsSubmitting(false);
@@ -247,14 +246,14 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
         if (!threshold) {
             const error = 'Threshold is undefined';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
         if (!selectedAccount || !selectedOrigin) {
             const error = 'No selected account or multisig/proxy';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
@@ -266,7 +265,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
         if (!extrinsicToCall) {
             const error = 'No extrinsic to call';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
@@ -303,7 +302,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
                 return;
             }
 
-            setErrorMessage('');
+            setSignErrorMessage('');
             setEasyOptionErrorMessage('');
             setSelectedEasyOption(value as EasyTransferTitle);
         },
@@ -369,7 +368,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
                     <Grid size={{ xs: 12, md: 10 }}>
                         <SignerSelection
                             possibleSigners={selectedMultisig?.signatories || []}
-                            onChange={() => setErrorMessage('')}
+                            onChange={() => setSignErrorMessage('')}
                         />
                     </Grid>
                     <Grid size={{ xs: 12, md: 2 }}>

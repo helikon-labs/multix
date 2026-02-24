@@ -132,6 +132,8 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/pages/Settings/Settings.tsx`                        | `expanded` → lazy `useState` initializer deriving initial panel from URL hash; `useEffect` (which called `onToggle` → `setExpanded`) and `useLocation` removed                                                                |
 | `react-hooks/set-state-in-effect`         | `src/contexts/AccountNamesContext.tsx`                   | `accountNames` → `useMemo` over `pubKeyNames` + `chainInfo`; `useState` + `useEffect` removed                                                                                                                                 |
 | `react-hooks/set-state-in-effect`         | `src/hooks/useImportExportLocalData.tsx`                 | `encodedData` → `useMemo` over `watchedPubKeys`, `hiddenAccounts`, `pubKeyNames`; `useState` + `useEffect` removed                                                                                                            |
+| `react-hooks/set-state-in-effect`         | `src/components/MultisigCompactDisplay.tsx`              | `signatories`, `threshold`, `badge` → single `useMemo` over GraphQL `data`; three `useState` + `useEffect` removed                                                                                                            |
+| `react-hooks/set-state-in-effect`         | `src/components/modals/Send.tsx`                         | `errorMessage` → `useMemo` computing balance/funds error, falling back to `signErrorMessage` (new `useState` for action-triggered validation errors); `useEffect` removed                                                     |
 
 ---
 
@@ -145,8 +147,6 @@ State is computed synchronously from other state or props. The effect and its st
 
 | File                                             | Lines             | Notes                                                                                                                 |
 | ------------------------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `src/components/MultisigCompactDisplay.tsx`      | 37                | `signatories`, `threshold`, `badge` derived from GraphQL `data`                                                       |
-| `src/components/modals/Send.tsx`                 | 157               | `errorMessage` derived from balance/funds calculation                                                                 |
 | `src/components/modals/WalletConnectSigning.tsx` | 93, 108, 142, 152 |                                                                                                                       |
 | `src/contexts/AccountNamesContext.tsx`           | 103               | `loadNames()` — one-time init from localStorage; convert to lazy `useState` (same pattern as `HiddenAccountsContext`) |
 | `src/contexts/MultiProxyContext.tsx`             | 160, 322          |                                                                                                                       |
