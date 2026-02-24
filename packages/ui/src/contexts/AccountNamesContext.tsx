@@ -25,14 +25,20 @@ export interface IAccountNamesContext {
 const AccountNamesContext = createContext<IAccountNamesContext | undefined>(undefined);
 
 const AccountNamesContextProvider = ({ children }: AccountNamesContextProps) => {
-    const [pubKeyNames, setPubKeyNames] = useState<AccountNames>({});
     const { getAccountByAddress } = useAccounts();
     const { chainInfo } = useApi();
+    const [pubKeyNames, setPubKeyNames] = useState<AccountNames>(() => {
+        const namesHexString = localStorage.getItem(LOCALSTORAGE_ACCOUNT_NAMES_KEY);
+        if (!namesHexString) {
+            console.error('No local name to load');
+            return {};
+        }
+        return JSON.parse(namesHexString) as AccountNames;
+    });
     const accountNames = useMemo(() => {
         if (!chainInfo) return {};
         return encodeNames(pubKeyNames, chainInfo.ss58Format);
     }, [chainInfo, pubKeyNames]);
-
     const getNamesWithExtension = useCallback(
         (address: string) => {
             const extensionAccount = getAccountByAddress(address);
@@ -44,18 +50,6 @@ const AccountNamesContextProvider = ({ children }: AccountNamesContextProps) => 
         },
         [accountNames, getAccountByAddress],
     );
-
-    const loadNames = useCallback(() => {
-        const namesHexString = localStorage.getItem(LOCALSTORAGE_ACCOUNT_NAMES_KEY);
-
-        if (!namesHexString) {
-            console.error('No local name to load');
-            return;
-        }
-        const namePubkeyParsed = JSON.parse(namesHexString) as AccountNames;
-        setPubKeyNames(namePubkeyParsed);
-    }, []);
-
     const saveNames = useCallback(() => {
         if (!Object.entries(pubKeyNames).length) return;
 
@@ -93,10 +87,6 @@ const AccountNamesContextProvider = ({ children }: AccountNamesContextProps) => 
         },
         [pubKeyNames],
     );
-
-    useEffect(() => {
-        loadNames();
-    }, [loadNames]);
 
     // save names each time it changes
     useEffect(() => {
