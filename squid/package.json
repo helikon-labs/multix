@@ -37,9 +37,9 @@
         "@subsquid/substrate-typegen": "^8.1.0",
         "@subsquid/typeorm-codegen": "^2.0.2",
         "@types/node": "25.3.0",
-        "@typescript-eslint/eslint-plugin": "^8.56.0",
-        "@typescript-eslint/parser": "^8.56.0",
-        "eslint": "^10.0.1",
+        "@typescript-eslint/eslint-plugin": "^8.56.1",
+        "@typescript-eslint/parser": "^8.56.1",
+        "eslint": "^10.0.2",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "prettier": "3.8.1"
