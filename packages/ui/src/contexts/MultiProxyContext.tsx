@@ -60,7 +60,6 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
     const getEncodedAddress = useGetEncodedAddress();
     const { networkHiddenAccounts } = useHiddenAccounts();
     const [refetchMultisigTimeoutMinutes, setRefetchMultisigTimeoutMinutes] = useState(0);
-    const [shouldPollMultisigs, setShouldPollMultisigs] = useState(false);
     const [canFindMultiProxyFromUrl, setCanFindMultiProxyFromUrl] = useState(false);
     const [selectedMultiProxyAddress, setSelectedMultiProxyAddress] = useState('');
     // if set to null, it means that it hasn't been initialized yet
@@ -155,17 +154,12 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
     );
 
     useEffect(() => {
-        let timeout: NodeJS.Timeout;
-        if (refetchMultisigTimeoutMinutes > 0) {
-            setShouldPollMultisigs(true);
-            const timeoutInMs = refetchMultisigTimeoutMinutes * 60 * 1000;
-            timeout = setTimeout(() => {
-                setShouldPollMultisigs(false);
-                setRefetchMultisigTimeoutMinutes(0);
-            }, timeoutInMs);
-        }
-
-        return () => timeout && clearTimeout(timeout);
+        if (refetchMultisigTimeoutMinutes <= 0) return;
+        const timeoutInMs = refetchMultisigTimeoutMinutes * 60 * 1000;
+        const timeout = setTimeout(() => {
+            setRefetchMultisigTimeoutMinutes(0);
+        }, timeoutInMs);
+        return () => clearTimeout(timeout);
     }, [refetchMultisigTimeoutMinutes]);
 
     const ownAccountIds = useAccountId(ownPubKeys);
@@ -314,7 +308,7 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
     } = useQueryMultisigsAndPureByAccounts({
         accountIds: ownAccountIds,
         watchedAccountIds: watchedAccountIds,
-        shouldRefetch: shouldPollMultisigs,
+        shouldRefetch: refetchMultisigTimeoutMinutes > 0,
     });
 
     useEffect(() => {
