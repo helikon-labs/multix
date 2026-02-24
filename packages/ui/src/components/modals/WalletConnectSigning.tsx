@@ -4,7 +4,7 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { useAccounts } from '../../contexts/AccountsContext';
 import { useApi } from '../../contexts/ApiContext';
-import { useMultiProxy } from '../../contexts/MultiProxyContext';
+import { MultisigAggregated, useMultiProxy } from '../../contexts/MultiProxyContext';
 import CallInfo from '../CallInfo';
 import SignerSelection from '../select/SignerSelection';
 import { useSigningCallback } from '../../hooks/useSigningCallback';
@@ -41,13 +41,18 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
         getMultisigAsAccountBaseInfo,
         selectMultiProxy,
     } = useMultiProxy();
-    const [selectedMultisig, setSelectedMultisig] = useState(selectedMultiProxy?.multisigs[0]);
+    const [selectedMultisigOverride, setSelectedMultisigOverride] = useState<
+        MultisigAggregated | undefined
+    >(undefined);
+    const selectedMultisig = useMemo(
+        () => selectedMultisigOverride ?? selectedMultiProxy?.multisigs[0],
+        [selectedMultisigOverride, selectedMultiProxy],
+    );
     const { selectedAccount } = useAccounts();
     const multisigList = useMemo(
         () => getMultisigAsAccountBaseInfo(),
         [getMultisigAsAccountBaseInfo],
     );
-    const [errorMessage, setErrorMessage] = useState<ReactNode | string>('');
     const originAddress = request.params.request.params.address;
     const isProxySelected = useMemo(
         () => selectedMultiProxy?.proxy === originAddress,
@@ -78,50 +83,33 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
         signatories: selectedMultisig?.signatories,
         call: multisigTx,
     });
-
     const { hasEnoughFreeBalance: hasSignerEnoughFunds } = useCheckTransferableBalance({
         min: multisigProposalNeededFunds,
         address: selectedAccount?.address,
         withPplApi: false,
     });
-
-    useEffect(() => {
-        if (isNamespaceLoading) return;
-
-        const requestedChainId = request.params.chainId;
-        if (requestedChainId !== currentNamespace) {
-            setErrorMessage(
-                `Wrong selected network in Multix. Please reject, then select the correct network and resubmit the transaction. Current Namespace: ${currentNamespace}, Request with namespace: ${requestedChainId}`,
-            );
-        }
-    }, [currentNamespace, isNamespaceLoading, originAddress, request.params.chainId]);
-
     const isCorrectMultiproxySelected = useMemo(
         () =>
             selectedMultiProxy?.proxy === originAddress ||
             selectedMultiProxy?.multisigs.map(({ address }) => address).includes(originAddress),
         [selectedMultiProxy, originAddress],
     );
-
-    useEffect(() => {
-        if (!isCorrectMultiproxySelected) {
-            setErrorMessage(
-                `Wrong multisig selected in Multix. Please reject, then select the correct multisig and resubmit the transaction. Request with address: ${originAddress}`,
-            );
-        }
-    }, [isCorrectMultiproxySelected, originAddress]);
-
     const { existentialDeposit } = useGetED({
         withPplApi: false,
     });
-
     const minBalance = useMemo(() => {
         if (!existentialDeposit || !multisigProposalNeededFunds) return;
-
         return multisigProposalNeededFunds + existentialDeposit;
     }, [existentialDeposit, multisigProposalNeededFunds]);
-
-    useEffect(() => {
+    const [signErrorMessage, setSignErrorMessage] = useState<ReactNode | string>('');
+    const errorMessage = useMemo<ReactNode | string>(() => {
+        const requestedChainId = request.params.chainId;
+        if (!isNamespaceLoading && requestedChainId != currentNamespace) {
+            return `Wrong selected network in Multix. Please reject, then select the correct network and resubmit the transaction. Current Namespace: ${currentNamespace}, Request with namespace: ${requestedChainId}`;
+        }
+        if (!isCorrectMultiproxySelected) {
+            return `Wrong multisig selected in Multix. Please reject, then select the correct multisig and resubmit the transaction. Request with address: ${originAddress}`;
+        }
         if (!!minBalance && !hasSignerEnoughFunds) {
             const requiredBalanceString = formatBigIntBalance(
                 minBalance,
@@ -130,28 +118,32 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
                     tokenSymbol: chainInfo?.tokenSymbol,
                 },
             );
-
             const reservedString = formatBigIntBalance(reserved, chainInfo?.tokenDecimals, {
                 tokenSymbol: chainInfo?.tokenSymbol,
             });
-            const errorWithReservedFunds = getErrorMessageReservedFunds({
+            return getErrorMessageReservedFunds({
                 identifier: '"Signing with" account',
                 requiredBalanceString,
                 reservedString,
             });
-            setErrorMessage(errorWithReservedFunds);
         }
-    }, [chainInfo, reserved, hasSignerEnoughFunds, minBalance]);
+        return signErrorMessage;
+    }, [
+        currentNamespace,
+        isNamespaceLoading,
+        isCorrectMultiproxySelected,
+        request.params.chainId,
+        originAddress,
+        chainInfo,
+        reserved,
+        hasSignerEnoughFunds,
+        minBalance,
+        signErrorMessage,
+    ]);
 
     useEffect(() => {
         selectMultiProxy(request.params.request.params.address);
     }, [request, selectMultiProxy]);
-
-    useEffect(() => {
-        if (!selectedMultisig && !!selectedMultiProxy) {
-            setSelectedMultisig(selectedMultiProxy.multisigs[0]);
-        }
-    }, [selectMultiProxy, selectedMultiProxy, selectedMultisig]);
 
     const onSubmitting = useCallback(() => {
         setIsSubmitting(false);
@@ -178,21 +170,21 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
         if (!threshold) {
             const error = 'Threshold is undefined';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
         if (!api) {
             const error = 'Api is not ready';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
         if (!selectedAccount || !originAddress) {
             const error = 'No selected signer or multisig/proxy';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
@@ -204,7 +196,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
         if (!extrinsicToCall) {
             const error = 'No extrinsic to call';
             console.error(error);
-            setErrorMessage(error);
+            setSignErrorMessage(error);
             return;
         }
 
@@ -220,7 +212,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
     const handleMultisigSelection = useCallback(
         (account: AccountBaseInfo) => {
             const selected = getMultisigByAddress(account.address);
-            setSelectedMultisig(selected);
+            setSelectedMultisigOverride(selected);
         },
         [getMultisigByAddress],
     );
@@ -281,7 +273,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
                     <Grid size={{ xs: 12, md: 10 }}>
                         <SignerSelection
                             possibleSigners={selectedMultisig?.signatories || []}
-                            onChange={() => setErrorMessage('')}
+                            onChange={() => setSignErrorMessage('')}
                         />
                     </Grid>
                     <Grid size={{ xs: 12, md: 2 }}>
