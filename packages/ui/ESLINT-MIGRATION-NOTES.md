@@ -136,6 +136,7 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/components/modals/Send.tsx`                         | `errorMessage` → `useMemo` computing balance/funds error, falling back to `signErrorMessage` (new `useState` for action-triggered validation errors); `useEffect` removed                                                                                                                                                                                                                       |
 | `react-hooks/set-state-in-effect`         | `src/components/modals/WalletConnectSigning.tsx`         | `errorMessage` → `useMemo` with priority order: namespace mismatch → wrong multiproxy → insufficient balance → `signErrorMessage` (new `useState` for action-triggered validation errors); three `useEffect`s removed; `selectedMultisig` → `useMemo` over `selectedMultisigOverride` (`useState<MultisigAggregated>`) ?? `selectedMultiProxy?.multisigs[0]`; fallback-init `useEffect` removed |
 | `react-hooks/set-state-in-effect`         | `src/pages/Creation/ThresholdSelection.tsx`              | `error` → `useMemo` over `threshold` + `signatoriesNumber`; `useState` + `useEffect` removed; `validateThreshold` retains `setThreshold(undefined)` side effect for `handleChange`                                                                                                                                                                                                              |
+| `react-hooks/set-state-in-effect`         | `src/contexts/MultiProxyContext.tsx`                     | `shouldPollMultisigs` → inline `refetchMultisigTimeoutMinutes > 0` expression; `multisigList` + `refreshAccounList` + init `useEffect` → single `useMemo` over `data`; `resetLists` removed (network switch naturally resets `data` via query key change); `multiProxyList` useMemo simplified (no `?.` or `\|\|[]` fallback needed)                                                            |
 
 ---
 
@@ -147,9 +148,9 @@ The rule flags `setState` calls (direct or indirect) inside `useEffect` bodies. 
 
 State is computed synchronously from other state or props. The effect and its state variable can be eliminated entirely.
 
-| File                                 | Lines    | Notes |
-| ------------------------------------ | -------- | ----- |
-| `src/contexts/MultiProxyContext.tsx` | 160, 322 |       |
+| File                                    | Lines    | Notes                        |
+| --------------------------------------- | -------- | ---------------------------- |
+| ✅ `src/contexts/MultiProxyContext.tsx` | 160, 322 | Done — see Fixed table above |
 
 ### B. Async or genuine side effects → `useMemo` not applicable; consider `eslint-disable`
 

@@ -11,7 +11,6 @@ import {
     testChains,
 } from '../../constants';
 import { theme } from '../../styles/theme';
-import { useMultiProxy } from '../../contexts/MultiProxyContext';
 import { useApi } from '../../contexts/ApiContext';
 
 const NetworkSelection = () => {
@@ -22,7 +21,6 @@ const NetworkSelection = () => {
             ? Object.entries(networkList)
             : Object.entries(networkList).filter(([name]) => name !== 'local');
     }, []);
-    const { resetLists } = useMultiProxy();
     const { resetApi } = useApi();
 
     const handleNetworkSelection = useCallback(
@@ -31,12 +29,10 @@ const NetworkSelection = () => {
                 console.error('Unexpected network value, expect string but received', value);
                 return;
             }
-
-            resetLists();
             resetApi();
             selectNetwork(value, true);
         },
-        [resetLists, selectNetwork, resetApi],
+        [selectNetwork, resetApi],
     );
 
     const renderNetworks = useCallback(
