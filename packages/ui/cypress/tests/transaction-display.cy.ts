@@ -7,7 +7,7 @@ import {
 import { multisigPage } from '../support/page-objects/multisigPage';
 import { txSigningModal } from '../support/page-objects/modals/txSigningModal';
 import { knownMultisigs } from '../fixtures/knownMultisigs';
-import { polkadotAHMemberAccount } from '../fixtures/polkadotAssetHub';
+import { polkadotAHMemberAccounts } from '../fixtures/polkadotAssetHub';
 import { expander } from '../support/page-objects/components/expander';
 import { accountDisplay } from '../support/page-objects/components/accountDisplay';
 import { westendMemberAccount } from '../fixtures/westendAccounts';
@@ -234,7 +234,7 @@ describe('Asset hub transactions', () => {
         cy.setupAndVisit({
             url: landingPageNetwork('asset-hub-polkadot'),
             extensionConnectionAllowed: true,
-            injectExtensionWithAccounts: [polkadotAHMemberAccount.Nikos],
+            injectExtensionWithAccounts: [polkadotAHMemberAccounts.MS_TEST_01],
         });
 
         multisigPage

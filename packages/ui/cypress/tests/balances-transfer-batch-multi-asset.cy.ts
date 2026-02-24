@@ -1,12 +1,12 @@
 import { multisigPage } from '../support/page-objects/multisigPage';
 import { sendTxModal } from '../support/page-objects/sendTxModal';
 import { waitForTxRequest } from '../utils/waitForTxRequests';
-import { polkadotAHMemberAccount } from '../fixtures/polkadotAssetHub';
+import { polkadotAHMemberAccounts } from '../fixtures/polkadotAssetHub';
 import { landingPageNetwork } from '../fixtures/landingData';
 import { SignerPayloadJSON } from '@polkadot-api/tx-utils';
 
-const testAccount1 = polkadotAHMemberAccount.MS_TEST_01;
-const testAccount2 = polkadotAHMemberAccount.MS_TEST_02;
+const testAccount1 = polkadotAHMemberAccounts.MS_TEST_01;
+const testAccount2 = polkadotAHMemberAccounts.MS_TEST_02;
 const randomAccount = {
     address: '1uXsk6gr4CJjQ83K1v2Lk9GFunwmjo49tjKRUY1rhZhTY1u',
     publicKey: '0x2810b1f4a7ff1cc7bc6c615eae881f971a88c8e7048d6bad52fcbab751966e2d',
@@ -205,7 +205,7 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             .click()
             .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
         sendTxModal.sendTokensFieldAssetSelection().should('exist');
-        sendTxModal.inputSendtokenAmount().click().type('1.8');
+        sendTxModal.inputSendtokenAmount().click().type('0.8');
         sendTxModal.sendTxError().should('not.exist');
         sendTxModal.buttonSend().should('be.enabled');
 
@@ -220,7 +220,7 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal.inputSendtokenAmount().click().type('0.5');
         });
         sendTxModal.sendTxError().should('be.visible');
-        sendTxModal.sendTxError().should('contain', 'the required 2.3 DOT');
+        sendTxModal.sendTxError().should('contain', 'the required 1.3 DOT');
         sendTxModal.buttonSend().should('be.disabled');
 
         // change the last field to USDT
