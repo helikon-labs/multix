@@ -135,6 +135,7 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/components/MultisigCompactDisplay.tsx`              | `signatories`, `threshold`, `badge` → single `useMemo` over GraphQL `data`; three `useState` + `useEffect` removed                                                                                                                                                                                                                                                                              |
 | `react-hooks/set-state-in-effect`         | `src/components/modals/Send.tsx`                         | `errorMessage` → `useMemo` computing balance/funds error, falling back to `signErrorMessage` (new `useState` for action-triggered validation errors); `useEffect` removed                                                                                                                                                                                                                       |
 | `react-hooks/set-state-in-effect`         | `src/components/modals/WalletConnectSigning.tsx`         | `errorMessage` → `useMemo` with priority order: namespace mismatch → wrong multiproxy → insufficient balance → `signErrorMessage` (new `useState` for action-triggered validation errors); three `useEffect`s removed; `selectedMultisig` → `useMemo` over `selectedMultisigOverride` (`useState<MultisigAggregated>`) ?? `selectedMultiProxy?.multisigs[0]`; fallback-init `useEffect` removed |
+| `react-hooks/set-state-in-effect`         | `src/pages/Creation/ThresholdSelection.tsx`              | `error` → `useMemo` over `threshold` + `signatoriesNumber`; `useState` + `useEffect` removed; `validateThreshold` retains `setThreshold(undefined)` side effect for `handleChange`                                                                                                                                                                                                              |
 
 ---
 
@@ -146,10 +147,9 @@ The rule flags `setState` calls (direct or indirect) inside `useEffect` bodies. 
 
 State is computed synchronously from other state or props. The effect and its state variable can be eliminated entirely.
 
-| File                                        | Lines    | Notes |
-| ------------------------------------------- | -------- | ----- |
-| `src/contexts/MultiProxyContext.tsx`        | 160, 322 |       |
-| `src/pages/Creation/ThresholdSelection.tsx` | 40       |       |
+| File                                 | Lines    | Notes |
+| ------------------------------------ | -------- | ----- |
+| `src/contexts/MultiProxyContext.tsx` | 160, 322 |       |
 
 ### B. Async or genuine side effects → `useMemo` not applicable; consider `eslint-disable`
 

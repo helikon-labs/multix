@@ -1,5 +1,5 @@
 import { Box, InputAdornment, Tooltip } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import { TextField } from '../../components/library';
 import { HiOutlineInformationCircle } from 'react-icons/hi2';
@@ -12,42 +12,34 @@ interface Props {
 }
 
 const ThresholdSelection = ({ className, threshold, setThreshold, signatoriesNumber }: Props) => {
-    const [error, setError] = useState('');
+    const error = useMemo(() => {
+        if (!threshold || !signatoriesNumber) return '';
+        if (signatoriesNumber <= 1) return `You need at least 2 signatories`;
+        if (Number.isNaN(threshold) || threshold > signatoriesNumber || threshold < 2) {
+            return `Threshold must be between 2 and ${signatoriesNumber}`;
+        }
+        return '';
+    }, [threshold, signatoriesNumber]);
 
     const validateThreshold = useCallback(
         (value: number) => {
             if (signatoriesNumber <= 1) {
-                setError(`You need at least 2 signatories`);
                 setThreshold(undefined);
-
                 return false;
             }
-
             if (Number.isNaN(value) || value > signatoriesNumber || value < 2) {
-                setError(`Threshold must be between 2 and ${signatoriesNumber}`);
                 setThreshold(undefined);
-
                 return false;
             }
-
             return true;
         },
         [setThreshold, signatoriesNumber],
     );
 
-    useEffect(() => {
-        if (threshold && signatoriesNumber) {
-            validateThreshold(threshold);
-        }
-    }, [signatoriesNumber, threshold, validateThreshold]);
-
     const handleChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-            setError('');
             const value = Number(event.target.value);
-
             const isValid = validateThreshold(value);
-
             isValid && setThreshold(value);
         },
         [setThreshold, validateThreshold],
