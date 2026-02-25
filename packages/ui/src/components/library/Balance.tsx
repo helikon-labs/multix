@@ -14,7 +14,7 @@ const Balance = ({ address }: BalanceProps) => {
         <BalanceStyled data-cy="asset-balance-native">
             {balanceFormatted}
             <ImgStyled
-                src={selectedNetworkInfo?.nativeAssetLogo || selectedNetworkInfo?.networkLogo}
+                src={selectedNetworkInfo.nativeAssetLogo || selectedNetworkInfo.networkLogo}
                 alt="balance"
             />
         </BalanceStyled>

@@ -11,10 +11,7 @@ export const useHasIdentityFeature = () => {
         () => !!api && !!(api as TypedApi<typeof dotPpl>).tx?.Identity?.set_identity,
         [api],
     );
-    const hasPplChain = useMemo(
-        () => !!selectedNetworkInfo?.pplChainRpcUrls,
-        [selectedNetworkInfo],
-    );
+    const hasPplChain = useMemo(() => !!selectedNetworkInfo.pplChainRpcUrls, [selectedNetworkInfo]);
     return {
         hasPplChain,
         hasIdentityPallet,

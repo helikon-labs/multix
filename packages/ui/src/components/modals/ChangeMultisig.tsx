@@ -32,7 +32,6 @@ import { useGetMultisigAddress } from '../../hooks/useGetMultisigAddress';
 import { getAsMultiTx } from '../../utils/getAsMultiTx';
 import { Enum } from 'polkadot-api';
 import { MultiAddress } from '@polkadot-api/descriptors';
-import { useNetwork } from '../../contexts/NetworkContext';
 import { useGetED } from '../../hooks/useGetED';
 
 interface Props {
@@ -43,7 +42,6 @@ interface Props {
 type Step = 'selection' | 'summary' | 'call';
 
 const ChangeMultisig = ({ onClose, className }: Props) => {
-    const { selectedNetwork } = useNetwork();
     const modalRef = useRef<HTMLDivElement | null>(null);
     const ctx = useApi();
     const { api, chainInfo, compatibilityToken } = ctx;
@@ -91,7 +89,7 @@ const ChangeMultisig = ({ onClose, className }: Props) => {
     const [callError, setCallError] = useState('');
 
     const secondCall = useMemo(() => {
-        if (!ctx.api || !compatibilityToken || !selectedNetwork) {
+        if (!ctx.api || !compatibilityToken) {
             console.error('api is not ready');
             return;
         }
@@ -183,7 +181,6 @@ const ChangeMultisig = ({ onClose, className }: Props) => {
     }, [
         ctx,
         compatibilityToken,
-        selectedNetwork,
         selectedAccount,
         selectedMultiProxy?.proxy,
         chainInfo,

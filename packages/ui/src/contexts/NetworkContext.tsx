@@ -11,8 +11,8 @@ type NetworkContextProps = {
 
 export interface INetworkContext {
     selectNetwork: (network: string, shouldResetAddress: boolean) => void;
-    selectedNetworkInfo?: NetworkInfo;
-    selectedNetwork?: SupportedNetworks;
+    selectedNetworkInfo: NetworkInfo;
+    selectedNetwork: SupportedNetworks;
 }
 
 const NetworkContext = React.createContext<INetworkContext | undefined>(undefined);
@@ -20,18 +20,34 @@ const isSupportedNetwork = (network: string): network is SupportedNetworks =>
     !!networkList[network as SupportedNetworks];
 
 const NetworkContextProvider = ({ children }: NetworkContextProps) => {
-    const [selectedNetworkInfo, setSelectedNetworkInfo] = useState<NetworkInfo | undefined>();
-    const [selectedNetwork, setSelectedNetwork] = useState<SupportedNetworks | undefined>();
     const [searchParams, setSearchParams] = useSearchParams({ network: '' });
+    const [selectedNetwork, setSelectedNetwork] = useState<SupportedNetworks>(() => {
+        const networkParam = searchParams.get('network');
+        if (networkParam && isSupportedNetwork(networkParam)) return networkParam;
+        const prev = localStorage.getItem(LOCALSTORAGE_SELECTED_NETWORK);
+        if (prev && isSupportedNetwork(prev)) return prev as SupportedNetworks;
+        return DEFAULT_NETWORK;
+    });
+    const [selectedNetworkInfo, setSelectedNetworkInfo] = useState<NetworkInfo>(
+        () => networkList[selectedNetwork],
+    );
+
+    // sync the initial resolved network to the URL and localStorage once on mount
+    useEffect(() => {
+        setSearchParams((prev) => {
+            prev.set('network', selectedNetwork);
+            return prev;
+        });
+        localStorage.setItem(LOCALSTORAGE_SELECTED_NETWORK, selectedNetwork);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const selectNetwork = useCallback(
         (network: string, shouldResetAccountAddress = false) => {
             if (!isSupportedNetwork(network)) {
                 console.error('This network is not supported', network);
             }
-
             const validNetwork = isSupportedNetwork(network) ? network : DEFAULT_NETWORK;
-
             setSelectedNetworkInfo(networkList[validNetwork]);
             setSelectedNetwork(validNetwork);
             setSearchParams((prev) => {
@@ -41,32 +57,8 @@ const NetworkContextProvider = ({ children }: NetworkContextProps) => {
             });
             localStorage.setItem(LOCALSTORAGE_SELECTED_NETWORK, validNetwork);
         },
-        [setSearchParams],
+        [setSelectedNetworkInfo, setSelectedNetwork, setSearchParams],
     );
-
-    useEffect(() => {
-        if (!selectedNetwork) {
-            const networkParam = searchParams.get('network');
-
-            // connect to the node set in the query string
-            if (networkParam) {
-                selectNetwork(networkParam);
-                return;
-            }
-
-            // connect the the previously selected network
-            const previouslySelectedNetwork = localStorage.getItem(LOCALSTORAGE_SELECTED_NETWORK);
-            if (
-                !!previouslySelectedNetwork &&
-                previouslySelectedNetwork.includes(networkParam as SupportedNetworks)
-            ) {
-                selectNetwork(previouslySelectedNetwork as SupportedNetworks);
-                return;
-            }
-
-            selectNetwork(DEFAULT_NETWORK);
-        }
-    }, [searchParams, selectNetwork, selectedNetwork]);
 
     return (
         <NetworkContext.Provider

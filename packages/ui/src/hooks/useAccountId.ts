@@ -8,8 +8,8 @@ export function useAccountId(pubKey: string | string[]) {
     const { selectedNetworkInfo } = useNetwork();
 
     if (Array.isArray(pubKey)) {
-        return pubKey.map((pk) => getId(pk, selectedNetworkInfo?.chainId || ''));
+        return pubKey.map((pk) => getId(pk, selectedNetworkInfo.chainId));
     }
 
-    return getId(pubKey, selectedNetworkInfo?.chainId || '');
+    return getId(pubKey, selectedNetworkInfo.chainId);
 }

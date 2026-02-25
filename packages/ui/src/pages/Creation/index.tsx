@@ -143,7 +143,7 @@ const MultisigCreation = ({ className }: Props) => {
             // this batchCall is only useful if the user wants a proxy.
             return;
         }
-        if (!ctx?.api || !compatibilityToken || !selectedNetwork) {
+        if (!ctx?.api || !compatibilityToken) {
             // console.error('api is not ready')
             return;
         }

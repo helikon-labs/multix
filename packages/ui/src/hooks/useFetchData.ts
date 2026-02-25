@@ -1,4 +1,3 @@
-import { HTTP_GRAPHQL_URL } from '../constants';
 import { useNetwork } from '../contexts/NetworkContext';
 
 export const useFetchData = <TData, TVariables>(
@@ -9,7 +8,7 @@ export const useFetchData = <TData, TVariables>(
     const { selectedNetworkInfo } = useNetwork();
 
     return async (variables?: TVariables) => {
-        const res = await fetch(selectedNetworkInfo?.httpGraphqlUrl || HTTP_GRAPHQL_URL, {
+        const res = await fetch(selectedNetworkInfo.httpGraphqlUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

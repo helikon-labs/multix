@@ -59,10 +59,6 @@ const NetworkSelection = () => {
         [networksToShow],
     );
 
-    if (!selectedNetwork) {
-        return null;
-    }
-
     return (
         <SelectStyled
             IconComponent={HiOutlineChevronDown}

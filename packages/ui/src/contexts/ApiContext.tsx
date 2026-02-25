@@ -50,7 +50,7 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
     const [compatibilityToken, setCompatibilityToken] = useState<CompatibilityToken | undefined>();
 
     const apiDescriptor =
-        selectedNetworkInfo?.descriptor as IApiContext<ApiDescriptors>['apiDescriptor'];
+        selectedNetworkInfo.descriptor as IApiContext<ApiDescriptors>['apiDescriptor'];
 
     const resetApi = useCallback(() => {
         setChainInfo(undefined);
@@ -58,19 +58,16 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
     }, []);
 
     const wsProvider = useMemo(() => {
-        if (!selectedNetworkInfo?.rpcUrls) return;
-
-        return getWsProvider(selectedNetworkInfo?.rpcUrls, wsStatusChangeCallback);
-    }, [selectedNetworkInfo?.rpcUrls]);
+        return getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
+    }, [selectedNetworkInfo.rpcUrls]);
 
     const client = useMemo(() => {
-        if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor || !wsProvider)
-            return;
+        if (!wsProvider) return;
         return createClient(withPolkadotSdkCompat(wsProvider));
-    }, [selectedNetworkInfo, wsProvider]);
+    }, [wsProvider]);
 
     const api = useMemo(() => {
-        if (!client || !selectedNetworkInfo?.descriptor) return undefined;
+        if (!client) return undefined;
 
         const id = selectedNetworkInfo.descriptor as Id;
         return client.getTypedApi(DESCRIPTORS[id]);

@@ -22,7 +22,7 @@ export const useDisplayLoader = () => {
     if (!api) {
         return (
             <LoadingBox
-                message={`Connecting to the node at ${selectedNetworkInfo?.rpcUrls}`}
+                message={`Connecting to the node at ${selectedNetworkInfo.rpcUrls}`}
                 testId="rpc-connection"
             />
         );

@@ -8,13 +8,13 @@ export const useGetSubscanLinks = () => {
 
     const _getSubscanExtrinsicLink = useCallback(
         (txHash: string) =>
-            getSubscanExtrinsicLink(selectedNetworkInfo?.explorerNetworkName, txHash),
+            getSubscanExtrinsicLink(selectedNetworkInfo.explorerNetworkName, txHash),
         [selectedNetworkInfo],
     );
 
     const _getSubscanAccountLink = useCallback(
         (account?: string, multisig = false) =>
-            getSubscanAccountLink(selectedNetworkInfo?.explorerNetworkName, account, multisig),
+            getSubscanAccountLink(selectedNetworkInfo.explorerNetworkName, account, multisig),
         [selectedNetworkInfo],
     );
     return {

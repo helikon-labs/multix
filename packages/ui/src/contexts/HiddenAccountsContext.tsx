@@ -48,8 +48,6 @@ const HiddenAccountsContextProvider = ({ children }: HiddenAccountsProps) => {
     });
 
     const networkHiddenAccounts = useMemo(() => {
-        if (!selectedNetwork) return [];
-
         return hiddenAccounts
             .map(({ pubKey, network }) => {
                 if (network !== selectedNetwork) return null;
@@ -80,8 +78,7 @@ const HiddenAccountsContextProvider = ({ children }: HiddenAccountsProps) => {
                 removeWatchedAccount(address);
                 return { removedWatchedAccount: true };
             } else {
-                selectedNetwork &&
-                    pubKey &&
+                pubKey &&
                     setHiddenAccounts((prev) => [
                         ...prev,
                         { pubKey, network: selectedNetwork } as HiddenAccount,

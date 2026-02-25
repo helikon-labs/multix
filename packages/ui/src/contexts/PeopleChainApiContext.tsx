@@ -49,7 +49,7 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
         useState<IPplApiContext<PplDescriptorKeys>['pplApiDescriptor']>();
 
     const wsProvider = useMemo(() => {
-        if (!selectedNetworkInfo?.pplChainRpcUrls) return;
+        if (!selectedNetworkInfo.pplChainRpcUrls) return;
 
         return getWsProvider(selectedNetworkInfo.pplChainRpcUrls, wsStatusChangeCallback);
     }, [selectedNetworkInfo]);
@@ -61,7 +61,7 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
     }, [pplApi]);
 
     useEffect(() => {
-        if (!wsProvider || !selectedNetworkInfo) return;
+        if (!wsProvider || !selectedNetworkInfo.pplChainDescriptor) return;
 
         const cl = createClient(withPolkadotSdkCompat(wsProvider));
         setPplClient(cl);

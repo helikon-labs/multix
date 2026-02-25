@@ -69,7 +69,7 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
     const watchedAccountIds = useAccountId(watchedPubKeys);
 
     const LOCALSTORAGE_LAST_MULTIPROXY_KEY_NETWORK = useMemo(
-        () => selectedNetwork && `multix.lastUsedMultiProxy.v2.${selectedNetwork}`,
+        () => `multix.lastUsedMultiProxy.v2.${selectedNetwork}`,
         [selectedNetwork],
     );
 
@@ -339,7 +339,7 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
             LOCALSTORAGE_LAST_MULTIPROXY_KEY_NETWORK &&
             localStorage.getItem(LOCALSTORAGE_LAST_MULTIPROXY_KEY_NETWORK);
 
-        if (selectedNetwork && lastUsedMultiProxyPubKey && chainInfo) {
+        if (lastUsedMultiProxyPubKey && chainInfo) {
             const lastUsedAddress = encodesubstrateAddress(
                 lastUsedMultiProxyPubKey,
                 chainInfo.ss58Format,
@@ -358,7 +358,6 @@ const MultiProxyContextProvider = ({ children }: MultisigContextProps) => {
         getMultiProxyByAddress,
         isLoading,
         multiProxyList,
-        selectedNetwork,
     ]);
 
     return (

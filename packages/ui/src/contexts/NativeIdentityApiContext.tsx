@@ -68,8 +68,6 @@ const NativeIdentityApiContextProvider = <Id extends NativeIdentityDescriptorKey
         >();
 
     const wsProvider = useMemo(() => {
-        if (!selectedNetworkInfo?.rpcUrls) return;
-
         return getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
     }, [selectedNetworkInfo]);
 
@@ -82,7 +80,7 @@ const NativeIdentityApiContextProvider = <Id extends NativeIdentityDescriptorKey
     }, [nativeIdentityApi]);
 
     useEffect(() => {
-        if (!wsProvider || !selectedNetworkInfo || !selectedNetworkInfo.descriptor) return;
+        if (!wsProvider) return;
         const descriptor = selectedNetworkInfo.descriptor;
         if (!(descriptor in DESCRIPTORS_NATIVE_IDENTITY)) return;
         const apiClient = createClient(withPolkadotSdkCompat(wsProvider));

@@ -63,7 +63,7 @@ export const BalancesTransfer = ({ className, onSetExtrinsic, onSetErrorMessage,
     });
 
     const assetList = useMemo(() => {
-        if (!chainInfo || !selectedNetworkInfo) return [] as Option[];
+        if (!chainInfo) return [] as Option[];
 
         const assetHubList = AH_SUPPORTED_ASSETS.map(({ assetId }) => {
             if (!isAssetHub) return;

@@ -13,7 +13,6 @@ import {
 import { getApproveAsMultiTx } from '../utils/getApproveAsMultiTx';
 import { HexString, Transaction } from 'polkadot-api';
 import { MultiAddress } from '@polkadot-api/descriptors';
-import { useNetwork } from '../contexts/NetworkContext';
 import { isPplContextIn, usePplApi } from '../contexts/PeopleChainApiContext';
 
 interface Params {
@@ -55,7 +54,6 @@ export const useGetMultisigTx = ({
         ? ctxPpl.pplCompatibilityToken
         : ctxNormal.compatibilityToken;
     const { getSortAddress } = useGetSortAddress();
-    const { selectedNetwork } = useNetwork();
 
     const multisigTx = useMemo(() => {
         if (!selectedMultisig?.signatories) {
@@ -71,7 +69,7 @@ export const useGetMultisigTx = ({
             return;
         }
 
-        if (!api || !selectedNetwork) {
+        if (!api) {
             return;
         }
 
@@ -163,7 +161,6 @@ export const useGetMultisigTx = ({
         getSortAddress,
         threshold,
         ctx,
-        selectedNetwork,
         senderAddress,
         fromAddress,
         forceAsMulti,
