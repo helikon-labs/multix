@@ -7467,9 +7467,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^15.10.0":
-  version: 15.10.0
-  resolution: "cypress@npm:15.10.0"
+"cypress@npm:^15.11.0":
+  version: 15.11.0
+  resolution: "cypress@npm:15.11.0"
   dependencies:
     "@cypress/request": ^3.0.10
     "@cypress/xvfb": ^1.2.4
@@ -7508,14 +7508,15 @@ __metadata:
     proxy-from-env: 1.0.0
     request-progress: ^3.0.0
     supports-color: ^8.1.1
-    systeminformation: ^5.27.14
+    systeminformation: ^5.31.1
     tmp: ~0.2.4
     tree-kill: 1.2.2
+    tslib: 1.14.1
     untildify: ^4.0.0
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 0041a6baad4ce3a70c1bb5d872636eb1dd4d49a199a322162b79f11e7cef41dc1e53c7002ee55d7d2c59a5587f36aa015989803e912074f54fe13a94fe7c574d
+  checksum: 6e3e31954bf46802d3f48f84301b224daadfc800ad65c0e297f0c1292f347a0a2385c0db6ecc4215c0aaf991363859db03f0a6e0fba249aee39dbc0dfca7673f
   languageName: node
   linkType: hard
 
@@ -11068,7 +11069,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^8.56.1
     "@typescript-eslint/parser": ^8.56.1
     "@vitejs/plugin-react": ^5.1.4
-    cypress: ^15.10.0
+    cypress: ^15.11.0
     cypress-wait-until: ^3.0.2
     dayjs: ^1.11.19
     dot-connect: ^0.30.0
@@ -13544,7 +13545,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"systeminformation@npm:^5.27.14":
+"systeminformation@npm:^5.31.1":
   version: 5.31.1
   resolution: "systeminformation@npm:5.31.1"
   bin:
