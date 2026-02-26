@@ -5,7 +5,7 @@ on:
       - development
       - main
   pull_request:
-    paths: ['packages/ui/**/*', '.github/workflows/lint-ui.yaml']
+    paths: ['packages/ui/**/*', '.github/workflows/ci.yml']
     types:
       - opened
       - reopened
@@ -32,7 +32,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: install packages
-        run: corepack enable && yarn
+        run: corepack enable && yarn install --immutable
       - name: format
         run: yarn formatAllCheck
       - name: lint
