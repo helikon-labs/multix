@@ -23,18 +23,18 @@ export interface IWatchedAccountsContext {
     watchedPubKeys: string[];
     setWatchedPubKeys: (pubKeys: string[]) => void;
     watchedAddresses: string[];
-    isInitialized: boolean;
 }
 
 const WatchedAccountsContext = createContext<IWatchedAccountsContext | undefined>(undefined);
 
 const WatchedAccountsContextProvider = ({ children }: WatchedAccountsProps) => {
-    const [watchedPubKeys, setWatchedPubKeys] = useState<string[]>([]);
-    const [isInitialized, setIsInitialized] = useState(false);
     const { chainInfo } = useApi();
+    const [watchedPubKeys, setWatchedPubKeys] = useState<string[]>(() => {
+        const stored = localStorage.getItem(LOCALSTORAGE_WATCHED_ACCOUNTS_KEY);
+        return stored ? JSON.parse(stored) : [];
+    });
     const watchedAddresses = useMemo(() => {
         if (!chainInfo) return [];
-
         return encodeAccounts(watchedPubKeys, chainInfo.ss58Format);
     }, [chainInfo, watchedPubKeys]);
 
@@ -52,30 +52,10 @@ const WatchedAccountsContextProvider = ({ children }: WatchedAccountsProps) => {
         [watchedPubKeys],
     );
 
-    const loadWatchedPubKeys = useCallback(() => {
-        if (!chainInfo) {
-            return;
-        }
-
-        const localStorageWatchedAccount = localStorage.getItem(LOCALSTORAGE_WATCHED_ACCOUNTS_KEY);
-        const watchedArray: string[] = localStorageWatchedAccount
-            ? JSON.parse(localStorageWatchedAccount)
-            : [];
-
-        setWatchedPubKeys(watchedArray);
-        setIsInitialized(true);
-    }, [chainInfo]);
-
-    useEffect(() => {
-        !isInitialized && loadWatchedPubKeys();
-    }, [isInitialized, loadWatchedPubKeys]);
-
     // persist the accounts watched every time there's a change
     useEffect(() => {
-        if (!isInitialized) return;
-
         localStorage.setItem(LOCALSTORAGE_WATCHED_ACCOUNTS_KEY, JSON.stringify(watchedPubKeys));
-    }, [isInitialized, watchedPubKeys]);
+    }, [watchedPubKeys]);
 
     return (
         <WatchedAccountsContext.Provider
@@ -85,7 +65,6 @@ const WatchedAccountsContextProvider = ({ children }: WatchedAccountsProps) => {
                 watchedAddresses,
                 watchedPubKeys,
                 setWatchedPubKeys,
-                isInitialized,
             }}
         >
             {children}
