@@ -45,11 +45,18 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
     const [pplCompatibilityToken, setPplCompatibilityToken] = useState<CompatibilityToken>();
 
     const { pplClient, pplApi, pplApiDescriptor } = useMemo(() => {
-        const descriptor = selectedNetworkInfo.descriptor;
-        if (!(descriptor in DESCRIPTORS_PPL)) return {};
-        const wsProvider = getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
+        const pplApiDescriptor = selectedNetworkInfo.pplChainDescriptor;
+        if (
+            !selectedNetworkInfo.pplChainRpcUrls ||
+            !pplApiDescriptor ||
+            !(pplApiDescriptor in DESCRIPTORS_PPL)
+        )
+            return {};
+        const wsProvider = getWsProvider(
+            selectedNetworkInfo.pplChainRpcUrls,
+            wsStatusChangeCallback,
+        );
         const pplClient = createClient(withPolkadotSdkCompat(wsProvider));
-        const pplApiDescriptor = selectedNetworkInfo.descriptor as Id;
         const pplApi = pplClient.getTypedApi(DESCRIPTORS_PPL[pplApiDescriptor]);
         return {
             pplClient,
