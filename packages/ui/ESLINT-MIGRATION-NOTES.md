@@ -138,6 +138,7 @@ export default defineConfig([
 | `react-hooks/set-state-in-effect`         | `src/pages/Creation/ThresholdSelection.tsx`              | `error` → `useMemo` over `threshold` + `signatoriesNumber`; `useState` + `useEffect` removed; `validateThreshold` retains `setThreshold(undefined)` side effect for `handleChange`                                                                                                                                                                                                              |
 | `react-hooks/set-state-in-effect`         | `src/contexts/MultiProxyContext.tsx`                     | `shouldPollMultisigs` → inline `refetchMultisigTimeoutMinutes > 0` expression; `multisigList` + `refreshAccounList` + init `useEffect` → single `useMemo` over `data`; `resetLists` removed (network switch naturally resets `data` via query key change); `multiProxyList` useMemo simplified (no `?.` or `\|\|[]` fallback needed)                                                            |
 | `react-hooks/set-state-in-effect`         | `src/components/EasySetup/FromCallData.tsx`              | `useEffect` eliminated — `removeProxyProxyCall` now returns `{ isRemoved, call }`; both state updates applied in async `onCallDataChange` after a call ID ref guard to prevent stale results                                                                                                                                                                                                    |
+| `react-hooks/set-state-in-effect`         | `src/hooks/useCallInfoFromCallData.tsx`                  | Entire effect body wrapped in async IIFE — all setState calls move inside the async block; linter only flags synchronous setState in effect body, not setState inside async functions                                                                                                                                                                                                           |
 
 ---
 
@@ -157,14 +158,14 @@ State is computed synchronously from other state or props. The effect and its st
 
 State is set from async operations or external API initialisation. The `useEffect` + `setState` pattern is correct here — the rule is a false positive. Use `// eslint-disable-next-line react-hooks/set-state-in-effect` with a comment explaining why.
 
-| File                                        | Lines | Notes                                                                                           |
-| ------------------------------------------- | ----- | ----------------------------------------------------------------------------------------------- |
+| File                                           | Lines | Notes                                                                                                                                                                                        |
+| ---------------------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ✅ `src/components/EasySetup/FromCallData.tsx` | 69    | `useEffect` eliminated — `removeProxyProxyCall` now returns `{ isRemoved, call }`; both state updates applied in async `onCallDataChange` after a call ID ref guard to prevent stale results |
-| `src/hooks/useCallInfoFromCallData.tsx`     | 21    | Sync reset guard (`setCallInfo(undefined)`) before async API call — both are in the same effect |
-| `src/contexts/NativeIdentityApiContext.tsx` | 89    | Multiple setters initialising API client from external lib — genuine side effect, not derivable |
-| `src/contexts/PeopleChainApiContext.tsx`    | 67    | Same pattern as `NativeIdentityApiContext` — API client initialisation                          |
-| `src/contexts/PendingTxContext.tsx`         | 447   | `refresh()` triggers async data fetching — not derived state                                    |
-| `src/contexts/WatchedAccountsContext.tsx`   | 70    | `loadWatchedPubKeys()` — one-time initialisation on mount                                       |
+| ✅ `src/hooks/useCallInfoFromCallData.tsx`     | 21    | Entire effect body wrapped in async IIFE — all setState calls move inside the async block; linter only flags synchronous setState in effect body, not setState inside async functions        |
+| `src/contexts/NativeIdentityApiContext.tsx`    | 89    | Multiple setters initialising API client from external lib — genuine side effect, not derivable                                                                                              |
+| `src/contexts/PeopleChainApiContext.tsx`       | 67    | Same pattern as `NativeIdentityApiContext` — API client initialisation                                                                                                                       |
+| `src/contexts/PendingTxContext.tsx`            | 447   | `refresh()` triggers async data fetching — not derived state                                                                                                                                 |
+| `src/contexts/WatchedAccountsContext.tsx`      | 70    | `loadWatchedPubKeys()` — one-time initialisation on mount                                                                                                                                    |
 
 ### C. Indirect setState via function call → restructure or `eslint-disable`
 

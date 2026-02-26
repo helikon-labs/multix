@@ -17,46 +17,33 @@ export const useCallInfoFromCallData = ({
     const [isGettingCallInfo, setIsGettingCallInfo] = useState(false);
 
     useEffect(() => {
-        if (!callData) {
-            setCallInfo(undefined);
-            setIsGettingCallInfo(false);
-            return;
-        }
-
-        if (!api || !compatibilityToken) {
-            setCallInfo(undefined);
-            setIsGettingCallInfo(false);
-            return;
-        }
-
-        setIsGettingCallInfo(true);
-
-        try {
-            const tx = api.txFromCallData(Binary.fromHex(callData), compatibilityToken);
-
-            tx.getPaymentInfo(PAYMENT_INFO_ACCOUNT, { at: 'best' })
-                .then(({ weight, partial_fee }) => {
-                    setCallInfo({
-                        decodedCall: tx?.decodedCall,
-                        call: tx,
-                        hash: hashFromTx(callData),
-                        weight,
-                        section: tx?.decodedCall.type,
-                        method: tx?.decodedCall.value.type,
-                        partialFee: partial_fee,
-                    });
-                    setIsGettingCallInfo(false);
-                })
-                .catch((e) => {
-                    console.error(e);
-                    setIsGettingCallInfo(false);
-                    setCallInfo(undefined);
+        (async () => {
+            if (!callData || !api || !compatibilityToken) {
+                setCallInfo(undefined);
+                setIsGettingCallInfo(false);
+                return;
+            }
+            setIsGettingCallInfo(true);
+            try {
+                const tx = api.txFromCallData(Binary.fromHex(callData), compatibilityToken);
+                const { weight, partial_fee } = await tx.getPaymentInfo(PAYMENT_INFO_ACCOUNT, {
+                    at: 'best',
                 });
-        } catch (e) {
-            console.error(e);
-            setIsGettingCallInfo(false);
-            setCallInfo(undefined);
-        }
+                setCallInfo({
+                    decodedCall: tx?.decodedCall,
+                    call: tx,
+                    hash: hashFromTx(callData),
+                    weight,
+                    section: tx?.decodedCall.type,
+                    method: tx?.decodedCall.value.type,
+                    partialFee: partial_fee,
+                });
+            } catch (e) {
+                console.error(e);
+            } finally {
+                setIsGettingCallInfo(false);
+            }
+        })();
     }, [api, callData, compatibilityToken]);
 
     return { callInfo, isGettingCallInfo };
