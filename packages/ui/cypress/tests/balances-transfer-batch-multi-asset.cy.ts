@@ -10,13 +10,20 @@ const testAccount2 = polkadotAHMemberAccounts.MS_TEST_02;
 const randomAccount = {
     address: '1uXsk6gr4CJjQ83K1v2Lk9GFunwmjo49tjKRUY1rhZhTY1u',
     publicKey: '0x2810b1f4a7ff1cc7bc6c615eae881f971a88c8e7048d6bad52fcbab751966e2d',
+    name: 'RANDOM',
 };
 
-const fillAndSubmitTransactionForm = (assetSymbol = '', address: string) => {
+const fillAndSubmitTransactionForm = (
+    address: string,
+    assetSymbol: string | undefined = undefined,
+) => {
     sendTxModal
         .sendTokensFieldTo()
         .click()
-        .type(`${address.slice(0, 5)}{downArrow}{enter}`);
+        .type(`${address.slice(0, 5)}`);
+    cy.wait(100);
+    sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+    cy.wait(100);
     sendTxModal.sendTokensFieldAssetSelection().should('exist');
     if (assetSymbol) {
         sendTxModal.sendTokensFieldAssetSelection().click();
@@ -24,7 +31,7 @@ const fillAndSubmitTransactionForm = (assetSymbol = '', address: string) => {
     }
     sendTxModal.inputSendtokenAmount().click().type('0.9');
     // there's a 300ms debounce for the extrinsic to be set
-    cy.wait(300);
+    cy.wait(100);
     sendTxModal.buttonSend().should('be.enabled').click();
 };
 
@@ -35,9 +42,9 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             extensionConnectionAllowed: true,
             injectExtensionWithAccounts: [testAccount1],
             accountNames: {
-                [randomAccount.publicKey]: 'RANDOM',
-                [testAccount1.publicKey!]: 'MS-TEST-01',
-                [testAccount2.publicKey!]: 'MS-TEST-02',
+                [randomAccount.publicKey]: randomAccount.name,
+                [testAccount1.publicKey!]: testAccount1.name!,
+                [testAccount2.publicKey!]: testAccount2.name!,
             },
         });
     });
@@ -46,9 +53,9 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
         multisigPage.accountHeader(6000).should('be.visible');
         multisigPage.newTransactionButton().click();
         sendTxModal.sendTxTitle().should('be.visible');
-        fillAndSubmitTransactionForm('', testAccount1.address);
+        fillAndSubmitTransactionForm(testAccount1.address);
         waitForTxRequest();
-        cy.wait(1000);
+        cy.wait(1500);
         cy.getTxRequests().then((req) => {
             const txRequests = Object.values(req);
             cy.wrap(txRequests.length).should('eq', 1);
@@ -65,9 +72,9 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
         multisigPage.accountHeader(6000).should('be.visible');
         multisigPage.newTransactionButton().click();
         sendTxModal.sendTxTitle().should('be.visible');
-        fillAndSubmitTransactionForm('usdt', randomAccount.address);
+        fillAndSubmitTransactionForm(randomAccount.address, 'usdt');
         waitForTxRequest();
-        cy.wait(1000);
+        cy.wait(1500);
         cy.getTxRequests().then((req) => {
             const txRequests = Object.values(req);
             cy.wrap(txRequests.length).should('eq', 1);
@@ -91,7 +98,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${testAccount1.address.slice(0, 5)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
             sendTxModal.sendTokensFieldAssetSelection().should('exist');
             sendTxModal.inputSendtokenAmount().click().type('0.1');
         });
@@ -107,7 +117,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${randomAccount.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${randomAccount.address.slice(0, 5)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
             sendTxModal.sendTokensFieldAssetSelection().should('contain', 'USDT');
             // there's a 300ms debounce for the extrinsic to be set
         });
@@ -122,7 +135,7 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
         sendTxModal.wrapperAssetTransfer(2).should('be.visible');
         sendTxModal.buttonSend().should('be.enabled').click();
         waitForTxRequest();
-        cy.wait(1000);
+        cy.wait(1500);
         cy.getTxRequests().then((req) => {
             const txRequests = Object.values(req);
             cy.wrap(txRequests.length).should('eq', 1);
@@ -146,19 +159,22 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${testAccount1.address.slice(0, 4)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
         });
         // this is outside of the within block to prevent the test from failing
         // because the component is re-rendering
         sendTxModal.sendTokensFieldAssetSelection().eq(1).contains('USDT').click();
         sendTxModal.selectAsset('dot').click();
         // debounce for the extrinsic to be set
-        cy.wait(3000);
+        cy.wait(1000);
         sendTxModal.buttonSend().should('be.enabled').click();
         // we should now see a batch transaction with 2 extrinsics
         // one for USDC and one for DOT to 2 different accounts
         waitForTxRequest();
-        cy.wait(1000);
+        cy.wait(1500);
         cy.getTxRequests().then((req) => {
             const txRequests = Object.values(req);
             cy.wrap(txRequests.length).should('eq', 2);
@@ -178,7 +194,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
         sendTxModal
             .sendTokensFieldTo()
             .click()
-            .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+            .type(`${randomAccount.address.slice(0, 4)}`);
+        cy.wait(100);
+        sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+        cy.wait(100);
         sendTxModal.sendTokensFieldAssetSelection().should('exist');
         sendTxModal.inputSendtokenAmount().click().type('100');
         sendTxModal.sendTxError().should('be.visible');
@@ -203,7 +222,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
         sendTxModal
             .sendTokensFieldTo()
             .click()
-            .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+            .type(`${randomAccount.address.slice(0, 4)}`);
+        cy.wait(100);
+        sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+        cy.wait(100);
         sendTxModal.sendTokensFieldAssetSelection().should('exist');
         sendTxModal.inputSendtokenAmount().click().type('0.8');
         sendTxModal.sendTxError().should('not.exist');
@@ -216,7 +238,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${randomAccount.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${randomAccount.address.slice(0, 4)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
             sendTxModal.inputSendtokenAmount().click().type('0.5');
         });
         sendTxModal.sendTxError().should('be.visible');
@@ -238,7 +263,10 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${randomAccount.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${randomAccount.address.slice(0, 4)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
             sendTxModal.inputSendtokenAmount().click().type('0.7');
         });
         sendTxModal.sendTxError().should('be.visible');
@@ -261,8 +289,8 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
             extensionConnectionAllowed: true,
             injectExtensionWithAccounts: [testAccount1],
             accountNames: {
-                [randomAccount.publicKey]: 'Random',
-                [testAccount1.publicKey!]: 'MS-TEST-01',
+                [randomAccount.publicKey]: randomAccount.name,
+                [testAccount1.publicKey!]: testAccount1.name!,
             },
         });
 
@@ -272,7 +300,10 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
         sendTxModal
             .sendTokensFieldTo()
             .click()
-            .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+            .type(`${testAccount1.address.slice(0, 7)}`);
+        cy.wait(100);
+        sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+        cy.wait(100);
         sendTxModal.sendTokensFieldAssetSelection().should('not.exist');
         sendTxModal.inputSendtokenAmount().click().type('20');
         sendTxModal.sendTxError().should('be.visible');
@@ -291,8 +322,8 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
             extensionConnectionAllowed: true,
             injectExtensionWithAccounts: [testAccount1],
             accountNames: {
-                [randomAccount.publicKey]: 'Random',
-                [testAccount1.publicKey!]: 'MS-TEST-01',
+                [randomAccount.publicKey]: randomAccount.name,
+                [testAccount1.publicKey!]: testAccount1.name!,
             },
         });
 
@@ -302,7 +333,10 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
         sendTxModal
             .sendTokensFieldTo()
             .click()
-            .type(`${randomAccount.address.slice(0, 4)}{downArrow}{enter}`);
+            .type(`${randomAccount.address.slice(0, 4)}`);
+        cy.wait(100);
+        sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+        cy.wait(100);
         sendTxModal.sendTokensFieldAssetSelection().should('not.exist');
         sendTxModal.inputSendtokenAmount().click().type('0.0001');
         sendTxModal.sendTxError().should('not.exist');
@@ -314,7 +348,10 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
             sendTxModal
                 .sendTokensFieldTo()
                 .click()
-                .type(`${testAccount1.address.slice(0, 4)}{downArrow}{enter}`);
+                .type(`${testAccount1.address.slice(0, 4)}`);
+            cy.wait(100);
+            sendTxModal.sendTokensFieldTo().click().type(`{downArrow}{enter}`);
+            cy.wait(100);
             sendTxModal.inputSendtokenAmount().click().type('10.9');
         });
         sendTxModal.sendTxError().should('be.visible');
