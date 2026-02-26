@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { useState, useEffect, createContext, useContext } from 'react';
 import { useNetwork } from './NetworkContext';
-import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api';
+import { CompatibilityToken, createClient, PolkadotClient } from 'polkadot-api';
 import { getWsProvider } from 'polkadot-api/ws-provider';
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';
-import { PplApiOf, PplDescriptorKeys, PplDescriptors, DESCRIPTORS_PPL } from '../types';
+import { PplApiOf, PplDescriptorKeys, DESCRIPTORS_PPL } from '../types';
 import { ChainInfoHuman } from './ApiContext';
 import { wsStatusChangeCallback } from '../utils/wsStatusChangeCallback';
 
@@ -42,16 +42,20 @@ const PplApiContext = createContext<IPplApiContext<PplDescriptorKeys> | undefine
 const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiContextProps) => {
     const { selectedNetworkInfo } = useNetwork();
     const [pplChainInfo, setPplChainInfo] = useState<ChainInfoHuman | undefined>();
-    const [pplApi, setPplApi] = useState<TypedApi<PplDescriptors<Id>>>();
-    const [pplClient, setPplClient] = useState<PolkadotClient>();
     const [pplCompatibilityToken, setPplCompatibilityToken] = useState<CompatibilityToken>();
-    const [pplApiDescriptor, setPplApiDescriptor] =
-        useState<IPplApiContext<PplDescriptorKeys>['pplApiDescriptor']>();
 
-    const wsProvider = useMemo(() => {
-        if (!selectedNetworkInfo.pplChainRpcUrls) return;
-
-        return getWsProvider(selectedNetworkInfo.pplChainRpcUrls, wsStatusChangeCallback);
+    const { pplClient, pplApi, pplApiDescriptor } = useMemo(() => {
+        const descriptor = selectedNetworkInfo.descriptor;
+        if (!(descriptor in DESCRIPTORS_PPL)) return {};
+        const wsProvider = getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
+        const pplClient = createClient(withPolkadotSdkCompat(wsProvider));
+        const pplApiDescriptor = selectedNetworkInfo.descriptor as Id;
+        const pplApi = pplClient.getTypedApi(DESCRIPTORS_PPL[pplApiDescriptor]);
+        return {
+            pplClient,
+            pplApi,
+            pplApiDescriptor,
+        };
     }, [selectedNetworkInfo]);
 
     useEffect(() => {
@@ -59,17 +63,6 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
 
         pplApi.compatibilityToken.then(setPplCompatibilityToken).catch(console.error);
     }, [pplApi]);
-
-    useEffect(() => {
-        if (!wsProvider || !selectedNetworkInfo.pplChainDescriptor) return;
-
-        const cl = createClient(withPolkadotSdkCompat(wsProvider));
-        setPplClient(cl);
-        const id = selectedNetworkInfo.pplChainDescriptor as Id;
-        const typedApi = cl.getTypedApi(DESCRIPTORS_PPL[id]);
-        setPplApi(typedApi);
-        setPplApiDescriptor(selectedNetworkInfo.pplChainDescriptor);
-    }, [selectedNetworkInfo, wsProvider]);
 
     useEffect(() => {
         if (!pplClient || !pplApi) return;
