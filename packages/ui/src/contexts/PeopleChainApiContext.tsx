@@ -39,7 +39,7 @@ export const isPplContextIn = <
 
 const PplApiContext = createContext<IPplApiContext<PplDescriptorKeys> | undefined>(undefined);
 
-const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiContextProps) => {
+const PplApiContextProvider = ({ children }: ApiContextProps) => {
     const { selectedNetworkInfo } = useNetwork();
     const [pplChainInfo, setPplChainInfo] = useState<ChainInfoHuman | undefined>();
     const [pplCompatibilityToken, setPplCompatibilityToken] = useState<CompatibilityToken>();

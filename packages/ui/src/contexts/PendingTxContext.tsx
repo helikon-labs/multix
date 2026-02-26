@@ -443,11 +443,12 @@ const PendingTxsContextProvider = ({ children }: PendingTxContextProps) => {
     );
 
     useEffect(() => {
-        if (hasPplChain) {
-            refresh(true);
-        }
-
-        refresh(false);
+        (async () => {
+            if (hasPplChain) {
+                await refresh(true);
+            }
+            await refresh(false);
+        })();
     }, [refresh, hasPplChain]);
 
     return (
