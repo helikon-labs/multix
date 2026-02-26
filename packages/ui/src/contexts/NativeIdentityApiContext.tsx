@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 import { useState, useEffect, createContext, useContext } from 'react';
 import { useNetwork } from './NetworkContext';
-import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api';
+import { CompatibilityToken, createClient, PolkadotClient } from 'polkadot-api';
 import { getWsProvider } from 'polkadot-api/ws-provider';
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat';
 import {
     NativeIdentityApiOf,
     NativeIdentityDescriptorKeys,
-    NativeIdentityDescriptors,
     DESCRIPTORS_NATIVE_IDENTITY,
 } from '../types';
 import { ChainInfoHuman } from './ApiContext';
@@ -57,18 +56,23 @@ const NativeIdentityApiContextProvider = <Id extends NativeIdentityDescriptorKey
     const [nativeIdentityChainInfo, setNativeIdentityChainInfo] = useState<
         ChainInfoHuman | undefined
     >();
-    const [nativeIdentityApi, setNativeIdentityApi] =
-        useState<TypedApi<NativeIdentityDescriptors<Id>>>();
-    const [nativeIdentityClient, setNativeIdentityClient] = useState<PolkadotClient>();
     const [nativeIdentityCompatibilityToken, setNativeIdentityCompatibilityToken] =
         useState<CompatibilityToken>();
-    const [nativeIdentityApiDescriptor, setNativeIdentityApiDescriptor] =
-        useState<
-            INativeIdentityApiContext<NativeIdentityDescriptorKeys>['nativeIdentityApiDescriptor']
-        >();
 
-    const wsProvider = useMemo(() => {
-        return getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
+    const { nativeIdentityClient, nativeIdentityApi, nativeIdentityApiDescriptor } = useMemo(() => {
+        const descriptor = selectedNetworkInfo.descriptor;
+        if (!(descriptor in DESCRIPTORS_NATIVE_IDENTITY)) return {};
+        const wsProvider = getWsProvider(selectedNetworkInfo.rpcUrls, wsStatusChangeCallback);
+        const nativeIdentityClient = createClient(withPolkadotSdkCompat(wsProvider));
+        const nativeIdentityApiDescriptor = selectedNetworkInfo.descriptor as Id;
+        const nativeIdentityApi = nativeIdentityClient.getTypedApi(
+            DESCRIPTORS_NATIVE_IDENTITY[nativeIdentityApiDescriptor],
+        );
+        return {
+            nativeIdentityClient,
+            nativeIdentityApi,
+            nativeIdentityApiDescriptor,
+        };
     }, [selectedNetworkInfo]);
 
     useEffect(() => {
@@ -78,18 +82,6 @@ const NativeIdentityApiContextProvider = <Id extends NativeIdentityDescriptorKey
             .then(setNativeIdentityCompatibilityToken)
             .catch(console.error);
     }, [nativeIdentityApi]);
-
-    useEffect(() => {
-        if (!wsProvider) return;
-        const descriptor = selectedNetworkInfo.descriptor;
-        if (!(descriptor in DESCRIPTORS_NATIVE_IDENTITY)) return;
-        const apiClient = createClient(withPolkadotSdkCompat(wsProvider));
-        setNativeIdentityClient(apiClient);
-        const id = selectedNetworkInfo.descriptor as Id;
-        const typedApi = apiClient.getTypedApi(DESCRIPTORS_NATIVE_IDENTITY[id]);
-        setNativeIdentityApi(typedApi);
-        setNativeIdentityApiDescriptor(id);
-    }, [selectedNetworkInfo, wsProvider]);
 
     useEffect(() => {
         if (!nativeIdentityClient || !nativeIdentityApi) return;
