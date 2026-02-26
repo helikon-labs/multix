@@ -1,17 +1,27 @@
-name: Lint squid
+name: Lint UI
 on:
+  push:
+    branches:
+      - development
+      - main
   pull_request:
-    paths: ['squid/**/*', '.github/workflows/lint-squid.yaml']
+    paths: ['packages/ui/**/*', '.github/workflows/lint-ui.yaml']
+    types:
+      - opened
+      - reopened
+      - synchronize
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  extract:
+  lint:
     name: eslint
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./squid/
+        working-directory: ./packages/ui/
     steps:
       - uses: actions/checkout@v3
-
       - name: set user
         run: |
           git config --global user.name 'GitHub Actions'
@@ -21,9 +31,9 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
       - name: install packages
-        run: npm ci
-
+        run: corepack enable && yarn install --immutable
+      - name: format
+        run: yarn formatAllCheck
       - name: lint
-        run: npm run lint
+        run: yarn lint
