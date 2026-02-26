@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: install packages
         run: corepack enable && yarn install --immutable
-      - name: format
+      - name: check format
         run: yarn formatAllCheck
       - name: lint
         run: yarn lint
