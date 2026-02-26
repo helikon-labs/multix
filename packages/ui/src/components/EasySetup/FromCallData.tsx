@@ -1,6 +1,6 @@
 import { Alert, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useApi } from '../../contexts/ApiContext';
 import { TextField } from '../library';
 import CallInfo from '../CallInfo';
@@ -23,20 +23,15 @@ const FromCallData = ({ className, onSetExtrinsic, currentProxy }: Props) => {
     const [callDataError, setCallDataError] = useState('');
     const [isProxyProxyRemoved, setIsProxyProxyRemoved] = useState(false);
     const [callDataToUse, setCallDataToUse] = useState<HexString | undefined>();
+    const callIdRef = useRef(0);
 
     const removeProxyProxyCall = useCallback(
         async (call: HexString) => {
-            setIsProxyProxyRemoved(false);
-            if (!api) return call;
-
-            if (!currentProxy) return call;
-
+            if (!api || !currentProxy) return { isRemoved: false, call };
             try {
                 const decodedCall = (await api.txFromCallData(Binary.fromHex(call))).decodedCall;
-
                 const real = `0x${call.substring(8, 72)}`;
                 const currentProxyAddress = getPubKeyFromAddress(currentProxy);
-
                 // check if this call is a proxy.proxy
                 if (
                     decodedCall.type === 'Proxy' &&
@@ -48,26 +43,25 @@ const FromCallData = ({ className, onSetExtrinsic, currentProxy }: Props) => {
                     // real 00 eb53ed54b7f921a438923e6eb52c4d89afc5c0fed5d0d15fb78648c53da227a0
                     // forceProxyType 00
                     // only remove the proxy if it's the proxy associated with the multisig
-                    setIsProxyProxyRemoved(true);
-                    return `0x${call.substring(74)}` as HexString;
+                    return {
+                        isRemoved: true,
+                        call: `0x${call.substring(74)}` as HexString,
+                    };
                 }
-
-                return call;
+                return {
+                    isRemoved: false,
+                    call,
+                };
             } catch (e: unknown) {
                 !!e && setCallDataError(String(e));
-                return;
+                return {
+                    isRemoved: false,
+                    call: undefined,
+                };
             }
         },
         [api, currentProxy],
     );
-
-    // users may erroneously paste callData from the multisig calldata
-    // this may start by proxy.proxy although this will be
-    // added by Multix too. For this reason we strip it.
-    useEffect(() => {
-        if (!pastedCallData) return;
-        removeProxyProxyCall(pastedCallData).then(setCallDataToUse).catch(console.error);
-    }, [pastedCallData, removeProxyProxyCall]);
 
     const { callInfo } = useCallInfoFromCallData({ isPplTx: false, callData: callDataToUse });
     const { callInfo: pastedCallInfo } = useCallInfoFromCallData({
@@ -77,24 +71,26 @@ const FromCallData = ({ className, onSetExtrinsic, currentProxy }: Props) => {
     const { extrinsicUrl } = usePjsLinks({ isPplChain: false });
 
     useEffect(() => {
-        if (!api) {
+        if (!api || !pastedCallData || !callInfo?.call) {
             return;
         }
-
-        if (!pastedCallData || !callInfo?.call) {
-            return;
-        }
-
         onSetExtrinsic(callInfo.call);
     }, [api, pastedCallData, callInfo, onSetExtrinsic]);
 
-    const onCallDataChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        setCallDataError('');
-
-        const pastedCallData = event.target.value.trim() as HexString;
-
-        setPastedCallData(pastedCallData);
-    }, []);
+    const onCallDataChange = useCallback(
+        async (event: React.ChangeEvent<HTMLInputElement>) => {
+            setCallDataError('');
+            const pasted = event.target.value.trim() as HexString;
+            setPastedCallData(pasted);
+            setIsProxyProxyRemoved(false);
+            const callId = ++callIdRef.current;
+            const result = await removeProxyProxyCall(pasted);
+            if (callId !== callIdRef.current) return;
+            setIsProxyProxyRemoved(result.isRemoved);
+            setCallDataToUse(result.call);
+        },
+        [removeProxyProxyCall],
+    );
 
     return (
         <Box className={className}>
