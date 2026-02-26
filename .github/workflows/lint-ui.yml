@@ -1,9 +1,20 @@
 name: Lint UI
 on:
+  push:
+    branches:
+      - development
+      - main
   pull_request:
     paths: ['packages/ui/**/*', '.github/workflows/lint-ui.yaml']
+    types:
+      - opened
+      - reopened
+      - synchronize
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  extract:
+  lint-ui:
     name: eslint
     runs-on: ubuntu-latest
     defaults:
