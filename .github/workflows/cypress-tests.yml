@@ -1,10 +1,22 @@
 name: Cypress tests
 on:
+  push:
+    paths:
+      - 'packages/ui/**/*'
+      - '.github/workflows/cypress-tests.yml'
+      - 'chopsticks-config.yml'
+    branches:
+      - development
+      - main
   pull_request:
     paths:
       - 'packages/ui/**/*'
-      - '.github/workflows/cypress-tests.yaml'
+      - '.github/workflows/cypress-tests.yml'
       - 'chopsticks-config.yml'
+    types:
+      - opened
+      - reopened
+      - synchronize
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -12,7 +24,7 @@ jobs:
       image: cypress/browsers:latest
     services:
       postgres:
-        image: postgres:14
+        image: postgres:18
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
