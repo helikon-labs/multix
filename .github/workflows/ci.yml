@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./packages/ui/
+        working-directory: .
     steps:
       - uses: actions/checkout@v3
       - name: set user
@@ -32,7 +32,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: install packages
-        run: corepack enable && yarn install --immutable
+        run: corepack enable && yarn
       - name: format
         run: yarn formatAllCheck
       - name: lint
