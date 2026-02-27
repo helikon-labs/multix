@@ -16,7 +16,7 @@
         "@polkadot/react-identicon": "^3.16.4",
         "@polkadot/util-crypto": "^14.0.1",
         "@reactive-dot/core": "^0.70.0",
-        "@reactive-dot/react": "^0.70.0",
+        "@reactive-dot/react": "^0.71.2",
         "@reactive-dot/wallet-walletconnect": "^0.18.9",
         "@reown/walletkit": "^1.5.3",
         "@tanstack/react-query": "^5.90.21",
