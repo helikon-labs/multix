@@ -15,7 +15,7 @@
         "@polkadot-labs/hdkd-helpers": "^0.0.27",
         "@polkadot/react-identicon": "^3.16.4",
         "@polkadot/util-crypto": "^14.0.1",
-        "@reactive-dot/core": "^0.70.0",
+        "@reactive-dot/core": "^0.71.1",
         "@reactive-dot/react": "^0.70.0",
         "@reactive-dot/wallet-walletconnect": "^0.18.9",
         "@reown/walletkit": "^1.5.3",
