@@ -1,10 +1,10 @@
 name: Cypress tests
 on:
   push:
-    paths:
-      - 'packages/ui/**/*'
-      - '.github/workflows/cypress-tests.yml'
-      - 'chopsticks-config.yml'
+    #paths:
+    #  - 'packages/ui/**/*'
+    #  - '.github/workflows/cypress-tests.yml'
+    #  - 'chopsticks-config.yml'
     branches:
       - development
       - main
