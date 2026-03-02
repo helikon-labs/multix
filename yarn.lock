@@ -3364,58 +3364,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paraspell/assets@npm:12.8.0":
-  version: 12.8.0
-  resolution: "@paraspell/assets@npm:12.8.0"
+"@paraspell/assets@npm:12.8.1":
+  version: 12.8.1
+  resolution: "@paraspell/assets@npm:12.8.1"
   dependencies:
-    "@paraspell/sdk-common": 12.8.0
-  checksum: 01c0a22e0031117b732084c641489f811de80329f8029127464f4a05babd479a9bb86fc69b02f80eedaf395464a99df4f50286b94c8bc8a538c9ad8773beaf75
+    "@paraspell/sdk-common": 12.8.1
+  checksum: 3ce48e288e17bbb584cc6cf5cb9f8361c5f77a75cb40f28c1e6f35e99d9723032fb335f6c18c81c25def6112f53bad84dc617183b1f3f95f4bb7bb8b8cd8daa8
   languageName: node
   linkType: hard
 
-"@paraspell/pallets@npm:12.8.0":
-  version: 12.8.0
-  resolution: "@paraspell/pallets@npm:12.8.0"
+"@paraspell/pallets@npm:12.8.1":
+  version: 12.8.1
+  resolution: "@paraspell/pallets@npm:12.8.1"
   dependencies:
-    "@paraspell/sdk-common": 12.8.0
-  checksum: 252b84f6fb383bedf6f10e1f33925a4cc30b1ed235cc2c22edb34f21f4277134858f5b9f4d217b4ae2fd4005648f9f8b27fca696284561d33600cd6a945cd04f
+    "@paraspell/sdk-common": 12.8.1
+  checksum: e219a81b7e3749fe19438cca148a2dfc468e16d468cf31142137fd1efd4a351f9c2ca73441411b42b30b5c795341b6955730543b2aa55fc2d5d0435776d1c1c4
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-common@npm:12.8.0":
-  version: 12.8.0
-  resolution: "@paraspell/sdk-common@npm:12.8.0"
-  checksum: 9205b1d1e8ca95f359956f2f62f7ad7f927516ca56e651428ed7ac87d7b21dcb76dfc7c2b076f9550fdf566058ab4831aa21d802f17a4ca36e84abf3afcab95e
+"@paraspell/sdk-common@npm:12.8.1":
+  version: 12.8.1
+  resolution: "@paraspell/sdk-common@npm:12.8.1"
+  checksum: f0339edf3df51eeea7f6ecde03555e05553ef1817431f51fadcbe2b0738b796f7b1767701235b2fb2f8bccfc7923a06e9382192d99bed84c18aaa6b966386c50
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-core@npm:12.8.0":
-  version: 12.8.0
-  resolution: "@paraspell/sdk-core@npm:12.8.0"
+"@paraspell/sdk-core@npm:12.8.1":
+  version: 12.8.1
+  resolution: "@paraspell/sdk-core@npm:12.8.1"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/assets": 12.8.0
-    "@paraspell/pallets": 12.8.0
-    "@paraspell/sdk-common": 12.8.0
+    "@paraspell/assets": 12.8.1
+    "@paraspell/pallets": 12.8.1
+    "@paraspell/sdk-common": 12.8.1
     "@scure/base": ^2.0.0
-    viem: 2.45.0
-  checksum: de9434db2affd2486cd27eeea78eea81586e840a35a530404e73507c4bd255ceeb518c24fd9f3abef371c84b6a23ba4339bff579ee08368d549e92276c0ee183
+    viem: 2.46.3
+  checksum: c319d88fde475c68a8f8d711536243757808df40aaaa13c579867a66c66bc5a81963d49efabb41c91ddb1767722eb3f6a6f1d1001768da6788db3cc9b04ff21d
   languageName: node
   linkType: hard
 
-"@paraspell/sdk@npm:^12.8.0":
-  version: 12.8.0
-  resolution: "@paraspell/sdk@npm:12.8.0"
+"@paraspell/sdk@npm:^12.8.1":
+  version: 12.8.1
+  resolution: "@paraspell/sdk@npm:12.8.1"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/sdk-core": 12.8.0
+    "@paraspell/sdk-core": 12.8.1
     "@polkadot-api/legacy-provider": ^0.3.8
     "@polkadot-labs/hdkd": ^0.0.26
     "@polkadot-labs/hdkd-helpers": ^0.0.27
-    viem: 2.45.0
+    viem: 2.46.3
   peerDependencies:
     polkadot-api: ">= 1.23.3 < 2"
-  checksum: 569c2bceaeaa52e2f19f49619caef4ced4c4a94cdae6732943bb1895d3536795d2747e18e5d9620955fe866a670fdcad9e93e4127c1919154a8f2bd3f5252af3
+  checksum: b784f546745d7f23782f2bbd275d58a380ad8b2375ee4317a267f5b21e7f97c22c53d99b529708224d7532d10d128585b5f945cfd11bdca52e355522ec00d253
   languageName: node
   linkType: hard
 
@@ -11051,7 +11051,7 @@ __metadata:
     "@graphql-eslint/eslint-plugin": ^4.4.0
     "@mui/material": ^7.3.8
     "@mui/styled-engine": ^7.3.8
-    "@paraspell/sdk": ^12.8.0
+    "@paraspell/sdk": ^12.8.1
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.2.2
     "@polkadot-labs/hdkd": ^0.0.26
@@ -11489,9 +11489,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ox@npm:0.11.3":
-  version: 0.11.3
-  resolution: "ox@npm:0.11.3"
+"ox@npm:0.12.4, ox@npm:^0.12.1":
+  version: 0.12.4
+  resolution: "ox@npm:0.12.4"
   dependencies:
     "@adraffy/ens-normalize": ^1.11.0
     "@noble/ciphers": ^1.3.0
@@ -11506,7 +11506,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: aab488bb5ff2e9c9d688f4044ebceb5efc4f62e71c19c2813d1ba93509dfcf618c7c97dd06ed867843340ac9744911ef3f3a4504850711a67f220f94aa9d8feb
+  checksum: 4b03aebe0ee02b9ba57faa765418acd9a58471f2feedd9f3c6db6fd9b9cf0b96a7c89795721977b110481ca2e525176ffd23f4bab8ac55deb7553205768d3068
   languageName: node
   linkType: hard
 
@@ -11528,27 +11528,6 @@ __metadata:
     typescript:
       optional: true
   checksum: e04f8f5d6de4fbc65d18e8388bbb4c6a09e7b69e6d51c45985bd2ed01414fda154a78dfb8fcd46e53842794a10ef37fff2b4d8b786bd7a7476a3772e8cc8e64a
-  languageName: node
-  linkType: hard
-
-"ox@npm:^0.12.1":
-  version: 0.12.4
-  resolution: "ox@npm:0.12.4"
-  dependencies:
-    "@adraffy/ens-normalize": ^1.11.0
-    "@noble/ciphers": ^1.3.0
-    "@noble/curves": 1.9.1
-    "@noble/hashes": ^1.8.0
-    "@scure/bip32": ^1.7.0
-    "@scure/bip39": ^1.6.0
-    abitype: ^1.2.3
-    eventemitter3: 5.0.1
-  peerDependencies:
-    typescript: ">=5.4.0"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 4b03aebe0ee02b9ba57faa765418acd9a58471f2feedd9f3c6db6fd9b9cf0b96a7c89795721977b110481ca2e525176ffd23f4bab8ac55deb7553205768d3068
   languageName: node
   linkType: hard
 
@@ -14344,9 +14323,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:2.45.0":
-  version: 2.45.0
-  resolution: "viem@npm:2.45.0"
+"viem@npm:2.46.3":
+  version: 2.46.3
+  resolution: "viem@npm:2.46.3"
   dependencies:
     "@noble/curves": 1.9.1
     "@noble/hashes": 1.8.0
@@ -14354,14 +14333,14 @@ __metadata:
     "@scure/bip39": 1.6.0
     abitype: 1.2.3
     isows: 1.0.7
-    ox: 0.11.3
+    ox: 0.12.4
     ws: 8.18.3
   peerDependencies:
     typescript: ">=5.0.4"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 099c73d2980493a372d7c91d7593c62c9bb534a91293f6ae308a88292e16a4c89301db8899fec98597a9e6ee51f02bd9ed857f498946b2ee905c9cae00e5289d
+  checksum: 2e201fb4e6171a518b1ae57fbf098864f45ab54bf0828c3f93eebcbf791a4d3d5a3d0137c68822703ab143cd8460f09791f191a9811411cc23bfc90a73c0d2ba
   languageName: node
   linkType: hard
 
