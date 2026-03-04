@@ -30,7 +30,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install indexer deps
         working-directory: squid
         run: npm ci
