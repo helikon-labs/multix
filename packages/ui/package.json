@@ -42,7 +42,7 @@
         "@eslint/js": "^10.0.1",
         "@graphql-codegen/cli": "6.1.2",
         "@graphql-codegen/client-preset": "5.2.3",
-        "@graphql-codegen/typescript-react-query": "^6.1.1",
+        "@graphql-codegen/typescript-react-query": "^6.1.2",
         "@graphql-eslint/eslint-plugin": "^4.4.0",
         "@types/node": "^25.3.3",
         "@types/react": "^19.2.14",
