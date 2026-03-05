@@ -1814,9 +1814,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-query@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "@graphql-codegen/typescript-react-query@npm:6.1.1"
+"@graphql-codegen/typescript-react-query@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@graphql-codegen/typescript-react-query@npm:6.1.2"
   dependencies:
     "@graphql-codegen/plugin-helpers": ^3.0.0
     "@graphql-codegen/visitor-plugin-common": 2.13.8
@@ -1825,7 +1825,7 @@ __metadata:
     tslib: ^2.8.1
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: a309faaada3780d17c9adf2bc04192e632e661c5e6483c4e8892b34344beb50374659cbefeb16177045aec41d4edd14806434d37a048bbc697a8603832f1c5e7
+  checksum: 8aed52f541c5ade59dd5662de2a24226b9152ce2a100d42acbe90c9fba830e8b850c3e761e4dbc073777f13be92972c938730b2e47152cec13c6d0902a5d1126
   languageName: node
   linkType: hard
 
@@ -11034,7 +11034,7 @@ __metadata:
     "@fontsource/jost": ^5.2.8
     "@graphql-codegen/cli": 6.1.2
     "@graphql-codegen/client-preset": 5.2.3
-    "@graphql-codegen/typescript-react-query": ^6.1.1
+    "@graphql-codegen/typescript-react-query": ^6.1.2
     "@graphql-eslint/eslint-plugin": ^4.4.0
     "@mui/material": ^7.3.8
     "@mui/styled-engine": ^7.3.8
