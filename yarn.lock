@@ -3166,6 +3166,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/styled-engine@npm:^7.3.9":
+  version: 7.3.9
+  resolution: "@mui/styled-engine@npm:7.3.9"
+  dependencies:
+    "@babel/runtime": ^7.28.6
+    "@emotion/cache": ^11.14.0
+    "@emotion/serialize": ^1.3.3
+    "@emotion/sheet": ^1.4.0
+    csstype: ^3.2.3
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@emotion/react": ^11.4.1
+    "@emotion/styled": ^11.3.0
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+  checksum: b7646474880bb0787faffa48703ba16191cca3f88eb09efab3947b4edf7536bf03107909b85011cf4af41188b13d7b6b72c31b470559929e3c4c403007c5ac68
+  languageName: node
+  linkType: hard
+
 "@mui/system@npm:^7.3.8":
   version: 7.3.8
   resolution: "@mui/system@npm:7.3.8"
@@ -11037,7 +11060,7 @@ __metadata:
     "@graphql-codegen/typescript-react-query": ^6.1.1
     "@graphql-eslint/eslint-plugin": ^4.4.0
     "@mui/material": ^7.3.8
-    "@mui/styled-engine": ^7.3.8
+    "@mui/styled-engine": ^7.3.9
     "@paraspell/sdk": ^12.8.2
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.2.2
