@@ -3166,6 +3166,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/styled-engine@npm:^7.3.9":
+  version: 7.3.9
+  resolution: "@mui/styled-engine@npm:7.3.9"
+  dependencies:
+    "@babel/runtime": ^7.28.6
+    "@emotion/cache": ^11.14.0
+    "@emotion/serialize": ^1.3.3
+    "@emotion/sheet": ^1.4.0
+    csstype: ^3.2.3
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@emotion/react": ^11.4.1
+    "@emotion/styled": ^11.3.0
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+  checksum: b7646474880bb0787faffa48703ba16191cca3f88eb09efab3947b4edf7536bf03107909b85011cf4af41188b13d7b6b72c31b470559929e3c4c403007c5ac68
+  languageName: node
+  linkType: hard
+
 "@mui/system@npm:^7.3.8":
   version: 7.3.8
   resolution: "@mui/system@npm:7.3.8"
@@ -3364,58 +3387,63 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paraspell/assets@npm:12.8.2":
-  version: 12.8.2
-  resolution: "@paraspell/assets@npm:12.8.2"
+"@paraspell/assets@npm:12.8.8":
+  version: 12.8.8
+  resolution: "@paraspell/assets@npm:12.8.8"
   dependencies:
-    "@paraspell/sdk-common": 12.8.2
-  checksum: 27025fb467f0bb10650e4d9ffbb952de9371e1660ca2645f21d7e58740c5e39cad412d3e8dd2fc623f45c22b02908f134d4f193fba441916e1b97fd966d5a49b
+    "@paraspell/sdk-common": 12.8.8
+  checksum: 54cf4e805f119c6e6fab67598bb6a823de3a21d197dc837616f7a2079864eb0a525d2c4c91c716355de57d41ccbd0f5e4ed53d33d985740c5cc3003b5d2a4a69
   languageName: node
   linkType: hard
 
-"@paraspell/pallets@npm:12.8.2":
-  version: 12.8.2
-  resolution: "@paraspell/pallets@npm:12.8.2"
+"@paraspell/pallets@npm:12.8.8":
+  version: 12.8.8
+  resolution: "@paraspell/pallets@npm:12.8.8"
   dependencies:
-    "@paraspell/sdk-common": 12.8.2
-  checksum: 8ed946475bedb46151c34a223fb0b03d5ac2e7ef7e8094751b5ae0925b09de58796c0e98442818480dbb16e782bcf260a162fd360aa5fd8f1fb2af314fec7e10
+    "@paraspell/sdk-common": 12.8.8
+  checksum: 097f77188306c779e04956ea72ce98c27a95a966ceb7e89ff29cfcce85b3c426a257302f83fd7d9e7fdce040a0ab541cfa53571028eba7d3c4934223051c69fc
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-common@npm:12.8.2":
-  version: 12.8.2
-  resolution: "@paraspell/sdk-common@npm:12.8.2"
-  checksum: f42cea3d499b7350544ce2b410e36d7bcd7fecff9adc2c10ff495499a51c261934349a79c0a926595b999de25e2f2f4f11387e539cf440c132ac6f792ab73e9c
+"@paraspell/sdk-common@npm:12.8.8":
+  version: 12.8.8
+  resolution: "@paraspell/sdk-common@npm:12.8.8"
+  checksum: 8dec3b30295b531a2d760f773cf7f669635602baca73d3ed0182b099c2026591fb52d9f7e6228d5a48e166e4cac6850a126cba55000aa7f36671158fe2481470
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-core@npm:12.8.2":
-  version: 12.8.2
-  resolution: "@paraspell/sdk-core@npm:12.8.2"
+"@paraspell/sdk-core@npm:12.8.8":
+  version: 12.8.8
+  resolution: "@paraspell/sdk-core@npm:12.8.8"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/assets": 12.8.2
-    "@paraspell/pallets": 12.8.2
-    "@paraspell/sdk-common": 12.8.2
+    "@paraspell/assets": 12.8.8
+    "@paraspell/pallets": 12.8.8
+    "@paraspell/sdk-common": 12.8.8
     "@scure/base": ^2.0.0
     viem: 2.46.3
-  checksum: 302e3796b24a0af47a6fb157836bf7d088043971c5e565cd986755dd61b6b7d87eeed60d7b052f368cae993d73a3696d0e035f0ab4e225c66cd9f662f73e1a4c
+  peerDependencies:
+    "@paraspell/swap": ^12.0.0
+  peerDependenciesMeta:
+    "@paraspell/swap":
+      optional: true
+  checksum: a6ca7e9d54c3c30644f7a9519a9af4fc6f7c8480001fd0f79fde5182925c8b32b7871bfb4fcab5b625399941d06891a64129917d5d56c911abd4fca5df05407b
   languageName: node
   linkType: hard
 
-"@paraspell/sdk@npm:^12.8.2":
-  version: 12.8.2
-  resolution: "@paraspell/sdk@npm:12.8.2"
+"@paraspell/sdk@npm:^12.8.3":
+  version: 12.8.8
+  resolution: "@paraspell/sdk@npm:12.8.8"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/sdk-core": 12.8.2
+    "@paraspell/sdk-core": 12.8.8
     "@polkadot-api/legacy-provider": ^0.3.8
     "@polkadot-labs/hdkd": ^0.0.26
     "@polkadot-labs/hdkd-helpers": ^0.0.27
     viem: 2.46.3
   peerDependencies:
     polkadot-api: ">= 1.23.3 < 2"
-  checksum: 9ece4cf86d33f0e344c3e99f42133d22f9e216acda23ba74770c2cfa0c3af512547aac20b3a09f9b58d878e5776e3ceb8977643c4bf78cf88cca4bb18477ef33
+  checksum: 58479f6bf015d0e63cbcc1f01b56b768e999a01d5d41ce24a9b37cebb1291d346ed1a949ffbc5172a1c7b9aedc835a0135207a70faef3acea29bea16c265365d
   languageName: node
   linkType: hard
 
@@ -9407,10 +9435,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.13.0":
-  version: 16.13.0
-  resolution: "graphql@npm:16.13.0"
-  checksum: c20e7909c6c8d405a30f8caeae5aaf604b9f949bdcdf80bdb3d3561123e6099181c39eae697cf4fcdc5dd301ab215363b8def0aa0ff51f03cc7e4b48a8c2c2b1
+"graphql@npm:^16.13.1":
+  version: 16.13.1
+  resolution: "graphql@npm:16.13.1"
+  checksum: 0c7a9aea59504fbf3e0674f13ddb82935780f2a388e1db0ef41c3711c0ff8cb0a871c50d30d2d5288f32b946af3570d6f9ba8d13b03a330336f27121f9ac7a6b
   languageName: node
   linkType: hard
 
@@ -11037,8 +11065,8 @@ __metadata:
     "@graphql-codegen/typescript-react-query": ^6.1.1
     "@graphql-eslint/eslint-plugin": ^4.4.0
     "@mui/material": ^7.3.8
-    "@mui/styled-engine": ^7.3.8
-    "@paraspell/sdk": ^12.8.2
+    "@mui/styled-engine": ^7.3.9
+    "@paraspell/sdk": ^12.8.3
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.2.2
     "@polkadot-labs/hdkd": ^0.0.26
@@ -11067,14 +11095,14 @@ __metadata:
     eslint-plugin-react: ^7.37.5
     eslint-plugin-react-hooks: ^7.0.1
     globals: ^17.4.0
-    graphql: ^16.13.0
+    graphql: ^16.13.1
     graphql-request: ^7.4.0
     graphql-ws: ^6.0.7
     json5: ^2.2.3
     polkadot-api: ^1.23.3
     react: ^19.2.4
     react-dom: ^19.2.4
-    react-icons: ^5.5.0
+    react-icons: ^5.6.0
     react-router: ^7.13.1
     reactflow: ^11.11.4
     ts-node: ^10.9.2
@@ -12169,12 +12197,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-icons@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "react-icons@npm:5.5.0"
+"react-icons@npm:^5.6.0":
+  version: 5.6.0
+  resolution: "react-icons@npm:5.6.0"
   peerDependencies:
     react: "*"
-  checksum: a24309bfc993c19cbcbfc928157e53a137851822779977b9588f6dd41ffc4d11ebc98b447f4039b0d309a858f0a42980f6bfb4477fb19f9f2d1bc2e190fcf79c
+  checksum: addba1ebfd45cdf7f69291d0c93df64fca1271cfdb66df657abd223e3451c73356b035f50e75858627dd182b02129596c79eaaaa45d32eb52658e443a992645c
   languageName: node
   linkType: hard
 
