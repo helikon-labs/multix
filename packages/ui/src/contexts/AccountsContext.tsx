@@ -7,7 +7,7 @@ import React, {
     Dispatch,
     SetStateAction,
 } from 'react';
-import { useConnectedWallets, useAccounts as useRedotAccounts } from '@reactive-dot/react';
+import { useAccounts as useRedotAccounts } from '@reactive-dot/react';
 import { useApi } from './ApiContext';
 import { encodeAccounts } from '../utils/encodeAccounts';
 import { useGetWalletConnectNamespace } from '../hooks/useWalletConnectNamespace';
@@ -39,17 +39,18 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
     const { walletConnectId } = useGetWalletConnectNamespace();
     const { chainInfo } = useApi();
     const redotAccountResult = useRedotAccounts({ use: false });
-    const isAccountsLoading =
-        'status' in redotAccountResult && redotAccountResult.status !== 'fulfilled';
-    const redotAccountList = isAccountsLoading
-        ? []
-        : ((redotAccountResult as unknown as { value: WalletAccount[] }).value ?? []);
+    const isAccountsLoading = !(
+        'status' in redotAccountResult && redotAccountResult.status === 'fulfilled'
+    );
+
     const [isConnectionDialogOpen, setIsConnectionDialogOpen] = useState(false);
     const [isAllowedToConnectToExtension, setIsAllowedToConnectToExtension] = useState(
         () => localStorage.getItem(LOCALSTORAGE_ALLOWED_CONNECTION_KEY) === 'true',
     );
     const ownAccountList = useMemo(() => {
-        if (!chainInfo || !redotAccountList) return [];
+        if (!chainInfo || isAccountsLoading) return [];
+        const redotAccountList =
+            (redotAccountResult as unknown as { value: WalletAccount[] }).value ?? [];
         // redot would share 10 accounts if we connect say Nova with 1 account, and 10 networks
         // for this reason, we need to filter out the accounts that are not for the current network
         // this only applies to wallet-connect accounts
@@ -59,7 +60,7 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
             );
         });
         return encodeAccounts(filteredAccounts, chainInfo.ss58Format);
-    }, [chainInfo, walletConnectId, redotAccountList]);
+    }, [chainInfo, walletConnectId, redotAccountResult, isAccountsLoading]);
     const [selectedAddress, setSelectedAddress] = useState<string | undefined>(
         () => localStorage.getItem(LOCALSTORAGE_SELECTED_ACCOUNT_KEY) ?? undefined,
     );
