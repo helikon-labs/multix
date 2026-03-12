@@ -7,7 +7,7 @@ import React, {
     Dispatch,
     SetStateAction,
 } from 'react';
-import { useAccounts as useRedotAccounts } from '@reactive-dot/react';
+import { useConnectedWallets, useAccounts as useRedotAccounts } from '@reactive-dot/react';
 import { useApi } from './ApiContext';
 import { encodeAccounts } from '../utils/encodeAccounts';
 import { useGetWalletConnectNamespace } from '../hooks/useWalletConnectNamespace';
@@ -28,6 +28,7 @@ export interface IAccountContext {
     getAccountByAddress: (address: string) => WalletAccount | undefined;
     allowConnectionToExtension: () => void;
     isAllowedToConnectToExtension: boolean;
+    isAccountsLoading: boolean;
     isConnectionDialogOpen: boolean;
     setIsConnectionDialogOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -36,8 +37,13 @@ const AccountContext = createContext<IAccountContext | undefined>(undefined);
 
 const AccountContextProvider = ({ children }: AccountContextProps) => {
     const { walletConnectId } = useGetWalletConnectNamespace();
-    const redotAccountList = useRedotAccounts();
     const { chainInfo } = useApi();
+    const redotAccountResult = useRedotAccounts({ use: false });
+    const isAccountsLoading =
+        'status' in redotAccountResult && redotAccountResult.status !== 'fulfilled';
+    const redotAccountList = isAccountsLoading
+        ? []
+        : ((redotAccountResult as unknown as { value: WalletAccount[] }).value ?? []);
     const [isConnectionDialogOpen, setIsConnectionDialogOpen] = useState(false);
     const [isAllowedToConnectToExtension, setIsAllowedToConnectToExtension] = useState(
         () => localStorage.getItem(LOCALSTORAGE_ALLOWED_CONNECTION_KEY) === 'true',
@@ -95,6 +101,7 @@ const AccountContextProvider = ({ children }: AccountContextProps) => {
                 setIsConnectionDialogOpen,
                 allowConnectionToExtension,
                 isAllowedToConnectToExtension,
+                isAccountsLoading,
             }}
         >
             {children}
