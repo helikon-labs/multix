@@ -4712,9 +4712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reactive-dot/core@npm:^0.70.0":
-  version: 0.70.0
-  resolution: "@reactive-dot/core@npm:0.70.0"
+"@reactive-dot/core@npm:^0.71.0, @reactive-dot/core@npm:^0.71.1":
+  version: 0.71.1
+  resolution: "@reactive-dot/core@npm:0.71.1"
   dependencies:
     "@noble/hashes": ^2.0.1
     "@reactive-dot/utils": ^0.10.3
@@ -4722,22 +4722,22 @@ __metadata:
     ox: ^0.12.1
   peerDependencies:
     polkadot-api: ">=1.23.2"
-  checksum: 31351689e82f2352856eb7e64a1868f2d6bc67f573d6a78598cb2629dda1079ecb60d0d8a6bd3bbb9d373e832f6708e6c08f25c06cab3f0ae86165f119ed924b
+  checksum: d9fc529d4168225c6a60051370e1c4f1562a48182f01582c5a87b10e82a7ec773fd4e630ad45cd1cf1c6f70f085f84b5911b2e02a40b8e8471c6b4fa2614301c
   languageName: node
   linkType: hard
 
-"@reactive-dot/react@npm:^0.70.0":
-  version: 0.70.0
-  resolution: "@reactive-dot/react@npm:0.70.0"
+"@reactive-dot/react@npm:^0.71.3":
+  version: 0.71.3
+  resolution: "@reactive-dot/react@npm:0.71.3"
   dependencies:
-    "@reactive-dot/core": ^0.70.0
-    jotai: ^2.17.1
+    "@reactive-dot/core": ^0.71.1
+    jotai: ^2.18.0
     jotai-eager: ^0.2.4
     jotai-effect: ^2.2.3
-    jotai-suspense: ^0.4.2
+    jotai-suspense: ^0.5.0
   peerDependencies:
     react: ">= 19.2.x"
-  checksum: 9a2756e630bf7feda9d06b8be23d4185a326b615fa93a93437480c1ed98f63fd5678e2511a570a4392e21a3d7a6f73baedc965ad5a0af3747e1d18f30de4defb
+  checksum: 2348b2a29c69632aabed38e65e96ceaffa124cf0722dfb1472cc65e7e67eb594ff556f6189135a8c8ab2f54b5aa2aec2615c77f5761fe6fc8ca1837774631cfb
   languageName: node
   linkType: hard
 
@@ -4748,14 +4748,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reactive-dot/wallet-walletconnect@npm:^0.18.9":
-  version: 0.18.9
-  resolution: "@reactive-dot/wallet-walletconnect@npm:0.18.9"
+"@reactive-dot/wallet-walletconnect@npm:^0.18.10":
+  version: 0.18.10
+  resolution: "@reactive-dot/wallet-walletconnect@npm:0.18.10"
   dependencies:
-    "@reactive-dot/core": ^0.70.0
+    "@reactive-dot/core": ^0.71.0
     "@walletconnect/modal": ^2.7.0
     "@walletconnect/universal-provider": ^2.23.5
-  checksum: d793a5efecfa44a6ed9f22f39755bcdb1b73c07e2747756a7bb34e782cc83a518120690b4bbca329830779f7d419f2535a6c8c4adeccfac9e9c571570076c756
+  checksum: e696a25cac147c42ba689f6fa952a4ecdeba842c5ecdd6505cde68e19c531422e022aaa8fabacc9406a61a85205e23032f51872dd7d449b7db54218a052e8368
   languageName: node
   linkType: hard
 
@@ -10508,13 +10508,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai-suspense@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "jotai-suspense@npm:0.4.2"
+"jotai-suspense@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "jotai-suspense@npm:0.5.0"
   peerDependencies:
-    jotai: ">=2.12.2"
+    jotai: ">=2.18.0"
     react: ">=18.0.0"
-  checksum: 6a77c590698fad65868aaefb0e3ff78437afc2ae4bda2faf4fda9c955e2bbf76618979ca6e276d53d98df19e7652da5d3ac08304b72980f8f04a1bf9ab03c8c2
+  checksum: 2b811df3ffa014533524bb873c99491999f2e0ff9fc505c1446715401b4ad6ea54d0ed800c0ae9a7382953fe89a77edb4b69cdbae396fd15baa94d5dfb918a28
   languageName: node
   linkType: hard
 
@@ -11306,9 +11306,9 @@ __metadata:
     "@polkadot-labs/hdkd-helpers": ^0.0.27
     "@polkadot/react-identicon": ^3.16.4
     "@polkadot/util-crypto": ^14.0.1
-    "@reactive-dot/core": ^0.70.0
-    "@reactive-dot/react": ^0.70.0
-    "@reactive-dot/wallet-walletconnect": ^0.18.9
+    "@reactive-dot/core": ^0.71.1
+    "@reactive-dot/react": ^0.71.3
+    "@reactive-dot/wallet-walletconnect": ^0.18.10
     "@reown/walletkit": ^1.5.4
     "@tanstack/react-query": ^5.90.21
     "@types/node": ^25.3.3
