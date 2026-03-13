@@ -1639,16 +1639,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:6.1.3":
-  version: 6.1.3
-  resolution: "@graphql-codegen/cli@npm:6.1.3"
+"@graphql-codegen/cli@npm:6.2.1":
+  version: 6.2.1
+  resolution: "@graphql-codegen/cli@npm:6.2.1"
   dependencies:
     "@babel/generator": ^7.18.13
     "@babel/template": ^7.18.10
     "@babel/types": ^7.18.13
     "@graphql-codegen/client-preset": ^5.2.4
     "@graphql-codegen/core": ^5.0.1
-    "@graphql-codegen/plugin-helpers": ^6.1.1
+    "@graphql-codegen/plugin-helpers": ^6.2.0
     "@graphql-tools/apollo-engine-loader": ^8.0.28
     "@graphql-tools/code-file-loader": ^8.1.28
     "@graphql-tools/git-loader": ^8.0.32
@@ -1656,6 +1656,7 @@ __metadata:
     "@graphql-tools/graphql-file-loader": ^8.1.11
     "@graphql-tools/json-file-loader": ^8.0.26
     "@graphql-tools/load": ^8.1.8
+    "@graphql-tools/merge": ^9.0.6
     "@graphql-tools/url-loader": ^9.0.6
     "@graphql-tools/utils": ^11.0.0
     "@inquirer/prompts": ^7.8.2
@@ -1688,7 +1689,7 @@ __metadata:
     graphql-code-generator: cjs/bin.js
     graphql-codegen: cjs/bin.js
     graphql-codegen-esm: esm/bin.js
-  checksum: 8fb706f1e2dfaa0e5b51c9ef8be3c7218573700c318c913ccca374ea8da920b8f347a4c3c0622cbea2c37db5bef885257179fae98ff782e2f6de72e87633900f
+  checksum: a6377489a9bce8ff350c656b42dd6c83e6fbe99cb6cbe26da9b50dc8a43816dcb5bd4189a78198158a8c5ab457f337161333f12fd767331d4b3227836d0514bd
   languageName: node
   linkType: hard
 
@@ -1822,7 +1823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^6.1.1":
+"@graphql-codegen/plugin-helpers@npm:^6.1.1, @graphql-codegen/plugin-helpers@npm:^6.2.0":
   version: 6.2.0
   resolution: "@graphql-codegen/plugin-helpers@npm:6.2.0"
   dependencies:
@@ -2553,7 +2554,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:^9.1.7":
+"@graphql-tools/merge@npm:^9.0.6, @graphql-tools/merge@npm:^9.1.7":
   version: 9.1.7
   resolution: "@graphql-tools/merge@npm:9.1.7"
   dependencies:
@@ -11293,7 +11294,7 @@ __metadata:
     "@eslint/eslintrc": ^3.3.4
     "@eslint/js": ^10.0.1
     "@fontsource/jost": ^5.2.8
-    "@graphql-codegen/cli": 6.1.3
+    "@graphql-codegen/cli": 6.2.1
     "@graphql-codegen/client-preset": 5.2.3
     "@graphql-codegen/typescript-react-query": ^6.1.1
     "@graphql-eslint/eslint-plugin": ^4.4.0
