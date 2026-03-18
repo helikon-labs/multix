@@ -17,6 +17,9 @@ on:
       - opened
       - reopened
       - synchronize
+permissions:
+  contents: read
+  pull-requests: read
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
