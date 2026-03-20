@@ -5072,21 +5072,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.90.20":
-  version: 5.90.20
-  resolution: "@tanstack/query-core@npm:5.90.20"
-  checksum: 70637dfcecd5ed9d810629aa27f1632af8a4bcd083e75cf29408d058c32f8234704a3231ec280e2c4016ea0485b16124fdf70ab97793b5a7b670f43f7659e9fe
+"@tanstack/query-core@npm:5.91.2":
+  version: 5.91.2
+  resolution: "@tanstack/query-core@npm:5.91.2"
+  checksum: 4feda32bd61dee28c0c8ff120f49d805aa0f3a3d4ad12bf371f6991590eaf5db667b49c35a2730a59598db4ef862f9d7899bc1c8aaf743cedc0c0f98b1958940
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.90.21":
-  version: 5.90.21
-  resolution: "@tanstack/react-query@npm:5.90.21"
+"@tanstack/react-query@npm:^5.91.2":
+  version: 5.91.2
+  resolution: "@tanstack/react-query@npm:5.91.2"
   dependencies:
-    "@tanstack/query-core": 5.90.20
+    "@tanstack/query-core": 5.91.2
   peerDependencies:
     react: ^18 || ^19
-  checksum: e8994c57f6ceb2c886a4d6486a8c6a3f89bc6b1220de3e732448d7fcbeb386e9358f03c73804de72004c6ac2668d0bf1b44cedbb273d3e4b33afcbaee7b7d24d
+  checksum: 8bae2d68deedfe9d535d222c7c5a55008e067b16b6d1cac82e18f077c9b3d0945e75644bbc2eaf0c0f2fc8ff238459633cf11787d2493389cd4c2d081dd69885
   languageName: node
   linkType: hard
 
@@ -11042,7 +11042,7 @@ __metadata:
     "@reactive-dot/react": ^0.71.4
     "@reactive-dot/wallet-walletconnect": ^0.18.11
     "@reown/walletkit": ^1.5.4
-    "@tanstack/react-query": ^5.90.21
+    "@tanstack/react-query": ^5.91.2
     "@types/node": ^25.5.0
     "@types/react": ^19.2.14
     "@types/react-dom": ^19.2.3
