@@ -12,7 +12,7 @@
         "@polkadot-api/descriptors": "portal:.papi/descriptors",
         "@polkadot-api/tx-utils": "^0.2.2",
         "@polkadot-labs/hdkd": "^0.0.26",
-        "@polkadot-labs/hdkd-helpers": "^0.0.27",
+        "@polkadot-labs/hdkd-helpers": "^0.0.28",
         "@polkadot/react-identicon": "^3.16.4",
         "@polkadot/util-crypto": "^14.0.2",
         "@reactive-dot/core": "^0.71.4",
