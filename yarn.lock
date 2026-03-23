@@ -3748,12 +3748,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polkadot-labs/hdkd-helpers@npm:~0.0.28":
+  version: 0.0.28
+  resolution: "@polkadot-labs/hdkd-helpers@npm:0.0.28"
+  dependencies:
+    "@noble/curves": ^2.0.1
+    "@noble/hashes": ^2.0.1
+    "@scure/base": ^2.0.0
+    "@scure/sr25519": ^1.0.0
+    scale-ts: ^1.6.1
+  checksum: 5e68c88c18ab2d6e54bfbc52c9b7a3fb1b56481093a2679ad237316427f10199542d45c388abd8e8e26744ef6effbd4a45dbec31210d7a8db47c3b6126b06d66
+  languageName: node
+  linkType: hard
+
 "@polkadot-labs/hdkd@npm:^0.0.26":
   version: 0.0.26
   resolution: "@polkadot-labs/hdkd@npm:0.0.26"
   dependencies:
     "@polkadot-labs/hdkd-helpers": ~0.0.27
   checksum: 1ff6aeade9c50b6225b4ba8c459beaa0a13cb4d754ba854addaae3d43016aa288c8f4b70356f8de12255d55cda5b3c2b26b78c6216191b6ecd5214f878946740
+  languageName: node
+  linkType: hard
+
+"@polkadot-labs/hdkd@npm:^0.0.27":
+  version: 0.0.27
+  resolution: "@polkadot-labs/hdkd@npm:0.0.27"
+  dependencies:
+    "@polkadot-labs/hdkd-helpers": ~0.0.28
+  checksum: eac50e7c7d215665825139730cb5a961c5e52d18a8753eb06acdbfeff9efe55655f03950cd033db104284a2bcee6ba3a5028ef6f99bf6e4a79a15e26ad61e8aa
   languageName: node
   linkType: hard
 
@@ -11027,7 +11049,7 @@ __metadata:
     "@paraspell/sdk": ^12.9.1
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.2.2
-    "@polkadot-labs/hdkd": ^0.0.26
+    "@polkadot-labs/hdkd": ^0.0.27
     "@polkadot-labs/hdkd-helpers": ^0.0.27
     "@polkadot/react-identicon": ^3.16.4
     "@polkadot/util-crypto": ^14.0.2
