@@ -118,11 +118,12 @@ export const networkList: Record<string, NetworkInfo> = {
         chainId: 'asset-hub-polkadot',
         explorerNetworkName: 'assethub-polkadot',
         rpcUrls: [
-            'wss://sys.ibp.network/asset-hub-polkadot',
-            'wss://asset-hub-polkadot.dotters.network',
-            'wss://rpc-asset-hub-polkadot.luckyfriday.io',
-            'wss://asset-hub-polkadot-rpc.n.dwellir.com',
-            'wss://statemint.api.onfinality.io/public-ws',
+            'wss://asset-hub.polkadot.rpc.deserve.network',
+            //'wss://sys.ibp.network/asset-hub-polkadot',
+            //'wss://asset-hub-polkadot.dotters.network',
+            //'wss://rpc-asset-hub-polkadot.luckyfriday.io',
+            //'wss://asset-hub-polkadot-rpc.n.dwellir.com',
+            //'wss://statemint.api.onfinality.io/public-ws',
             //'wss://polkadot-asset-hub-rpc.polkadot.io',
             //'wss://dot-rpc.stakeworld.io/assethub'
         ],
