@@ -3455,14 +3455,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/networks@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/networks@npm:14.0.2"
+"@polkadot/networks@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/networks@npm:14.0.3"
   dependencies:
-    "@polkadot/util": 14.0.2
+    "@polkadot/util": 14.0.3
     "@substrate/ss58-registry": ^1.51.0
     tslib: ^2.8.0
-  checksum: 5ce567e22715145d4d999d235c4ed42d1974f43cb558ca91aeb14a5f3c614c08da19a0a0ac20c5133d08e3bc92e7d2ca5a89cf043a5637463fcbad885cc6be3e
+  checksum: 9568207781f4d0d430ff1d2e69f43c13b00eebb5834e8d635855275c44eb9c991ab6194dc5151fd52bba1cc1b7b4752527a2f562656e54756c2cab2a08d70ea7
   languageName: node
   linkType: hard
 
@@ -3667,39 +3667,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/util-crypto@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/util-crypto@npm:14.0.2"
+"@polkadot/util-crypto@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/util-crypto@npm:14.0.3"
   dependencies:
     "@noble/curves": ^1.3.0
     "@noble/hashes": ^1.3.3
-    "@polkadot/networks": 14.0.2
-    "@polkadot/util": 14.0.2
+    "@polkadot/networks": 14.0.3
+    "@polkadot/util": 14.0.3
     "@polkadot/wasm-crypto": ^7.5.3
     "@polkadot/wasm-util": ^7.5.3
-    "@polkadot/x-bigint": 14.0.2
-    "@polkadot/x-randomvalues": 14.0.2
+    "@polkadot/x-bigint": 14.0.3
+    "@polkadot/x-randomvalues": 14.0.3
     "@scure/base": ^1.1.7
     "@scure/sr25519": ^0.2.0
     tslib: ^2.8.0
   peerDependencies:
-    "@polkadot/util": 14.0.2
-  checksum: e0fd72f8bb9c10fac22cfade3b9cc125664520e4bab5b59ca84cd3f7ce5224a90ee0cd1e47538df09de44d7ec1e6f8818f037842a6d1c2b9ca4bbc50b9fd1431
+    "@polkadot/util": 14.0.3
+  checksum: c63bc62e9c99b96a01402c4a3fe5839e0846a5d400249e1e032ebdd8881970004d20061da3af3ac8a3bfcc4d12194aa360211ac166f7cdb4549918447804f038
   languageName: node
   linkType: hard
 
-"@polkadot/util@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/util@npm:14.0.2"
+"@polkadot/util@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/util@npm:14.0.3"
   dependencies:
-    "@polkadot/x-bigint": 14.0.2
-    "@polkadot/x-global": 14.0.2
-    "@polkadot/x-textdecoder": 14.0.2
-    "@polkadot/x-textencoder": 14.0.2
+    "@polkadot/x-bigint": 14.0.3
+    "@polkadot/x-global": 14.0.3
+    "@polkadot/x-textdecoder": 14.0.3
+    "@polkadot/x-textencoder": 14.0.3
     "@types/bn.js": ^5.1.6
     bn.js: ^5.2.1
     tslib: ^2.8.0
-  checksum: 65d84043ab59f5965f894f6c277c152f131f9e1f3f10b9e580761b5c646a49f326de27ca34f46a4dce5b114786efb9c2aefcc8d22e137bdc396a2040b93b24ed
+  checksum: 31972be5f2c00658cd62e8d46a0d1ffd859cd73f34b957c9f57167d505190e23d045f81d728e2e89b85aeb9a8128f47f335e74623a21bc95a91e23c1d673554d
   languageName: node
   linkType: hard
 
@@ -3783,13 +3783,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-bigint@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/x-bigint@npm:14.0.2"
+"@polkadot/x-bigint@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/x-bigint@npm:14.0.3"
   dependencies:
-    "@polkadot/x-global": 14.0.2
+    "@polkadot/x-global": 14.0.3
     tslib: ^2.8.0
-  checksum: f0bbf8de863743c77244273678a1e7bfd5075f1d1acbba08816885f61c74079b5e819458fb2ad96b9632529154924a7c103dfdd8343285e24f1c107c0936d85c
+  checksum: 4ea97796327f838ea08bb620ecefd5ad00e6685fd22fae427b5f6c4bef50fa21417a1f154e3ad95355da111adc339f4f7b8dd214d8e152042f487a628cc00eda
   languageName: node
   linkType: hard
 
@@ -3823,45 +3823,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-global@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/x-global@npm:14.0.2"
+"@polkadot/x-global@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/x-global@npm:14.0.3"
   dependencies:
     tslib: ^2.8.0
-  checksum: 4df80b367fe52e87c0e9c5576428c85f2aa0b52224bf7412d8fd8139b53cc2a0e2bbdb60a808be9f1f1d549c5ce78a61b38a4577c4406b37e06e2c66e4f0d313
+  checksum: 323d966ca45de68bd12cd53c39579d4df9fa5faa50c93f7f988b9e3526362400935e8cb40f37201b896795661f4c52cba7e7f5937bf1c6d972c25ab5eee8cfd5
   languageName: node
   linkType: hard
 
-"@polkadot/x-randomvalues@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/x-randomvalues@npm:14.0.2"
+"@polkadot/x-randomvalues@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/x-randomvalues@npm:14.0.3"
   dependencies:
-    "@polkadot/x-global": 14.0.2
+    "@polkadot/x-global": 14.0.3
     tslib: ^2.8.0
   peerDependencies:
-    "@polkadot/util": 14.0.2
+    "@polkadot/util": 14.0.3
     "@polkadot/wasm-util": "*"
-  checksum: cb907dab3f09fa2ee16f22dd8b747b61a070909e5a4c1dad14249d2bad8753a9184466fd8df6ade2e2b5d56513893c199930d138199674eabf7403398b99aabe
+  checksum: 3fff52aae44e3352411591da68639daef061d00b62967d68e3832b01a6a6ac7870090e69a433a6290274f9fb64fbf7e1f24f4213db6bbce86ca414f48f83a9e7
   languageName: node
   linkType: hard
 
-"@polkadot/x-textdecoder@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/x-textdecoder@npm:14.0.2"
+"@polkadot/x-textdecoder@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/x-textdecoder@npm:14.0.3"
   dependencies:
-    "@polkadot/x-global": 14.0.2
+    "@polkadot/x-global": 14.0.3
     tslib: ^2.8.0
-  checksum: b5591fa0890258e4b3094da69de6a8e2ce3e8f11cb629ea848e780b4a1793242e4a37d18b51136a2a00e9c3bb7843a97078c2deb98f8a95780168eb75ca144bf
+  checksum: c930086aa26b522c55e9308d33595cb888242535cb926111e3f1e1937b51aaf17de7dc365723eac97b16d5f58ecb0512d81aec4e7915e0eb3984ba296881b0f2
   languageName: node
   linkType: hard
 
-"@polkadot/x-textencoder@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@polkadot/x-textencoder@npm:14.0.2"
+"@polkadot/x-textencoder@npm:14.0.3":
+  version: 14.0.3
+  resolution: "@polkadot/x-textencoder@npm:14.0.3"
   dependencies:
-    "@polkadot/x-global": 14.0.2
+    "@polkadot/x-global": 14.0.3
     tslib: ^2.8.0
-  checksum: e95b3ff1ab93a548697b74321d85b53a4c10b9cc11d7fb0a5c65b324ab4122f9003ff261e89cff85c55c578929caee7ee664d3330c1f581a5a38dbed8a823b1b
+  checksum: 0e840c8128cd4ea7640ac209546dce72ae38cc7be64abb1e7277d99cc76056c06722036666e4f988e1169a5ccd61d8eeb17a2eb81eca1352d7b78d3c52a15031
   languageName: node
   linkType: hard
 
@@ -8521,7 +8521,7 @@ __metadata:
     path-scurry: ^1.11.1
   bin:
     glob: dist/esm/bin.mjs
-  checksum: 100705eddbde6323e7b35e1d1ac28bcb58322095bd8e63a7d0bef1a2cdafe0d0f7922a981b2b48369a4f8c1b077be5c171804534c3509dfe950dde15fbe6d828
+  checksum: 19a9759ea77b8e3ca0a43c2f07ecddc2ad46216b786bb8f993c445aee80d345925a21e5280c7b7c6c59e860a0154b84e4b2b60321fea92cd3c56b4a7489f160e
   languageName: node
   linkType: hard
 
@@ -8721,10 +8721,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.13.1":
-  version: 16.13.1
-  resolution: "graphql@npm:16.13.1"
-  checksum: 0c7a9aea59504fbf3e0674f13ddb82935780f2a388e1db0ef41c3711c0ff8cb0a871c50d30d2d5288f32b946af3570d6f9ba8d13b03a330336f27121f9ac7a6b
+"graphql@npm:^16.13.2":
+  version: 16.13.2
+  resolution: "graphql@npm:16.13.2"
+  checksum: 64e822a0a0e4398781e4bc9765b88d370c08261498b517add4b878038ef7be2005b6b394a79a5102b9379d57052f60bc7f23fec8f39808d101984a74772ebd9d
   languageName: node
   linkType: hard
 
@@ -9563,9 +9563,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:2.18.1":
-  version: 2.18.1
-  resolution: "jotai@npm:2.18.1"
+"jotai@npm:2.19.1":
+  version: 2.19.1
+  resolution: "jotai@npm:2.19.1"
   peerDependencies:
     "@babel/core": ">=7.0.0"
     "@babel/template": ">=7.0.0"
@@ -9580,7 +9580,7 @@ __metadata:
       optional: true
     react:
       optional: true
-  checksum: bff677bc8d52041f60496d84b389bae89bc6e1c4d487d5fa1458f88aae279454b413bb310e097647f84776d6da94644b861092310460c1fb0924b30d78b119b8
+  checksum: 82651da60711b2ceb4f50e3869b92fa9e71dab085f11cb0277bcad4c0f6691af5e66a5a1997082e13912a39ab3ad1e83f4b96b59fb0990dd392c8f94deffb9ef
   languageName: node
   linkType: hard
 
@@ -10517,7 +10517,7 @@ __metadata:
     concurrently: ^9.2.1
     eslint-config-prettier: ^10.1.8
     eslint-plugin-prettier: ^5.5.5
-    prettier: ^3.8.1
+    prettier: ^3.8.3
   languageName: unknown
   linkType: soft
 
@@ -11380,12 +11380,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "prettier@npm:3.8.1"
+"prettier@npm:^3.8.3":
+  version: 3.8.3
+  resolution: "prettier@npm:3.8.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 33169b594009e48f570471271be7eac7cdcf88a209eed39ac3b8d6d78984039bfa9132f82b7e6ba3b06711f3bfe0222a62a1bfb87c43f50c25a83df1b78a2c42
+  checksum: 754816fd7593eb80f6376d7476d463e832c38a12f32775a82683adb6e35b772b1f484d65f19401507b983a8c8a7cd5a4a9f12006bd56491e8f35503473f77473
   languageName: node
   linkType: hard
 
