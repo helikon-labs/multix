@@ -237,10 +237,10 @@ export const networkList: Record<string, NetworkInfo> = {
         explorerNetworkName: 'hydration',
         rpcUrls: [
             'wss://rpc.helikon.io/hydration',
-            'wss://rpc.ibp.network/hydration',
-            'wss://hydration.dotters.network',
             'wss://hydration-rpc.n.dwellir.com',
-            // 'wss://rpc.hydradx.cloud',
+            //'wss://rpc.ibp.network/hydration',
+            //'wss://hydration.dotters.network',
+            //'wss://rpc.hydradx.cloud',
         ],
         httpGraphqlUrl: 'https://hydration.graphql.multix.cloud/graphql',
         networkLogo: hydrationSVG,
