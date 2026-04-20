@@ -7,7 +7,7 @@
         "@emotion/styled": "^11.14.1",
         "@fontsource/jost": "^5.2.8",
         "@mui/material": "^7.3.9",
-        "@mui/styled-engine": "^7.3.9",
+        "@mui/styled-engine": "^9.0.0",
         "@paraspell/sdk": "^12.9.1",
         "@polkadot-api/descriptors": "portal:.papi/descriptors",
         "@polkadot-api/tx-utils": "^0.2.2",
