@@ -18,7 +18,8 @@
         "start:graphql-server": "npx squid-graphql-server --sql-statement-timeout 3000 --dumb-cache in-memory --dumb-cache-ttl 1000 --dumb-cache-size 100 --dumb-cache-max-age 1000",
         "lint": "eslint 'src/**/*.{js,ts,tsx}'",
         "lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-        "format": " npx prettier --write ."
+        "format": " npx prettier --write .",
+        "postinstall": "patch-package"
     },
     "dependencies": {
         "@polkadot/util-crypto": "^14.0.3",
@@ -42,6 +43,7 @@
         "eslint": "^10.0.2",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
+        "patch-package": "^8.0.1",
         "prettier": "3.8.1"
     }
 }

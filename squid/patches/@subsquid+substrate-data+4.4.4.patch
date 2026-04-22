@@ -1,0 +1,14 @@
+diff --git a/node_modules/@subsquid/substrate-data/lib/parsing/call/parser.js b/node_modules/@subsquid/substrate-data/lib/parsing/call/parser.js
+index fe3a742..8562baf 100644
+--- a/node_modules/@subsquid/substrate-data/lib/parsing/call/parser.js
++++ b/node_modules/@subsquid/substrate-data/lib/parsing/call/parser.js
+@@ -44,7 +44,8 @@ class CallParser {
+                 ...this.extrinsics[i].call,
+                 origin
+             };
+-            let event = this.next();
++            let event = this.maybeNext();
++            if (!event) continue;
+             switch (event.name) {
+                 case 'System.ExtrinsicSuccess':
+                     this.extrinsic.success = true;
