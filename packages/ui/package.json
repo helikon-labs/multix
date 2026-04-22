@@ -6,7 +6,7 @@
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
         "@fontsource/jost": "^5.2.8",
-        "@mui/material": "^7.3.9",
+        "@mui/material": "^9.0.0",
         "@mui/styled-engine": "^7.3.9",
         "@paraspell/sdk": "^12.9.1",
         "@polkadot-api/descriptors": "portal:.papi/descriptors",
