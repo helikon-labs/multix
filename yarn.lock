@@ -2846,63 +2846,62 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paraspell/assets@npm:12.9.1":
-  version: 12.9.1
-  resolution: "@paraspell/assets@npm:12.9.1"
+"@paraspell/assets@npm:13.2.2":
+  version: 13.2.2
+  resolution: "@paraspell/assets@npm:13.2.2"
   dependencies:
-    "@paraspell/sdk-common": 12.9.1
-  checksum: 62b95e8c3fecf5e2da5ea211ce694c298d5f74f62627dacd7abea54ab332162e26e4099626cde773ae5b63832734b3fb6fbac3561087d4207a30b316919ae0d6
+    "@paraspell/sdk-common": 13.2.2
+  checksum: 0491d49c5e202cc405d0a311fa07a2a78d00019f29558a8ce901f6bd305415fee57c40af9e72de83b5ab2fd709d39d1d874356a77abf975cb64ef72f421d6bf0
   languageName: node
   linkType: hard
 
-"@paraspell/pallets@npm:12.9.1":
-  version: 12.9.1
-  resolution: "@paraspell/pallets@npm:12.9.1"
+"@paraspell/pallets@npm:13.2.2":
+  version: 13.2.2
+  resolution: "@paraspell/pallets@npm:13.2.2"
   dependencies:
-    "@paraspell/sdk-common": 12.9.1
-  checksum: a2ddeb2e240b042668a32f109f812f280aeffbc0c29af0e65d1b1f166e262ac06ded8fbda3256780e04db0a462c3023122da95288474a828466cdeee2aeb4d36
+    "@paraspell/sdk-common": 13.2.2
+  checksum: 26c016d0983fe7365f34bd6ee750e06b8b87b9160c2595d61ca31d0bf6bf84dfffa2d376dca4a8159e82fedc85ebdca197370450fcfc7b437c3576e49952a8a2
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-common@npm:12.9.1":
-  version: 12.9.1
-  resolution: "@paraspell/sdk-common@npm:12.9.1"
-  checksum: 661ce345c241b5eddd17374d49ca9ced836a73efd3715291b5c3046885f3e87bbab035451068ab8ab561f28fdb7ebb038fde0edd5744b704d6dbb73467fbf718
+"@paraspell/sdk-common@npm:13.2.2":
+  version: 13.2.2
+  resolution: "@paraspell/sdk-common@npm:13.2.2"
+  checksum: 7d1aa3d9159f04fe1204c3aaf78ec878141f2d9d35900ccdb40631660f5bb33ea94e0a863aa3ad1060e9655a4dff9168cd8ad83d30d7004190c3a0027a9004ab
   languageName: node
   linkType: hard
 
-"@paraspell/sdk-core@npm:12.9.1":
-  version: 12.9.1
-  resolution: "@paraspell/sdk-core@npm:12.9.1"
+"@paraspell/sdk-core@npm:13.2.2":
+  version: 13.2.2
+  resolution: "@paraspell/sdk-core@npm:13.2.2"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/assets": 12.9.1
-    "@paraspell/pallets": 12.9.1
-    "@paraspell/sdk-common": 12.9.1
+    "@paraspell/assets": 13.2.2
+    "@paraspell/pallets": 13.2.2
+    "@paraspell/sdk-common": 13.2.2
     "@scure/base": ^2.0.0
-    viem: ^2.47.1
+    viem: ^2.47.6
   peerDependencies:
-    "@paraspell/swap": ^12.0.0
+    "@paraspell/swap": ^13.0.0
   peerDependenciesMeta:
     "@paraspell/swap":
       optional: true
-  checksum: 91c396e7b0c0e2ab6380ccf8d2615b4e7f2cabeb77343e13dbabfaeae31bae8309c4c19b0e01a8a50de66fda279e9ddf31c2a5427e8402f96ff537048a3734bf
+  checksum: 4ce21dbd257d7a716456d9d3101206d6fe0477c01902f2437dfe29c94c88c1c12b70d93a0f322d60d5a4564b67fcb32be1a8b0b257dd38b8a1fd1624caad4e2d
   languageName: node
   linkType: hard
 
-"@paraspell/sdk@npm:^12.9.1":
-  version: 12.9.1
-  resolution: "@paraspell/sdk@npm:12.9.1"
+"@paraspell/sdk@npm:^13.2.2":
+  version: 13.2.2
+  resolution: "@paraspell/sdk@npm:13.2.2"
   dependencies:
     "@noble/hashes": ^2.0.1
-    "@paraspell/sdk-core": 12.9.1
-    "@polkadot-api/legacy-provider": ^0.3.8
-    "@polkadot-labs/hdkd": ^0.0.26
-    "@polkadot-labs/hdkd-helpers": ^0.0.27
-    viem: ^2.47.1
+    "@paraspell/sdk-core": 13.2.2
+    "@polkadot-labs/hdkd": ^0.0.27
+    "@polkadot-labs/hdkd-helpers": ^0.0.28
+    viem: ^2.47.6
   peerDependencies:
-    polkadot-api: ">= 1.23.3 < 2"
-  checksum: afc171ff90b19043ee4fdb746c4f98d9b68ec235f54d88f810e0239ba21947e0e275bdf4ace434fbe176a1ac80b580b0b8a652f945b819931f886016265454b1
+    polkadot-api: ">= 2 < 3"
+  checksum: 4340b90b99d8dbc550b237b8b4bb40dde4cbf3de295cdfcf72f649a401ef5f91780978a11efcf2c1f16dfc71ddb72530ce10edbe1f55875fa523b01af5fce2da
   languageName: node
   linkType: hard
 
@@ -3025,7 +3024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot-api/legacy-provider@npm:0.3.8, @polkadot-api/legacy-provider@npm:^0.3.8":
+"@polkadot-api/legacy-provider@npm:0.3.8":
   version: 0.3.8
   resolution: "@polkadot-api/legacy-provider@npm:0.3.8"
   dependencies:
@@ -3294,20 +3293,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot-labs/hdkd-helpers@npm:^0.0.27, @polkadot-labs/hdkd-helpers@npm:~0.0.27":
-  version: 0.0.27
-  resolution: "@polkadot-labs/hdkd-helpers@npm:0.0.27"
+"@polkadot-labs/hdkd-helpers@npm:^0.0.28":
+  version: 0.0.28
+  resolution: "@polkadot-labs/hdkd-helpers@npm:0.0.28"
   dependencies:
     "@noble/curves": ^2.0.1
     "@noble/hashes": ^2.0.1
     "@scure/base": ^2.0.0
     "@scure/sr25519": ^1.0.0
     scale-ts: ^1.6.1
-  checksum: 564e95dcfbb38aedb980d70567e6f26136e4e6d9c6b4aa021857e0897153087b03d6969bb6d91fc91184797ae6c292a810d5976f73c19509036ff80d6591208d
+  checksum: 5e68c88c18ab2d6e54bfbc52c9b7a3fb1b56481093a2679ad237316427f10199542d45c388abd8e8e26744ef6effbd4a45dbec31210d7a8db47c3b6126b06d66
   languageName: node
   linkType: hard
 
-"@polkadot-labs/hdkd-helpers@npm:^0.0.29, @polkadot-labs/hdkd-helpers@npm:~0.0.29":
+"@polkadot-labs/hdkd-helpers@npm:^0.0.29, @polkadot-labs/hdkd-helpers@npm:~0.0.28, @polkadot-labs/hdkd-helpers@npm:~0.0.29":
   version: 0.0.29
   resolution: "@polkadot-labs/hdkd-helpers@npm:0.0.29"
   dependencies:
@@ -3320,12 +3319,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot-labs/hdkd@npm:^0.0.26":
-  version: 0.0.26
-  resolution: "@polkadot-labs/hdkd@npm:0.0.26"
+"@polkadot-labs/hdkd@npm:^0.0.27":
+  version: 0.0.27
+  resolution: "@polkadot-labs/hdkd@npm:0.0.27"
   dependencies:
-    "@polkadot-labs/hdkd-helpers": ~0.0.27
-  checksum: 1ff6aeade9c50b6225b4ba8c459beaa0a13cb4d754ba854addaae3d43016aa288c8f4b70356f8de12255d55cda5b3c2b26b78c6216191b6ecd5214f878946740
+    "@polkadot-labs/hdkd-helpers": ~0.0.28
+  checksum: eac50e7c7d215665825139730cb5a961c5e52d18a8753eb06acdbfeff9efe55655f03950cd033db104284a2bcee6ba3a5028ef6f99bf6e4a79a15e26ad61e8aa
   languageName: node
   linkType: hard
 
@@ -10464,7 +10463,7 @@ __metadata:
     "@graphql-eslint/eslint-plugin": ^4.4.0
     "@mui/material": ^7.3.9
     "@mui/styled-engine": ^7.3.9
-    "@paraspell/sdk": ^12.9.1
+    "@paraspell/sdk": ^13.2.2
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.2.2
     "@polkadot-labs/hdkd": ^0.0.28
@@ -10888,9 +10887,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ox@npm:0.14.5, ox@npm:^0.14.5":
-  version: 0.14.5
-  resolution: "ox@npm:0.14.5"
+"ox@npm:0.14.17":
+  version: 0.14.17
+  resolution: "ox@npm:0.14.17"
   dependencies:
     "@adraffy/ens-normalize": ^1.11.0
     "@noble/ciphers": ^1.3.0
@@ -10905,7 +10904,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 229cd389a81d7388649216b6d68e65fc95efddc952450493bb275869066727c2a490a1b74946c433f24b0439552d9a31550f3edb6e5593b652fdc89f1dfecb52
+  checksum: a4632918d89db20e7265dff96dec3786046e2ec99a42659badd300b7b24678348f505fd57e651c3a814a150d905f512a23a037f15757eae41db601d25fa7b10c
   languageName: node
   linkType: hard
 
@@ -10927,6 +10926,27 @@ __metadata:
     typescript:
       optional: true
   checksum: e04f8f5d6de4fbc65d18e8388bbb4c6a09e7b69e6d51c45985bd2ed01414fda154a78dfb8fcd46e53842794a10ef37fff2b4d8b786bd7a7476a3772e8cc8e64a
+  languageName: node
+  linkType: hard
+
+"ox@npm:^0.14.5":
+  version: 0.14.5
+  resolution: "ox@npm:0.14.5"
+  dependencies:
+    "@adraffy/ens-normalize": ^1.11.0
+    "@noble/ciphers": ^1.3.0
+    "@noble/curves": 1.9.1
+    "@noble/hashes": ^1.8.0
+    "@scure/bip32": ^1.7.0
+    "@scure/bip39": ^1.6.0
+    abitype: ^1.2.3
+    eventemitter3: 5.0.1
+  peerDependencies:
+    typescript: ">=5.4.0"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 229cd389a81d7388649216b6d68e65fc95efddc952450493bb275869066727c2a490a1b74946c433f24b0439552d9a31550f3edb6e5593b652fdc89f1dfecb52
   languageName: node
   linkType: hard
 
@@ -13662,9 +13682,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:^2.47.1":
-  version: 2.47.5
-  resolution: "viem@npm:2.47.5"
+"viem@npm:^2.47.6":
+  version: 2.48.1
+  resolution: "viem@npm:2.48.1"
   dependencies:
     "@noble/curves": 1.9.1
     "@noble/hashes": 1.8.0
@@ -13672,14 +13692,14 @@ __metadata:
     "@scure/bip39": 1.6.0
     abitype: 1.2.3
     isows: 1.0.7
-    ox: 0.14.5
+    ox: 0.14.17
     ws: 8.18.3
   peerDependencies:
     typescript: ">=5.0.4"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 85405302d67a30c49c748a1616d5101aebaf24e8b4f62bcc21fbe63f83a3a594a0358a5ec08a36c9bffbfa22e4abc9dccf35e63ddccd3d9ed5b35e375a391508
+  checksum: 222ad600cee6f9887228e2a9a8bc9d11315cb8a68cef6e271de4aee75be087be33544d3f1c7483d8a5c93c1964bbd4298fc6b36bfbcd3b7f1a66bda0de82d841
   languageName: node
   linkType: hard
 
